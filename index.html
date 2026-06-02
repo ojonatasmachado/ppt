@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descubra Seu Ministério · CE.X</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400;1,14..32,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --tinta:    #0E110D;
+      --grafite:  #181B16;
+      --oliva:    #7A9E3F;
+      --oliva-c:  #94B85C;
+      --oliva-p:  #4F6B26;
+      --creme:    #EDE6D3;
+      --creme-s:  #F6F1E0;
+      --areia:    #C9BFA0;
+      --branco:   #FAFAF7;
+      --cinza-m:  #8B8C82;
+      --cinza-s:  #555650;
+      --borda:    #252922;
+      --borda-l:  #2F342C;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--tinta);
+      color: var(--branco);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── LOGO ── */
+    .logo {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--branco);
+    }
+    .logo .x { font-style: italic; color: var(--oliva); }
+
+    /* ── EYEBROW ── */
+    .eyebrow {
+      font-family: 'Fira Code', 'SF Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--cinza-m);
+    }
+
+    /* ════════════════════════════════════
+       WELCOME
+    ════════════════════════════════════ */
+    .w-hero {
+      padding: 72px 24px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .w-logo { font-size: 72px; margin-bottom: 10px; }
+    .w-brand-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--cinza-s);
+      margin-bottom: 48px;
+    }
+
+    .w-title {
+      font-size: clamp(36px, 9vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 0.96;
+      color: var(--branco);
+      margin-bottom: 20px;
+    }
+    .w-title em { font-style: italic; color: var(--oliva); }
+
+    .w-sub {
+      font-size: 16px;
+      color: var(--cinza-m);
+      line-height: 1.65;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .w-body {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 44px 24px 80px;
+    }
+
+    /* intro card — creme (devotional moment) */
+    .w-intro {
+      background: var(--creme-s);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      border-left: 3px solid var(--oliva);
+    }
+    .w-intro .eyebrow {
+      color: var(--oliva-p);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .w-intro p {
+      font-size: 14px;
+      color: #3a3b35;
+      line-height: 1.78;
+    }
+    .w-intro p + p { margin-top: 10px; }
+
+    /* name form */
+    .w-form {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .w-form label {
+      display: block;
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--cinza-m);
+      margin-bottom: 10px;
+    }
+    .w-input {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--tinta);
+      border: 1px solid var(--borda-l);
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      color: var(--branco);
+      outline: none;
+      margin-bottom: 14px;
+      transition: border-color 0.18s;
+    }
+    .w-input:focus { border-color: var(--oliva); }
+    .w-input::placeholder { color: var(--cinza-s); }
+
+    .btn-start {
+      width: 100%;
+      padding: 15px;
+      background: var(--oliva);
+      color: var(--tinta);
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: -0.01em;
+      transition: background 0.18s;
+    }
+    .btn-start:hover { background: var(--oliva-c); }
+
+    /* ════════════════════════════════════
+       QUIZ
+    ════════════════════════════════════ */
+    .q-header {
+      background: var(--grafite);
+      border-bottom: 1px solid var(--borda);
+      padding: 14px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    .q-header-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 11px;
+    }
+    .q-logo { font-size: 17px; }
+
+    /* progress bar */
+    .q-progress-wrap {
+      position: relative;
+    }
+    .q-progress-track {
+      height: 3px;
+      background: var(--borda-l);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .q-progress-fill {
+      height: 100%;
+      background: var(--oliva);
+      border-radius: 3px;
+      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .q-body {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 32px 24px 56px;
+    }
+
+    .q-card {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 14px;
+    }
+    .q-num { margin-bottom: 14px; }
+    .q-text {
+      font-size: clamp(18px, 4.5vw, 22px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.3;
+      color: var(--branco);
+    }
+
+    .q-options {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .q-option {
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--grafite);
+      border: 1px solid var(--borda-l);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--cinza-m);
+      line-height: 1.55;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      appearance: none;
+    }
+    .q-option:hover {
+      border-color: var(--oliva);
+      color: var(--branco);
+    }
+    .q-option.selected {
+      border-color: var(--oliva);
+      background: rgba(122, 158, 63, 0.1);
+      color: var(--branco);
+    }
+
+    .q-nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn-prev {
+      padding: 13px 18px;
+      background: transparent;
+      border: 1px solid var(--borda-l);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      color: var(--cinza-m);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-prev:hover:not(:disabled) { border-color: var(--cinza-m); color: var(--branco); }
+    .btn-prev:disabled { opacity: 0.2; cursor: not-allowed; }
+
+    .btn-next {
+      flex: 1;
+      padding: 13px 20px;
+      background: var(--oliva);
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      color: var(--tinta);
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+    }
+    .btn-next:hover:not(:disabled) { background: var(--oliva-c); }
+    .btn-next:disabled { opacity: 0.25; cursor: not-allowed; }
+
+    /* ════════════════════════════════════
+       RESULTS
+    ════════════════════════════════════ */
+    .r-header {
+      padding: 64px 24px 52px;
+      text-align: center;
+      border-bottom: 1px solid var(--borda);
+    }
+    .r-header-inner { max-width: 600px; margin: 0 auto; }
+    .r-logo { font-size: 28px; margin-bottom: 36px; }
+    .r-greeting {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--cinza-m);
+      margin-bottom: 8px;
+    }
+    .r-name {
+      font-size: clamp(32px, 8vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      color: var(--branco);
+      margin-bottom: 10px;
+    }
+    .r-meta {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--cinza-s);
+    }
+
+    .r-body {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 44px 24px 80px;
+    }
+
+    .r-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--cinza-m);
+      margin-bottom: 16px;
+    }
+
+    /* primary card */
+    .r-primary {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-left: 3px solid var(--oliva);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 12px;
+    }
+    .r-pri-badge {
+      display: inline-block;
+      font-family: 'Fira Code', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--oliva);
+      border: 1px solid rgba(122,158,63,0.4);
+      border-radius: 100px;
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+    .r-pri-name {
+      font-size: clamp(40px, 10vw, 68px);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 0.93;
+      color: var(--branco);
+      margin-bottom: 8px;
+    }
+    .r-pri-sub {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--oliva-c);
+      margin-bottom: 28px;
+    }
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .score-track {
+      flex: 1;
+      height: 4px;
+      background: var(--borda-l);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      background: var(--oliva);
+      border-radius: 4px;
+    }
+    .score-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--cinza-m);
+      white-space: nowrap;
+    }
+
+    /* secondary card */
+    .r-secondary {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .r-sec-lbl {
+      font-family: 'Fira Code', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--cinza-s);
+      margin-bottom: 4px;
+    }
+    .r-sec-name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      color: var(--branco);
+    }
+    .r-sec-sub {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--cinza-m);
+      margin-top: 3px;
+    }
+    .r-sec-score {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--oliva);
+      flex-shrink: 0;
+    }
+
+    /* chart */
+    .r-chart-card {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 32px 20px;
+      margin-bottom: 44px;
+    }
+    .chart-wrap {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* all scores distribution */
+    .r-dist {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 44px;
+    }
+    .dist-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .dist-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--branco);
+      width: 96px;
+      flex-shrink: 0;
+    }
+    .dist-track {
+      flex: 1;
+      height: 4px;
+      background: var(--borda-l);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .dist-fill {
+      height: 100%;
+      background: var(--oliva);
+      border-radius: 4px;
+    }
+    .dist-val {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--cinza-m);
+      width: 20px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* description cards */
+    .desc-card {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .desc-head {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--borda);
+    }
+    .desc-badge {
+      font-family: 'Fira Code', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--oliva);
+      margin-bottom: 8px;
+    }
+    .desc-ministry {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--branco);
+    }
+    .desc-body { padding: 28px; }
+    .desc-verse {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--cinza-m);
+      border-left: 2px solid var(--oliva);
+      padding-left: 14px;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .desc-section {
+      font-family: 'Fira Code', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--oliva);
+      margin-bottom: 10px;
+      margin-top: 22px;
+    }
+    .desc-section:first-of-type { margin-top: 0; }
+    .desc-text {
+      font-size: 14px;
+      color: var(--cinza-m);
+      line-height: 1.78;
+    }
+    .desc-list { list-style: none; }
+    .desc-list li {
+      font-size: 14px;
+      color: var(--cinza-m);
+      line-height: 1.65;
+      padding: 5px 0 5px 18px;
+      position: relative;
+    }
+    .desc-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--oliva);
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+    .calling-box {
+      background: var(--creme-s);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 22px;
+    }
+    .calling-box p {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--oliva-p);
+      line-height: 1.72;
+    }
+
+    /* disclaimer — creme (devotional/human moment) */
+    .disclaimer {
+      background: var(--creme-s);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+    .disclaimer-lbl {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--oliva-p);
+      margin-bottom: 14px;
+    }
+    .disclaimer p {
+      font-size: 13px;
+      color: #42433c;
+      line-height: 1.78;
+    }
+    .disclaimer p + p { margin-top: 10px; }
+    .disclaimer strong { font-weight: 700; color: #2a2b26; }
+
+    .btn-restart {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1px solid var(--borda-l);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      color: var(--cinza-m);
+      cursor: pointer;
+      text-align: center;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-restart:hover { border-color: var(--cinza-m); color: var(--branco); }
+
+    .r-footer {
+      text-align: center;
+      padding: 36px 0 0;
+      border-top: 1px solid var(--borda);
+      margin-top: 32px;
+    }
+    .r-footer-logo { font-size: 22px; margin-bottom: 8px; }
+    .r-footer-sub {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      color: var(--cinza-s);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      .w-hero { padding: 56px 20px 48px; }
+      .q-card { padding: 24px 20px; }
+      .r-primary { padding: 24px 20px; }
+      .r-body { padding: 36px 20px 64px; }
+      .desc-head, .desc-body { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ WELCOME ══════════════════ -->
+<div id="screen-welcome" class="screen active">
+  <div class="w-hero">
+    <div class="logo w-logo">CE<span class="x">.X</span></div>
+    <div class="w-brand-label">Campus Expansão</div>
+    <h1 class="w-title">Descubra o seu<br><em>Ministério</em></h1>
+    <p class="w-sub">Com qual dos Cinco Ministérios de Efésios 4 Deus te chamou para servir?</p>
+  </div>
+
+  <div class="w-body">
+    <div class="w-intro">
+      <span class="eyebrow">Efésios 4:11–13</span>
+      <p>Este questionário foi desenvolvido com base nos princípios dos Cinco Ministérios e na Cultura da Honra, para ajudar você a compreender como Deus te chamou para contribuir no Corpo de Cristo.</p>
+      <p>São 16 perguntas. Não existe resposta certa ou errada — responda com sinceridade, escolhendo o que mais se aproxima da sua realidade.</p>
+    </div>
+
+    <div class="w-form">
+      <label for="user-name">Qual é o seu nome?</label>
+      <input type="text" id="user-name" class="w-input" placeholder="Digite seu nome" autocomplete="given-name">
+      <button class="btn-start" onclick="startQuiz()">Começar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ QUIZ ══════════════════ -->
+<div id="screen-quiz" class="screen">
+  <div class="q-header">
+    <div class="q-header-inner">
+      <div class="q-meta">
+        <div class="logo q-logo">CE<span class="x">.X</span></div>
+        <div class="eyebrow" id="q-counter">Pergunta 1 de 16</div>
+      </div>
+      <div class="q-progress-wrap">
+        <div class="q-progress-track">
+          <div class="q-progress-fill" id="q-progress" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-body">
+    <div class="q-card">
+      <div class="eyebrow q-num" id="q-num">Pergunta 1</div>
+      <div class="q-text" id="q-text"></div>
+    </div>
+    <div class="q-options" id="q-options"></div>
+    <div class="q-nav">
+      <button class="btn-prev" id="btn-prev" onclick="prevQ()">← Anterior</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>Próxima →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ RESULTS ══════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="r-header">
+    <div class="r-header-inner">
+      <div class="logo r-logo">CE<span class="x">.X</span></div>
+      <div class="r-greeting">Resultado de</div>
+      <div class="r-name" id="r-name"></div>
+      <div class="r-meta">Cinco Ministérios · Efésios 4:11–13</div>
+    </div>
+  </div>
+
+  <div class="r-body">
+    <div class="r-label">Ministério Dominante</div>
+    <div class="r-primary">
+      <div class="r-pri-badge">Principal</div>
+      <div class="r-pri-name" id="r-pri-name"></div>
+      <div class="r-pri-sub" id="r-pri-sub"></div>
+      <div class="score-row">
+        <div class="score-track"><div class="score-fill" id="r-pri-bar"></div></div>
+        <div class="score-label" id="r-pri-score"></div>
+      </div>
+    </div>
+
+    <div class="r-secondary">
+      <div>
+        <div class="r-sec-lbl">Ministério Secundário</div>
+        <div class="r-sec-name" id="r-sec-name"></div>
+        <div class="r-sec-sub" id="r-sec-sub"></div>
+      </div>
+      <div class="r-sec-score" id="r-sec-score"></div>
+    </div>
+
+    <div class="r-label">Perfil Completo</div>
+    <div class="r-chart-card">
+      <div class="chart-wrap">
+        <canvas id="ministry-chart"></canvas>
+      </div>
+    </div>
+
+    <div class="r-label">Distribuição</div>
+    <div class="r-dist" id="r-dist"></div>
+
+    <div class="r-label">Entenda Seu Chamado</div>
+    <div id="r-pri-desc"></div>
+    <div id="r-sec-desc"></div>
+
+    <div class="disclaimer">
+      <div class="disclaimer-lbl">Uma nota importante</div>
+      <p>Este questionário é uma ferramenta de autoconhecimento baseada em princípios bíblicos e estudos sobre os Cinco Ministérios de Efésios 4:11-13. Os resultados <strong>não são definitivos</strong> e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança.</p>
+      <p>Use este resultado como um ponto de partida para reflexão, conversa e oração — não como uma conclusão final sobre o seu chamado. Sua jornada ministerial é única e continua sendo moldada por Deus dia a dia. Se quiser ir mais fundo nessa descoberta, converse com seu líder ou pastor na CE.X.</p>
+    </div>
+
+    <button class="btn-restart" onclick="restart()">Refazer o questionário</button>
+
+    <div class="r-footer">
+      <div class="logo r-footer-logo">CE<span class="x">.X</span></div>
+      <div class="r-footer-sub">Campus Expansão · Preparamos trabalhadores<br>para a Grande Comissão</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────
+
+const questions = [
+  { text: "Como você normalmente se comporta quando entra em um ambiente novo?", options: [
+    { key:"A", text:"Começo a entender como tudo funciona e penso em melhorias." },
+    { key:"B", text:"Procuro perceber quem está sozinho ou desconfortável." },
+    { key:"C", text:"Observo para entender as regras e a dinâmica do lugar." },
+    { key:"D", text:"Começo a conversar e conhecer novas pessoas." },
+    { key:"E", text:"Tento perceber o clima e a cultura do ambiente." }
+  ]},
+  { text: "Quando surge um problema em um grupo, você costuma:", options: [
+    { key:"A", text:"Assumir a liderança para encontrar uma solução." },
+    { key:"B", text:"Cuidar das pessoas afetadas." },
+    { key:"C", text:"Analisar as causas para entender o que aconteceu." },
+    { key:"D", text:"Motivar as pessoas a continuarem avançando." },
+    { key:"E", text:"Identificar o que precisa ser corrigido para evitar novos problemas." }
+  ]},
+  { text: "O que mais te gera satisfação?", options: [
+    { key:"A", text:"Ver algo crescer e prosperar." },
+    { key:"B", text:"Ver pessoas restauradas e fortalecidas." },
+    { key:"C", text:"Ver pessoas aprendendo e amadurecendo." },
+    { key:"D", text:"Ver novas pessoas chegando e participando." },
+    { key:"E", text:"Ver pessoas alinhadas com seu propósito." }
+  ]},
+  { text: "Se você participasse da organização de um grande evento, qual função escolheria?", options: [
+    { key:"A", text:"Coordenar toda a operação." },
+    { key:"B", text:"Garantir que todos estejam bem e acolhidos." },
+    { key:"C", text:"Treinar e orientar as equipes." },
+    { key:"D", text:"Divulgar e atrair participantes." },
+    { key:"E", text:"Garantir que o propósito do evento não seja perdido." }
+  ]},
+  { text: "As pessoas normalmente procuram você para:", options: [
+    { key:"A", text:"Pedir direção e tomada de decisão." },
+    { key:"B", text:"Desabafar ou pedir aconselhamento." },
+    { key:"C", text:"Tirar dúvidas ou aprender algo." },
+    { key:"D", text:"Fazer amizades ou ampliar conexões." },
+    { key:"E", text:"Buscar discernimento sobre situações importantes." }
+  ]},
+  { text: "O que mais te incomoda?", options: [
+    { key:"A", text:"Falta de visão." },
+    { key:"B", text:"Pessoas abandonadas ou ignoradas." },
+    { key:"C", text:"Falta de conhecimento ou preparo." },
+    { key:"D", text:"Falta de crescimento ou alcance." },
+    { key:"E", text:"Falta de integridade ou coerência." }
+  ]},
+  { text: "Quando você aprende algo novo:", options: [
+    { key:"A", text:"Penso em como aplicar em projetos." },
+    { key:"B", text:"Penso em quem pode ser ajudado." },
+    { key:"C", text:"Quero aprofundar e estudar mais." },
+    { key:"D", text:"Quero compartilhar com outras pessoas." },
+    { key:"E", text:"Avalio se aquilo está alinhado com princípios corretos." }
+  ]},
+  { text: "Qual frase mais combina com você?", options: [
+    { key:"A", text:"“Vamos construir algo grande.”" },
+    { key:"B", text:"“Como você está de verdade?”" },
+    { key:"C", text:"“Vamos entender melhor isso.”" },
+    { key:"D", text:"“Você precisa conhecer isso.”" },
+    { key:"E", text:"“Precisamos voltar ao propósito.”" }
+  ]},
+  { text: "Quando você observa uma equipe:", options: [
+    { key:"A", text:"Vejo oportunidades de crescimento." },
+    { key:"B", text:"Vejo pessoas que precisam de apoio." },
+    { key:"C", text:"Vejo necessidades de treinamento." },
+    { key:"D", text:"Vejo oportunidades de expansão." },
+    { key:"E", text:"Vejo ajustes que precisam ser feitos." }
+  ]},
+  { text: "O que mais te motiva?", options: [
+    { key:"A", text:"Construir algo duradouro." },
+    { key:"B", text:"Cuidar de pessoas." },
+    { key:"C", text:"Compartilhar conhecimento." },
+    { key:"D", text:"Influenciar vidas." },
+    { key:"E", text:"Promover transformação genuína." }
+  ]},
+  { text: "Em uma conversa você normalmente:", options: [
+    { key:"A", text:"Apresenta caminhos e soluções." },
+    { key:"B", text:"Escuta atentamente." },
+    { key:"C", text:"Explica conceitos." },
+    { key:"D", text:"Conta histórias e inspira pessoas." },
+    { key:"E", text:"Faz perguntas profundas." }
+  ]},
+  { text: "Qual resultado te deixa mais feliz?", options: [
+    { key:"A", text:"Um projeto funcionando." },
+    { key:"B", text:"Uma pessoa fortalecida." },
+    { key:"C", text:"Uma pessoa aprendendo." },
+    { key:"D", text:"Uma pessoa se conectando." },
+    { key:"E", text:"Uma pessoa encontrando direção." }
+  ]},
+  { text: "Se tivesse um dia livre, você preferiria:", options: [
+    { key:"A", text:"Planejar algo novo." },
+    { key:"B", text:"Estar com pessoas próximas." },
+    { key:"C", text:"Ler, estudar ou aprender." },
+    { key:"D", text:"Conhecer pessoas novas." },
+    { key:"E", text:"Refletir sobre a vida e propósito." }
+  ]},
+  { text: "O que você mais valoriza?", options: [
+    { key:"A", text:"Crescimento." },
+    { key:"B", text:"Relacionamento." },
+    { key:"C", text:"Conhecimento." },
+    { key:"D", text:"Influência." },
+    { key:"E", text:"Verdade." }
+  ]},
+  { text: "Quando você vê potencial em alguém:", options: [
+    { key:"A", text:"Quero ajudá-lo a desenvolver seus dons." },
+    { key:"B", text:"Quero caminhar ao lado dele." },
+    { key:"C", text:"Quero ensiná-lo." },
+    { key:"D", text:"Quero conectá-lo às pessoas certas." },
+    { key:"E", text:"Quero ajudá-lo a encontrar seu propósito." }
+  ]},
+  { text: "Qual legado você gostaria de deixar?", options: [
+    { key:"A", text:"Obras e projetos que continuem gerando impacto." },
+    { key:"B", text:"Pessoas cuidadas e amadas." },
+    { key:"C", text:"Pessoas capacitadas e maduras." },
+    { key:"D", text:"Muitas vidas alcançadas." },
+    { key:"E", text:"Pessoas vivendo seu propósito diante de Deus." }
+  ]}
+];
+
+const ministries = {
+  A: {
+    name: "Apóstolo",
+    subtitle: "O Visionário e Estrategista",
+    verse: "“Ele designou alguns para serem apóstolos…” — Efésios 4:11",
+    main: "Você tem um chamado para construir fundações espirituais sólidas e desenvolver estratégias para a expansão do Reino de Deus. Pioneiro por natureza, enxerga o quadro geral e alinha pessoas e ações a uma visão de longo prazo.",
+    characteristics: [
+      "Líder estratégico e inovador",
+      "Capacidade de enxergar potencial em pessoas e situações",
+      "Focado em crescimento e impacto duradouro"
+    ],
+    examples: [
+      "Planejar novas iniciativas ministeriais",
+      "Trabalhar na plantação de igrejas ou missões",
+      "Liderar times em direção a objetivos estratégicos"
+    ],
+    calling: "Se você sente paixão por construir, liderar e inovar, Deus pode estar te chamando para ser uma ‘coluna’ na edificação da igreja."
+  },
+  B: {
+    name: "Pastor",
+    subtitle: "O Cuidador e Protetor",
+    verse: "“Ele designou alguns para serem pastores…” — Efésios 4:11",
+    main: "Você tem um chamado para cuidar do bem-estar espiritual, emocional e relacional das pessoas. Cria ambientes seguros e acolhedores onde o rebanho pode crescer.",
+    characteristics: [
+      "Empatia e compaixão profundas",
+      "Habilidade para ouvir e aconselhar",
+      "Focado em relacionamentos e crescimento espiritual"
+    ],
+    examples: [
+      "Aconselhar pessoas em momentos difíceis",
+      "Organizar pequenos grupos e discipulados",
+      "Garantir que os membros sejam acompanhados em suas jornadas"
+    ],
+    calling: "Se você sente alegria em cuidar de outros, caminhar ao lado deles em momentos difíceis e construir relacionamentos fortes, seu chamado pode ser pastoral."
+  },
+  C: {
+    name: "Mestre",
+    subtitle: "O Educador e Equipador",
+    verse: "“Ele designou alguns para serem mestres…” — Efésios 4:11",
+    main: "Você tem um chamado para ensinar as Escrituras com clareza e profundidade, equipando a igreja com conhecimento prático para viver o Evangelho.",
+    characteristics: [
+      "Paixão por estudar e compartilhar a Palavra",
+      "Habilidade para explicar conceitos complexos de forma simples",
+      "Focado em ajudar outros a aplicar o conhecimento bíblico"
+    ],
+    examples: [
+      "Ministrar aulas de discipulado, escola bíblica ou batismo",
+      "Escrever ou criar materiais didáticos para a igreja",
+      "Ensinar em pequenos grupos, conferências ou estudos bíblicos"
+    ],
+    calling: "Se você ama estudar a Bíblia, ensinar e ver as pessoas crescerem em sabedoria e fé, Deus pode estar te chamando para o ministério de ensino."
+  },
+  D: {
+    name: "Evangelista",
+    subtitle: "O Comunicador e Conector",
+    verse: "“Ele designou alguns para serem evangelistas…” — Efésios 4:11",
+    main: "Você tem um chamado para compartilhar o Evangelho de forma apaixonada, inspirar outros a seguir a Cristo e conectar pessoas a Deus e à comunidade.",
+    characteristics: [
+      "Comunicação carismática e empolgante",
+      "Facilidade para construir relacionamentos e promover unidade",
+      "Focado em alcançar os perdidos e integrá-los à igreja"
+    ],
+    examples: [
+      "Participar de ações evangelísticas e eventos comunitários",
+      "Recepcionar visitantes e conectá-los à comunidade",
+      "Liderar iniciativas que impactem a comunidade local"
+    ],
+    calling: "Se você ama estar com pessoas, compartilhar a mensagem de Cristo e ver vidas sendo transformadas, você pode ter o chamado de evangelista."
+  },
+  E: {
+    name: "Profeta",
+    subtitle: "O Sensível e Inspirador",
+    verse: "“Ele designou alguns para serem profetas…” — Efésios 4:11",
+    main: "Você tem um chamado para ouvir a voz de Deus e comunicar Sua vontade à igreja, ajudando a comunidade a permanecer alinhada com os propósitos divinos.",
+    characteristics: [
+      "Sensibilidade espiritual e empatia profunda",
+      "Capacidade de discernir o que Deus está falando",
+      "Focado em encorajar e trazer esperança"
+    ],
+    examples: [
+      "Liderar momentos de oração e intercessão",
+      "Aconselhar espiritualmente quem busca direção",
+      "Trazer palavras de encorajamento em momentos críticos"
+    ],
+    calling: "Se você sente que Deus frequentemente fala ao seu coração por meio de convicções, sonhos ou visões, seu chamado pode ser ajudar outros a se conectarem com Ele."
+  }
+};
+
+// ── STATE ─────────────────────────────────────────────────
+
+let currentQ = 0;
+let answers  = new Array(16).fill(null);
+let userName = "";
+let chartInst = null;
+
+// ── NAVIGATION ────────────────────────────────────────────
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() {
+  const inp  = document.getElementById('user-name');
+  const name = inp.value.trim();
+  if (!name) {
+    inp.focus();
+    inp.style.borderColor = '#b03030';
+    setTimeout(() => { inp.style.borderColor = ''; }, 2000);
+    return;
+  }
+  userName = name;
+  currentQ = 0;
+  answers  = new Array(16).fill(null);
+  renderQ();
+  show('screen-quiz');
+}
+
+function renderQ() {
+  const q     = questions[currentQ];
+  const n     = currentQ + 1;
+  const total = questions.length;
+
+  document.getElementById('q-num').textContent     = `Pergunta ${n}`;
+  document.getElementById('q-text').textContent    = q.text;
+  document.getElementById('q-counter').textContent = `Pergunta ${n} de ${total}`;
+  document.getElementById('q-progress').style.width = `${(n / total) * 100}%`;
+
+  const container = document.getElementById('q-options');
+  container.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'q-option' + (answers[currentQ] === opt.key ? ' selected' : '');
+    btn.textContent = opt.text;
+    btn.addEventListener('click', () => selectOpt(opt.key));
+    container.appendChild(btn);
+  });
+
+  const isFirst = currentQ === 0;
+  const isLast  = currentQ === total - 1;
+  document.getElementById('btn-prev').disabled         = isFirst;
+  document.getElementById('btn-next').disabled         = answers[currentQ] === null;
+  document.getElementById('btn-next').textContent      = isLast ? 'Ver resultado →' : 'Próxima →';
+}
+
+function selectOpt(key) {
+  answers[currentQ] = key;
+  document.querySelectorAll('.q-option').forEach((el, i) => {
+    el.classList.toggle('selected', questions[currentQ].options[i].key === key);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function prevQ() {
+  if (currentQ > 0) { currentQ--; renderQ(); }
+}
+
+function nextQ() {
+  if (answers[currentQ] === null) return;
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    renderQ();
+  } else {
+    showResults();
+  }
+}
+
+function restart() {
+  currentQ = 0;
+  answers  = new Array(16).fill(null);
+  document.getElementById('user-name').value = '';
+  if (chartInst) { chartInst.destroy(); chartInst = null; }
+  show('screen-welcome');
+}
+
+// ── RESULTS ───────────────────────────────────────────────
+
+function showResults() {
+  const scores = { A:0, B:0, C:0, D:0, E:0 };
+  answers.forEach(a => { if (a) scores[a]++; });
+
+  const sorted   = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const [priKey, priScore] = sorted[0];
+  const [secKey, secScore] = sorted[1];
+  const total    = questions.length;
+  const pri      = ministries[priKey];
+  const sec      = ministries[secKey];
+
+  // header
+  document.getElementById('r-name').textContent = userName;
+
+  // primary
+  document.getElementById('r-pri-name').textContent  = pri.name;
+  document.getElementById('r-pri-sub').textContent   = pri.subtitle;
+  document.getElementById('r-pri-bar').style.width   = `${(priScore / total) * 100}%`;
+  document.getElementById('r-pri-score').textContent = `${priScore} de ${total}`;
+
+  // secondary
+  document.getElementById('r-sec-name').textContent  = sec.name;
+  document.getElementById('r-sec-sub').textContent   = sec.subtitle;
+  document.getElementById('r-sec-score').textContent = `${secScore}`;
+
+  // distribution bars
+  const dist = document.getElementById('r-dist');
+  dist.innerHTML = '';
+  sorted.forEach(([key, val]) => {
+    const m = ministries[key];
+    dist.innerHTML += `
+      <div class="dist-item">
+        <div class="dist-name">${m.name}</div>
+        <div class="dist-track"><div class="dist-fill" style="width:${(val/total)*100}%"></div></div>
+        <div class="dist-val">${val}</div>
+      </div>`;
+  });
+
+  // descriptions
+  document.getElementById('r-pri-desc').innerHTML = buildDesc(pri, 'Dominante');
+  document.getElementById('r-sec-desc').innerHTML = buildDesc(sec, 'Secundário');
+
+  // chart
+  renderChart(scores);
+
+  show('screen-results');
+}
+
+function buildDesc(m, badge) {
+  return `
+    <div class="desc-card">
+      <div class="desc-head">
+        <div class="desc-badge">${badge}</div>
+        <div class="desc-ministry">${m.name}</div>
+      </div>
+      <div class="desc-body">
+        <div class="desc-verse">${m.verse}</div>
+        <div class="desc-section">Sua Função</div>
+        <p class="desc-text">${m.main}</p>
+        <div class="desc-section">Características</div>
+        <ul class="desc-list">${m.characteristics.map(c => `<li>${c}</li>`).join('')}</ul>
+        <div class="desc-section">Exemplos de Atuação</div>
+        <ul class="desc-list">${m.examples.map(e => `<li>${e}</li>`).join('')}</ul>
+        <div class="calling-box"><p>${m.calling}</p></div>
+      </div>
+    </div>`;
+}
+
+function renderChart(scores) {
+  if (chartInst) chartInst.destroy();
+  const ctx = document.getElementById('ministry-chart').getContext('2d');
+  // APEST order: Apóstolo, Profeta, Evangelista, Pastor, Mestre
+  chartInst = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Apóstolo', 'Profeta', 'Evangelista', 'Pastor', 'Mestre'],
+      datasets: [{
+        data: [scores.A, scores.E, scores.D, scores.B, scores.C],
+        backgroundColor: 'rgba(122,158,63,0.15)',
+        borderColor: '#7A9E3F',
+        pointBackgroundColor: '#7A9E3F',
+        pointBorderColor: '#0E110D',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 16,
+          ticks: { display: false },
+          pointLabels: {
+            font: { size: 12, weight: '600', family: "'Inter', sans-serif" },
+            color: '#8B8C82'
+          },
+          grid:       { color: 'rgba(255,255,255,0.06)' },
+          angleLines: { color: 'rgba(255,255,255,0.06)' }
+        }
+      }
+    }
+  });
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────
+
+document.getElementById('user-name').addEventListener('keydown', e => {
+  if (e.key === 'Enter') startQuiz();
+});
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('screen-quiz').classList.contains('active')) return;
+  const n = parseInt(e.key);
+  if (n >= 1 && n <= 5) {
+    const opt = questions[currentQ].options[n - 1];
+    if (opt) selectOpt(opt.key);
+  }
+  if (e.key === 'Enter' && answers[currentQ] !== null) nextQ();
+  if (e.key === 'ArrowLeft') prevQ();
+});
+</script>
+</body>
+</html>
