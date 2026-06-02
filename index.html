@@ -40,7 +40,6 @@
     .screen { display: none; }
     .screen.active { display: block; }
 
-    /* ── LOGO ── */
     .logo {
       font-family: 'Inter', sans-serif;
       font-weight: 700;
@@ -50,7 +49,6 @@
     }
     .logo .x { font-style: italic; color: var(--oliva); }
 
-    /* ── EYEBROW ── */
     .eyebrow {
       font-family: 'Fira Code', 'SF Mono', monospace;
       font-size: 10px;
@@ -60,15 +58,12 @@
       color: var(--cinza-m);
     }
 
-    /* ════════════════════════════════════
-       WELCOME
-    ════════════════════════════════════ */
+    /* ════════ WELCOME ════════ */
     .w-hero {
       padding: 72px 24px 60px;
       text-align: center;
       border-bottom: 1px solid var(--borda);
     }
-
     .w-logo { font-size: 72px; margin-bottom: 10px; }
     .w-brand-label {
       font-family: 'Fira Code', monospace;
@@ -79,7 +74,6 @@
       color: var(--cinza-s);
       margin-bottom: 48px;
     }
-
     .w-title {
       font-size: clamp(36px, 9vw, 64px);
       font-weight: 700;
@@ -89,7 +83,6 @@
       margin-bottom: 20px;
     }
     .w-title em { font-style: italic; color: var(--oliva); }
-
     .w-sub {
       font-size: 16px;
       color: var(--cinza-m);
@@ -97,14 +90,11 @@
       max-width: 380px;
       margin: 0 auto;
     }
-
     .w-body {
       max-width: 540px;
       margin: 0 auto;
       padding: 44px 24px 80px;
     }
-
-    /* intro card — creme (devotional moment) */
     .w-intro {
       background: var(--creme-s);
       border-radius: 12px;
@@ -112,19 +102,9 @@
       margin-bottom: 20px;
       border-left: 3px solid var(--oliva);
     }
-    .w-intro .eyebrow {
-      color: var(--oliva-p);
-      margin-bottom: 14px;
-      display: block;
-    }
-    .w-intro p {
-      font-size: 14px;
-      color: #3a3b35;
-      line-height: 1.78;
-    }
+    .w-intro .eyebrow { color: var(--oliva-p); margin-bottom: 14px; display: block; }
+    .w-intro p { font-size: 14px; color: #3a3b35; line-height: 1.78; }
     .w-intro p + p { margin-top: 10px; }
-
-    /* name form */
     .w-form {
       background: var(--grafite);
       border: 1px solid var(--borda);
@@ -156,7 +136,6 @@
     }
     .w-input:focus { border-color: var(--oliva); }
     .w-input::placeholder { color: var(--cinza-s); }
-
     .btn-start {
       width: 100%;
       padding: 15px;
@@ -173,9 +152,7 @@
     }
     .btn-start:hover { background: var(--oliva-c); }
 
-    /* ════════════════════════════════════
-       QUIZ
-    ════════════════════════════════════ */
+    /* ════════ QUIZ ════════ */
     .q-header {
       background: var(--grafite);
       border-bottom: 1px solid var(--borda);
@@ -184,10 +161,7 @@
       top: 0;
       z-index: 20;
     }
-    .q-header-inner {
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    .q-header-inner { max-width: 600px; margin: 0 auto; }
     .q-meta {
       display: flex;
       justify-content: space-between;
@@ -195,11 +169,6 @@
       margin-bottom: 11px;
     }
     .q-logo { font-size: 17px; }
-
-    /* progress bar */
-    .q-progress-wrap {
-      position: relative;
-    }
     .q-progress-track {
       height: 3px;
       background: var(--borda-l);
@@ -212,13 +181,7 @@
       border-radius: 3px;
       transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    .q-body {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 32px 24px 56px;
-    }
-
+    .q-body { max-width: 600px; margin: 0 auto; padding: 32px 24px 56px; }
     .q-card {
       background: var(--grafite);
       border: 1px solid var(--borda);
@@ -234,12 +197,7 @@
       line-height: 1.3;
       color: var(--branco);
     }
-
-    .q-options {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
+    .q-options { display: flex; flex-direction: column; gap: 9px; }
     .q-option {
       width: 100%;
       padding: 16px 20px;
@@ -255,21 +213,13 @@
       transition: border-color 0.15s, background 0.15s, color 0.15s;
       appearance: none;
     }
-    .q-option:hover {
-      border-color: var(--oliva);
-      color: var(--branco);
-    }
+    .q-option:hover { border-color: var(--oliva); color: var(--branco); }
     .q-option.selected {
       border-color: var(--oliva);
       background: rgba(122, 158, 63, 0.1);
       color: var(--branco);
     }
-
-    .q-nav {
-      display: flex;
-      gap: 10px;
-      margin-top: 18px;
-    }
+    .q-nav { display: flex; gap: 10px; margin-top: 18px; }
     .btn-prev {
       padding: 13px 18px;
       background: transparent;
@@ -285,7 +235,6 @@
     }
     .btn-prev:hover:not(:disabled) { border-color: var(--cinza-m); color: var(--branco); }
     .btn-prev:disabled { opacity: 0.2; cursor: not-allowed; }
-
     .btn-next {
       flex: 1;
       padding: 13px 20px;
@@ -302,9 +251,7 @@
     .btn-next:hover:not(:disabled) { background: var(--oliva-c); }
     .btn-next:disabled { opacity: 0.25; cursor: not-allowed; }
 
-    /* ════════════════════════════════════
-       RESULTS
-    ════════════════════════════════════ */
+    /* ════════ RESULTS ════════ */
     .r-header {
       padding: 64px 24px 52px;
       text-align: center;
@@ -329,18 +276,8 @@
       color: var(--branco);
       margin-bottom: 10px;
     }
-    .r-meta {
-      font-size: 13px;
-      font-style: italic;
-      color: var(--cinza-s);
-    }
-
-    .r-body {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 44px 24px 80px;
-    }
-
+    .r-meta { font-size: 13px; font-style: italic; color: var(--cinza-s); }
+    .r-body { max-width: 600px; margin: 0 auto; padding: 44px 24px 80px; }
     .r-label {
       font-family: 'Fira Code', monospace;
       font-size: 10px;
@@ -350,8 +287,6 @@
       color: var(--cinza-m);
       margin-bottom: 16px;
     }
-
-    /* primary card */
     .r-primary {
       background: var(--grafite);
       border: 1px solid var(--borda);
@@ -387,11 +322,7 @@
       color: var(--oliva-c);
       margin-bottom: 28px;
     }
-    .score-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .score-row { display: flex; align-items: center; gap: 14px; }
     .score-track {
       flex: 1;
       height: 4px;
@@ -399,19 +330,13 @@
       border-radius: 4px;
       overflow: hidden;
     }
-    .score-fill {
-      height: 100%;
-      background: var(--oliva);
-      border-radius: 4px;
-    }
+    .score-fill { height: 100%; background: var(--oliva); border-radius: 4px; }
     .score-label {
       font-family: 'Fira Code', monospace;
       font-size: 11px;
       color: var(--cinza-m);
       white-space: nowrap;
     }
-
-    /* secondary card */
     .r-secondary {
       background: var(--grafite);
       border: 1px solid var(--borda);
@@ -432,27 +357,9 @@
       color: var(--cinza-s);
       margin-bottom: 4px;
     }
-    .r-sec-name {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.035em;
-      color: var(--branco);
-    }
-    .r-sec-sub {
-      font-size: 12px;
-      font-style: italic;
-      color: var(--cinza-m);
-      margin-top: 3px;
-    }
-    .r-sec-score {
-      font-size: 36px;
-      font-weight: 700;
-      letter-spacing: -0.05em;
-      color: var(--oliva);
-      flex-shrink: 0;
-    }
-
-    /* chart */
+    .r-sec-name { font-size: 22px; font-weight: 700; letter-spacing: -0.035em; color: var(--branco); }
+    .r-sec-sub { font-size: 12px; font-style: italic; color: var(--cinza-m); margin-top: 3px; }
+    .r-sec-score { font-size: 36px; font-weight: 700; letter-spacing: -0.05em; color: var(--oliva); flex-shrink: 0; }
     .r-chart-card {
       background: var(--grafite);
       border: 1px solid var(--borda);
@@ -460,42 +367,12 @@
       padding: 32px 20px;
       margin-bottom: 44px;
     }
-    .chart-wrap {
-      max-width: 280px;
-      margin: 0 auto;
-    }
-
-    /* all scores distribution */
-    .r-dist {
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-      margin-bottom: 44px;
-    }
-    .dist-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .dist-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--branco);
-      width: 96px;
-      flex-shrink: 0;
-    }
-    .dist-track {
-      flex: 1;
-      height: 4px;
-      background: var(--borda-l);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .dist-fill {
-      height: 100%;
-      background: var(--oliva);
-      border-radius: 4px;
-    }
+    .chart-wrap { max-width: 280px; margin: 0 auto; }
+    .r-dist { display: flex; flex-direction: column; gap: 11px; margin-bottom: 44px; }
+    .dist-item { display: flex; align-items: center; gap: 14px; }
+    .dist-name { font-size: 13px; font-weight: 600; color: var(--branco); width: 96px; flex-shrink: 0; }
+    .dist-track { flex: 1; height: 4px; background: var(--borda-l); border-radius: 4px; overflow: hidden; }
+    .dist-fill { height: 100%; background: var(--oliva); border-radius: 4px; }
     .dist-val {
       font-family: 'Fira Code', monospace;
       font-size: 11px;
@@ -504,8 +381,6 @@
       text-align: right;
       flex-shrink: 0;
     }
-
-    /* description cards */
     .desc-card {
       background: var(--grafite);
       border: 1px solid var(--borda);
@@ -513,10 +388,7 @@
       overflow: hidden;
       margin-bottom: 14px;
     }
-    .desc-head {
-      padding: 24px 28px;
-      border-bottom: 1px solid var(--borda);
-    }
+    .desc-head { padding: 24px 28px; border-bottom: 1px solid var(--borda); }
     .desc-badge {
       font-family: 'Fira Code', monospace;
       font-size: 9px;
@@ -526,12 +398,7 @@
       color: var(--oliva);
       margin-bottom: 8px;
     }
-    .desc-ministry {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      color: var(--branco);
-    }
+    .desc-ministry { font-size: 28px; font-weight: 700; letter-spacing: -0.04em; color: var(--branco); }
     .desc-body { padding: 28px; }
     .desc-verse {
       font-size: 13px;
@@ -541,6 +408,18 @@
       padding-left: 14px;
       line-height: 1.65;
       margin-bottom: 24px;
+    }
+    .desc-bible-refs {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .desc-bible-ref {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      color: var(--oliva);
+      line-height: 1.5;
     }
     .desc-section {
       font-family: 'Fira Code', monospace;
@@ -553,11 +432,24 @@
       margin-top: 22px;
     }
     .desc-section:first-of-type { margin-top: 0; }
-    .desc-text {
-      font-size: 14px;
-      color: var(--cinza-m);
-      line-height: 1.78;
+    .desc-text { font-size: 14px; color: var(--cinza-m); line-height: 1.78; }
+    .desc-figure {
+      background: rgba(122,158,63,0.07);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 16px;
+      margin-bottom: 4px;
     }
+    .desc-figure-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 9px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--oliva);
+      margin-bottom: 6px;
+    }
+    .desc-figure-text { font-size: 13px; color: var(--cinza-m); line-height: 1.7; font-style: italic; }
     .desc-list { list-style: none; }
     .desc-list li {
       font-size: 14px;
@@ -581,14 +473,7 @@
       padding: 16px 18px;
       margin-top: 22px;
     }
-    .calling-box p {
-      font-size: 14px;
-      font-style: italic;
-      color: var(--oliva-p);
-      line-height: 1.72;
-    }
-
-    /* disclaimer — creme (devotional/human moment) */
+    .calling-box p { font-size: 14px; font-style: italic; color: var(--oliva-p); line-height: 1.72; }
     .disclaimer {
       background: var(--creme-s);
       border-radius: 12px;
@@ -604,14 +489,26 @@
       color: var(--oliva-p);
       margin-bottom: 14px;
     }
-    .disclaimer p {
-      font-size: 13px;
-      color: #42433c;
-      line-height: 1.78;
-    }
+    .disclaimer p { font-size: 13px; color: #42433c; line-height: 1.78; }
     .disclaimer p + p { margin-top: 10px; }
     .disclaimer strong { font-weight: 700; color: #2a2b26; }
-
+    .btn-share {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--oliva);
+      color: var(--tinta);
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.15s;
+      margin-bottom: 12px;
+    }
+    .btn-share:hover { background: var(--oliva-c); }
     .btn-restart {
       display: block;
       width: 100%;
@@ -628,7 +525,6 @@
       transition: border-color 0.15s, color 0.15s;
     }
     .btn-restart:hover { border-color: var(--cinza-m); color: var(--branco); }
-
     .r-footer {
       text-align: center;
       padding: 36px 0 0;
@@ -668,8 +564,8 @@
   <div class="w-body">
     <div class="w-intro">
       <span class="eyebrow">Efésios 4:11–13</span>
-      <p>Este questionário foi desenvolvido com base nos princípios dos Cinco Ministérios e na Cultura da Honra, para ajudar você a compreender como Deus te chamou para contribuir no Corpo de Cristo.</p>
-      <p>São 16 perguntas. Não existe resposta certa ou errada — responda com sinceridade, escolhendo o que mais se aproxima da sua realidade.</p>
+      <p>Em Efésios 4:11-13, Paulo descreve cinco dons que Cristo deu à Igreja para equipar o seu povo e edificar o Corpo de Cristo. Este questionário foi desenvolvido para ajudar você a identificar com qual desses chamados você mais se conecta.</p>
+      <p>São 18 perguntas. Não existe resposta certa ou errada. Responda com sinceridade, escolhendo o que mais se aproxima da sua realidade.</p>
     </div>
 
     <div class="w-form">
@@ -686,12 +582,10 @@
     <div class="q-header-inner">
       <div class="q-meta">
         <div class="logo q-logo">CE<span class="x">.X</span></div>
-        <div class="eyebrow" id="q-counter">Pergunta 1 de 16</div>
+        <div class="eyebrow" id="q-counter">Pergunta 1 de 18</div>
       </div>
-      <div class="q-progress-wrap">
-        <div class="q-progress-track">
-          <div class="q-progress-fill" id="q-progress" style="width:0%"></div>
-        </div>
+      <div class="q-progress-track">
+        <div class="q-progress-fill" id="q-progress" style="width:0%"></div>
       </div>
     </div>
   </div>
@@ -757,10 +651,11 @@
 
     <div class="disclaimer">
       <div class="disclaimer-lbl">Uma nota importante</div>
-      <p>Este questionário é uma ferramenta de autoconhecimento baseada em princípios bíblicos e estudos sobre os Cinco Ministérios de Efésios 4:11-13. Os resultados <strong>não são definitivos</strong> e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança.</p>
-      <p>Use este resultado como um ponto de partida para reflexão, conversa e oração — não como uma conclusão final sobre o seu chamado. Sua jornada ministerial é única e continua sendo moldada por Deus dia a dia. Se quiser ir mais fundo nessa descoberta, converse com seu líder ou pastor na CE.X.</p>
+      <p>Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados <strong>não são definitivos</strong> e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança.</p>
+      <p>Use este resultado como ponto de partida para reflexão, conversa e oração. Sua jornada ministerial é única e continua sendo moldada por Deus dia a dia. Se quiser ir mais fundo nessa descoberta, converse com seu líder ou pastor na CE.X.</p>
     </div>
 
+    <button class="btn-share" onclick="shareCard()">Compartilhar meu resultado</button>
     <button class="btn-restart" onclick="restart()">Refazer o questionário</button>
 
     <div class="r-footer">
@@ -771,120 +666,134 @@
 </div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────
+// ── DATA ──────────────────────────────────────────────────────────────
 
 const questions = [
   { text: "Como você normalmente se comporta quando entra em um ambiente novo?", options: [
-    { key:"A", text:"Começo a entender como tudo funciona e penso em melhorias." },
+    { key:"A", text:"Começo a entender como tudo funciona e penso em como poderia ser melhor." },
     { key:"B", text:"Procuro perceber quem está sozinho ou desconfortável." },
     { key:"C", text:"Observo para entender as regras e a dinâmica do lugar." },
-    { key:"D", text:"Começo a conversar e conhecer novas pessoas." },
-    { key:"E", text:"Tento perceber o clima e a cultura do ambiente." }
+    { key:"D", text:"Começo a conversar e conhecer as pessoas ao redor." },
+    { key:"E", text:"Tento perceber o clima espiritual e a cultura do ambiente." }
   ]},
   { text: "Quando surge um problema em um grupo, você costuma:", options: [
     { key:"A", text:"Assumir a liderança para encontrar uma solução." },
-    { key:"B", text:"Cuidar das pessoas afetadas." },
-    { key:"C", text:"Analisar as causas para entender o que aconteceu." },
-    { key:"D", text:"Motivar as pessoas a continuarem avançando." },
+    { key:"B", text:"Cuidar das pessoas afetadas emocionalmente." },
+    { key:"C", text:"Analisar as causas para entender o que realmente aconteceu." },
+    { key:"D", text:"Motivar as pessoas a continuarem avançando juntas." },
     { key:"E", text:"Identificar o que precisa ser corrigido para evitar novos problemas." }
   ]},
   { text: "O que mais te gera satisfação?", options: [
-    { key:"A", text:"Ver algo crescer e prosperar." },
-    { key:"B", text:"Ver pessoas restauradas e fortalecidas." },
-    { key:"C", text:"Ver pessoas aprendendo e amadurecendo." },
-    { key:"D", text:"Ver novas pessoas chegando e participando." },
-    { key:"E", text:"Ver pessoas alinhadas com seu propósito." }
+    { key:"A", text:"Ver algo que você iniciou crescendo e gerando fruto." },
+    { key:"B", text:"Ver pessoas sendo restauradas e fortalecidas." },
+    { key:"C", text:"Ver pessoas compreendendo a Palavra e crescendo nela." },
+    { key:"D", text:"Ver novas pessoas chegando, sendo acolhidas e participando." },
+    { key:"E", text:"Ver pessoas alinhadas com o propósito de Deus para elas." }
   ]},
   { text: "Se você participasse da organização de um grande evento, qual função escolheria?", options: [
-    { key:"A", text:"Coordenar toda a operação." },
-    { key:"B", text:"Garantir que todos estejam bem e acolhidos." },
-    { key:"C", text:"Treinar e orientar as equipes." },
-    { key:"D", text:"Divulgar e atrair participantes." },
-    { key:"E", text:"Garantir que o propósito do evento não seja perdido." }
+    { key:"A", text:"Coordenar toda a operação e garantir que a visão seja cumprida." },
+    { key:"B", text:"Garantir que cada pessoa se sinta acolhida e cuidada." },
+    { key:"C", text:"Treinar e orientar as equipes com clareza." },
+    { key:"D", text:"Divulgar, convidar e atrair novos participantes." },
+    { key:"E", text:"Garantir que o propósito original do evento não se perca." }
   ]},
   { text: "As pessoas normalmente procuram você para:", options: [
-    { key:"A", text:"Pedir direção e tomada de decisão." },
-    { key:"B", text:"Desabafar ou pedir aconselhamento." },
-    { key:"C", text:"Tirar dúvidas ou aprender algo." },
-    { key:"D", text:"Fazer amizades ou ampliar conexões." },
-    { key:"E", text:"Buscar discernimento sobre situações importantes." }
+    { key:"A", text:"Pedir direção e ajuda na tomada de decisão." },
+    { key:"B", text:"Desabafar, ser ouvidas e receber aconselhamento." },
+    { key:"C", text:"Tirar dúvidas, aprender ou entender algo melhor." },
+    { key:"D", text:"Fazer amizade, ampliar conexões ou se integrar a um grupo." },
+    { key:"E", text:"Buscar discernimento sobre situações importantes da vida." }
   ]},
-  { text: "O que mais te incomoda?", options: [
-    { key:"A", text:"Falta de visão." },
-    { key:"B", text:"Pessoas abandonadas ou ignoradas." },
-    { key:"C", text:"Falta de conhecimento ou preparo." },
-    { key:"D", text:"Falta de crescimento ou alcance." },
-    { key:"E", text:"Falta de integridade ou coerência." }
+  { text: "O que mais te incomoda quando você olha ao redor?", options: [
+    { key:"A", text:"Falta de visão e de direção clara." },
+    { key:"B", text:"Pessoas sendo abandonadas ou não cuidadas." },
+    { key:"C", text:"Falta de preparo e de fundamento bíblico." },
+    { key:"D", text:"Falta de crescimento e de alcance da comunidade." },
+    { key:"E", text:"Falta de integridade e coerência entre o que se diz e o que se vive." }
   ]},
-  { text: "Quando você aprende algo novo:", options: [
-    { key:"A", text:"Penso em como aplicar em projetos." },
-    { key:"B", text:"Penso em quem pode ser ajudado." },
-    { key:"C", text:"Quero aprofundar e estudar mais." },
-    { key:"D", text:"Quero compartilhar com outras pessoas." },
-    { key:"E", text:"Avalio se aquilo está alinhado com princípios corretos." }
+  { text: "Quando você aprende algo novo na Palavra:", options: [
+    { key:"A", text:"Penso em como isso pode ser aplicado em novos projetos e iniciativas." },
+    { key:"B", text:"Penso imediatamente em quem precisa ouvir isso para ser ajudado." },
+    { key:"C", text:"Quero aprofundar mais, pesquisar e entender em profundidade." },
+    { key:"D", text:"Quero compartilhar com o maior número de pessoas possível." },
+    { key:"E", text:"Avalio se aquilo está alinhado com o caráter e os propósitos de Deus." }
   ]},
-  { text: "Qual frase mais combina com você?", options: [
-    { key:"A", text:"“Vamos construir algo grande.”" },
-    { key:"B", text:"“Como você está de verdade?”" },
-    { key:"C", text:"“Vamos entender melhor isso.”" },
-    { key:"D", text:"“Você precisa conhecer isso.”" },
-    { key:"E", text:"“Precisamos voltar ao propósito.”" }
+  { text: "Qual dessas frases mais combina com você?", options: [
+    { key:"A", text:"Vamos construir algo que ainda não existe aqui." },
+    { key:"B", text:"Conta pra mim. Como você está de verdade?" },
+    { key:"C", text:"Deixa eu te explicar o que esse trecho significa." },
+    { key:"D", text:"Você precisa conhecer essa pessoa. Ela vai te abençoar." },
+    { key:"E", text:"Precisamos voltar ao propósito pelo qual fomos chamados." }
   ]},
-  { text: "Quando você observa uma equipe:", options: [
-    { key:"A", text:"Vejo oportunidades de crescimento." },
-    { key:"B", text:"Vejo pessoas que precisam de apoio." },
-    { key:"C", text:"Vejo necessidades de treinamento." },
-    { key:"D", text:"Vejo oportunidades de expansão." },
-    { key:"E", text:"Vejo ajustes que precisam ser feitos." }
+  { text: "Quando você observa uma equipe de serviço:", options: [
+    { key:"A", text:"Vejo oportunidades de crescimento e expansão." },
+    { key:"B", text:"Vejo pessoas que precisam de cuidado e atenção." },
+    { key:"C", text:"Vejo necessidades de treinamento e capacitação." },
+    { key:"D", text:"Vejo oportunidades de alcançar mais pessoas." },
+    { key:"E", text:"Vejo ajustes que precisam ser feitos para que tudo esteja alinhado." }
   ]},
-  { text: "O que mais te motiva?", options: [
-    { key:"A", text:"Construir algo duradouro." },
-    { key:"B", text:"Cuidar de pessoas." },
-    { key:"C", text:"Compartilhar conhecimento." },
-    { key:"D", text:"Influenciar vidas." },
-    { key:"E", text:"Promover transformação genuína." }
+  { text: "O que mais te move a servir?", options: [
+    { key:"A", text:"O desejo de construir algo duradouro para o Reino de Deus." },
+    { key:"B", text:"A alegria de cuidar de pessoas e vê-las florescer." },
+    { key:"C", text:"A satisfação de transmitir conhecimento que transforma vidas." },
+    { key:"D", text:"A paixão de influenciar vidas e trazer pessoas para perto de Deus." },
+    { key:"E", text:"O comprometimento com a transformação genuína e o alinhamento com Deus." }
   ]},
   { text: "Em uma conversa você normalmente:", options: [
-    { key:"A", text:"Apresenta caminhos e soluções." },
-    { key:"B", text:"Escuta atentamente." },
-    { key:"C", text:"Explica conceitos." },
-    { key:"D", text:"Conta histórias e inspira pessoas." },
-    { key:"E", text:"Faz perguntas profundas." }
+    { key:"A", text:"Apresenta caminhos, estratégias e soluções." },
+    { key:"B", text:"Escuta com atenção e faz a pessoa se sentir acolhida." },
+    { key:"C", text:"Explica conceitos e aprofunda o entendimento." },
+    { key:"D", text:"Conta histórias, entusiasma e inspira pessoas à ação." },
+    { key:"E", text:"Faz perguntas profundas que levam à reflexão e ao autoconhecimento." }
   ]},
-  { text: "Qual resultado te deixa mais feliz?", options: [
-    { key:"A", text:"Um projeto funcionando." },
-    { key:"B", text:"Uma pessoa fortalecida." },
-    { key:"C", text:"Uma pessoa aprendendo." },
-    { key:"D", text:"Uma pessoa se conectando." },
-    { key:"E", text:"Uma pessoa encontrando direção." }
+  { text: "Qual resultado te traz mais alegria?", options: [
+    { key:"A", text:"Ver um projeto funcionando e gerando impacto real." },
+    { key:"B", text:"Ver uma pessoa fortalecida após um momento difícil." },
+    { key:"C", text:"Ver uma pessoa crescendo na compreensão da Bíblia." },
+    { key:"D", text:"Ver uma pessoa se conectando à comunidade e encontrando pertencimento." },
+    { key:"E", text:"Ver uma pessoa encontrando clareza sobre o chamado de Deus." }
   ]},
-  { text: "Se tivesse um dia livre, você preferiria:", options: [
-    { key:"A", text:"Planejar algo novo." },
-    { key:"B", text:"Estar com pessoas próximas." },
-    { key:"C", text:"Ler, estudar ou aprender." },
-    { key:"D", text:"Conhecer pessoas novas." },
-    { key:"E", text:"Refletir sobre a vida e propósito." }
+  { text: "Se tivesse um dia livre, você provavelmente:", options: [
+    { key:"A", text:"Planejaria algo novo ou pensaria em como expandir alguma iniciativa." },
+    { key:"B", text:"Passaria tempo de qualidade com pessoas próximas." },
+    { key:"C", text:"Leria, estudaria ou aprofundaria algum tema bíblico." },
+    { key:"D", text:"Aproveitaria para conhecer pessoas novas ou visitar alguém." },
+    { key:"E", text:"Refletiria sobre a vida, o propósito e o que Deus tem falado ao seu coração." }
   ]},
-  { text: "O que você mais valoriza?", options: [
-    { key:"A", text:"Crescimento." },
-    { key:"B", text:"Relacionamento." },
-    { key:"C", text:"Conhecimento." },
-    { key:"D", text:"Influência." },
-    { key:"E", text:"Verdade." }
+  { text: "O que você mais valoriza na vida de fé?", options: [
+    { key:"A", text:"Crescimento e expansão do Reino de Deus." },
+    { key:"B", text:"Relacionamentos profundos e comunidade verdadeira." },
+    { key:"C", text:"Conhecimento bíblico sólido e maturidade na Palavra." },
+    { key:"D", text:"Alcance e influência para transformar vidas." },
+    { key:"E", text:"Verdade, integridade e alinhamento com os propósitos de Deus." }
   ]},
   { text: "Quando você vê potencial em alguém:", options: [
-    { key:"A", text:"Quero ajudá-lo a desenvolver seus dons." },
-    { key:"B", text:"Quero caminhar ao lado dele." },
-    { key:"C", text:"Quero ensiná-lo." },
-    { key:"D", text:"Quero conectá-lo às pessoas certas." },
-    { key:"E", text:"Quero ajudá-lo a encontrar seu propósito." }
+    { key:"A", text:"Quer ajudá-lo a desenvolver seus dons e colocá-los em prática." },
+    { key:"B", text:"Quer caminhar ao lado dessa pessoa, apoiando e encorajando." },
+    { key:"C", text:"Quer ensiná-la e ajudá-la a crescer no conhecimento da Palavra." },
+    { key:"D", text:"Quer conectá-la às pessoas e oportunidades certas." },
+    { key:"E", text:"Quer ajudá-la a identificar e viver o propósito de Deus para ela." }
   ]},
   { text: "Qual legado você gostaria de deixar?", options: [
-    { key:"A", text:"Obras e projetos que continuem gerando impacto." },
-    { key:"B", text:"Pessoas cuidadas e amadas." },
-    { key:"C", text:"Pessoas capacitadas e maduras." },
-    { key:"D", text:"Muitas vidas alcançadas." },
-    { key:"E", text:"Pessoas vivendo seu propósito diante de Deus." }
+    { key:"A", text:"Iniciativas e obras que continuem gerando fruto após você." },
+    { key:"B", text:"Pessoas cuidadas, amadas e fortalecidas pela sua presença." },
+    { key:"C", text:"Pessoas capacitadas, maduras e firmes na Palavra." },
+    { key:"D", text:"Muitas vidas alcançadas e transformadas pelo Evangelho." },
+    { key:"E", text:"Pessoas vivendo plenamente o propósito que Deus preparou para elas." }
+  ]},
+  { text: "Quando você pensa na Igreja, o que mais te move?", options: [
+    { key:"A", text:"Quero ver ela crescendo e alcançando novos territórios para Deus." },
+    { key:"B", text:"Quero que ela seja um lugar seguro para quem está machucado." },
+    { key:"C", text:"Quero que ela seja profunda na Palavra e firme na doutrina." },
+    { key:"D", text:"Quero que ela esteja sempre abrindo espaço para pessoas novas." },
+    { key:"E", text:"Quero que ela permaneça fiel ao propósito pelo qual foi chamada." }
+  ]},
+  { text: "O que mais te pesa quando você vê a Igreja não funcionando bem?", options: [
+    { key:"A", text:"Que falta liderança e direção clara para onde ir." },
+    { key:"B", text:"Que as pessoas se perdem sem cuidado e acompanhamento." },
+    { key:"C", text:"Que há muito entusiasmo mas pouco fundamento bíblico." },
+    { key:"D", text:"Que ela está fechada em si mesma, sem alcançar quem está de fora." },
+    { key:"E", text:"Que ela perdeu o senso de propósito e do chamado original." }
   ]}
 ];
 
@@ -892,97 +801,140 @@ const ministries = {
   A: {
     name: "Apóstolo",
     subtitle: "O Visionário e Estrategista",
-    verse: "“Ele designou alguns para serem apóstolos…” — Efésios 4:11",
-    main: "Você tem um chamado para construir fundações espirituais sólidas e desenvolver estratégias para a expansão do Reino de Deus. Pioneiro por natureza, enxerga o quadro geral e alinha pessoas e ações a uma visão de longo prazo.",
+    verse: "Efésios 4:11: \"Ele mesmo concedeu que uns fossem apóstolos...\"",
+    cardVerse: "\"...para equipar os santos para as obras do serviço\" (Ef 4:12)",
+    bibleRefs: [
+      "Ef 2:20 — edificados sobre o fundamento dos apóstolos e profetas",
+      "1 Co 12:28 — Deus colocou na Igreja, em primeiro lugar, apóstolos",
+      "Rm 15:20 — Paulo: pregar onde Cristo ainda não era conhecido"
+    ],
+    figure: { name: "Paulo", text: "O maior exemplo apostólico do Novo Testamento. Não apenas pregava, mas plantava igrejas, formava líderes, estabelecia doutrinas e conectava comunidades inteiras à missão de Cristo. Seu lema era ir onde Cristo ainda não era conhecido (Rm 15:20)." },
+    main: "Você tem um chamado apostólico: construir o que ainda não existe e estabelecer fundamentos sólidos para que o Reino de Deus avance. O apóstolo não se contenta com o que já foi construído. Ele enxerga territórios inexplorados, reúne pessoas ao redor de uma visão maior e lança alicerces para que outros possam edificar. Em Efésios 2:20, Paulo descreve a Igreja como edificada sobre o fundamento dos apóstolos e profetas. Esse fundamento não é apenas histórico: é um chamado vivo, para pessoas que carregam a coragem de ir além do familiar e estabelecer o que ainda não existe.",
     characteristics: [
-      "Líder estratégico e inovador",
-      "Capacidade de enxergar potencial em pessoas e situações",
-      "Focado em crescimento e impacto duradouro"
+      "Liderança estratégica com visão de longo prazo",
+      "Capacidade de enxergar potencial onde outros veem apenas desafios",
+      "Pioneirismo: conforto com o novo, o desconhecido e o inacabado",
+      "Habilidade de reunir pessoas ao redor de uma causa maior"
     ],
     examples: [
-      "Planejar novas iniciativas ministeriais",
-      "Trabalhar na plantação de igrejas ou missões",
-      "Liderar times em direção a objetivos estratégicos"
+      "Iniciar novos ministérios, células ou frentes de missão",
+      "Plantar igrejas ou estabelecer obras em novos territórios",
+      "Criar estruturas e sistemas que sustentem o crescimento da Igreja"
     ],
-    calling: "Se você sente paixão por construir, liderar e inovar, Deus pode estar te chamando para ser uma ‘coluna’ na edificação da igreja."
+    calling: "Se você sente inquietação diante do que ainda não foi feito, se naturalmente pensa em estratégia e expansão, Deus pode estar te chamando para construir fundamentos sobre os quais outros vão edificar."
   },
   B: {
     name: "Pastor",
     subtitle: "O Cuidador e Protetor",
-    verse: "“Ele designou alguns para serem pastores…” — Efésios 4:11",
-    main: "Você tem um chamado para cuidar do bem-estar espiritual, emocional e relacional das pessoas. Cria ambientes seguros e acolhedores onde o rebanho pode crescer.",
+    verse: "Efésios 4:11: \"...outros, pastores e doutores...\"",
+    cardVerse: "\"Apascenta as minhas ovelhas.\" (Jo 21:17)",
+    bibleRefs: [
+      "Jo 10:11 — o bom pastor dá a sua vida pelas ovelhas",
+      "1 Pe 5:2-3 — apascentai o rebanho de Deus que está entre vós",
+      "Ez 34:15-16 — eu mesmo apascentarei o meu rebanho"
+    ],
+    figure: { name: "Pedro", text: "Restaurado por Jesus às margens do mar da Galileia, Pedro recebeu três vezes o mesmo comissionamento: apascenta as minhas ovelhas (Jo 21:15-17). O cuidado pastoral nasce de um coração que foi ele mesmo cuidado por Deus." },
+    main: "Você tem um chamado pastoral: criar o ambiente onde as pessoas podem crescer com segurança. Em João 10:11, Jesus se descreve como o bom pastor, aquele que conhece as ovelhas pelo nome e dá a vida por elas. O pastor não cuida de longe: ele caminha junto, suporta o peso dos outros, identifica os que se perderam e vai buscá-los. Pastorear não é apenas consolar. É nutrir intencionalmente, proteger de ameaças espirituais e relacionais e guiar pessoas em direção à maturidade no Senhor. Pedro foi comissionado por Jesus exatamente para isso: apascenta as minhas ovelhas.",
     characteristics: [
-      "Empatia e compaixão profundas",
-      "Habilidade para ouvir e aconselhar",
-      "Focado em relacionamentos e crescimento espiritual"
+      "Empatia profunda e capacidade de estar presente no sofrimento",
+      "Habilidade para ouvir sem pressa e aconselhar com sabedoria",
+      "Comprometimento com o acompanhamento de longo prazo",
+      "Sensibilidade para perceber quando alguém está se perdendo"
     ],
     examples: [
-      "Aconselhar pessoas em momentos difíceis",
-      "Organizar pequenos grupos e discipulados",
-      "Garantir que os membros sejam acompanhados em suas jornadas"
+      "Cuidar de pessoas em momentos de crise, luto ou dificuldade",
+      "Liderar grupos de discipulado e criar vínculos de responsabilidade",
+      "Criar cultura de pertencimento e cuidado mútuo na comunidade"
     ],
-    calling: "Se você sente alegria em cuidar de outros, caminhar ao lado deles em momentos difíceis e construir relacionamentos fortes, seu chamado pode ser pastoral."
+    calling: "Se você sente alegria genuína ao estar presente na vida das pessoas, ao caminhar com elas nos momentos difíceis e ao vê-las florescer, seu chamado pode ser o de Pastor."
   },
   C: {
     name: "Mestre",
     subtitle: "O Educador e Equipador",
-    verse: "“Ele designou alguns para serem mestres…” — Efésios 4:11",
-    main: "Você tem um chamado para ensinar as Escrituras com clareza e profundidade, equipando a igreja com conhecimento prático para viver o Evangelho.",
+    verse: "Efésios 4:11: \"...outros, pastores e doutores...\"",
+    cardVerse: "\"Esdras preparou seu coração para investigar a lei do Senhor, cumpri-la e ensiná-la.\" (Ed 7:10)",
+    bibleRefs: [
+      "2 Tm 2:2 — ensina a homens fiéis que sejam capazes de ensinar outros",
+      "Ed 7:10 — investigar, praticar e ensinar a lei do Senhor",
+      "At 18:24 — Apolo, homem eloquente e poderoso nas Escrituras"
+    ],
+    figure: { name: "Apolo e Esdras", text: "Apolo era \"poderoso nas Escrituras\" (At 18:24) e instruía com precisão e fervor. Esdras, séculos antes, seguia uma sequência clara: primeiro investigar a Palavra, depois praticá-la, e só então ensiná-la a outros. Essa é a marca do verdadeiro Mestre." },
+    main: "Você tem um chamado de ensino: tornar a Palavra de Deus acessível, profunda e transformadora para outros. Em Esdras 7:10 vemos a sequência do Mestre: ele preparou seu coração para investigar a lei do Senhor, para cumpri-la e para ensiná-la. Estudo, prática, transmissão. O Mestre não é apenas alguém que sabe muito. É alguém que sabe fazer outros saberem, de forma que a Palavra entre pela mente, mude o coração e transforme a vida. Paulo chama isso de discipular através da Palavra: ensinar a homens fiéis que por sua vez sejam capazes de ensinar a outros (2 Tm 2:2).",
     characteristics: [
-      "Paixão por estudar e compartilhar a Palavra",
-      "Habilidade para explicar conceitos complexos de forma simples",
-      "Focado em ajudar outros a aplicar o conhecimento bíblico"
+      "Amor genuíno pelo estudo das Escrituras e da teologia",
+      "Capacidade de explicar o complexo de forma simples e aplicável",
+      "Rigor e cuidado com a precisão bíblica e doutrinária",
+      "Paciência para acompanhar o aprendizado de outros ao longo do tempo"
     ],
     examples: [
-      "Ministrar aulas de discipulado, escola bíblica ou batismo",
-      "Escrever ou criar materiais didáticos para a igreja",
-      "Ensinar em pequenos grupos, conferências ou estudos bíblicos"
+      "Ministrar aulas de discipulado, escola bíblica ou grupos de estudo",
+      "Criar materiais didáticos que ajudem pessoas a compreender a Bíblia",
+      "Preparar e ensinar mensagens que formam e equipam a Igreja"
     ],
-    calling: "Se você ama estudar a Bíblia, ensinar e ver as pessoas crescerem em sabedoria e fé, Deus pode estar te chamando para o ministério de ensino."
+    calling: "Se você sente prazer em estudar a Palavra, em preparar explicações e em ver pessoas crescendo no entendimento bíblico, Deus pode estar te chamando para o ministério de ensino."
   },
   D: {
     name: "Evangelista",
     subtitle: "O Comunicador e Conector",
-    verse: "“Ele designou alguns para serem evangelistas…” — Efésios 4:11",
-    main: "Você tem um chamado para compartilhar o Evangelho de forma apaixonada, inspirar outros a seguir a Cristo e conectar pessoas a Deus e à comunidade.",
+    verse: "Efésios 4:11: \"...outros, evangelistas...\"",
+    cardVerse: "\"Como crerão naquele de quem não ouviram falar? E como ouvirão, sem haver quem pregue?\" (Rm 10:14)",
+    bibleRefs: [
+      "At 21:8 — Filipe, o evangelista",
+      "2 Tm 4:5 — faça o trabalho de evangelista",
+      "Rm 10:14-15 — como crerão sem quem lhes pregue?"
+    ],
+    figure: { name: "Filipe", text: "Em Atos 8, o Espírito enviou Filipe para um deserto, onde encontrou um único homem lendo Isaías num carro de bois. Filipe não hesitou, aproximou-se, perguntou, explicou e conduziu à fé. Esse é o evangelista: movido pelo Espírito, confortável em qualquer contexto, sempre pronto a construir uma ponte." },
+    main: "Você tem um chamado evangelístico: construir pontes entre as pessoas e o Evangelho de Jesus Cristo. O evangelista não espera que os perdidos apareçam. Ele vai até onde estão. Em Atos 8:26-40, Filipe foi enviado pelo Espírito ao deserto, um lugar improvável, para alcançar um único homem. Evangelistas se movem com naturalidade entre mundos diferentes, traduzem o Evangelho para linguagens que pessoas de fora conseguem entender e têm uma convicção inabalável de que toda pessoa pode responder ao chamado de Deus. Paulo instrui Timóteo a fazer o trabalho de evangelista (2 Tm 4:5): não é apenas um dom especial, é uma responsabilidade de todo seguidor de Cristo, mas há aqueles para quem isso é fogo no coração.",
     characteristics: [
-      "Comunicação carismática e empolgante",
-      "Facilidade para construir relacionamentos e promover unidade",
-      "Focado em alcançar os perdidos e integrá-los à igreja"
+      "Facilidade natural de se conectar com pessoas de origens diversas",
+      "Comunicação apaixonada e capacidade de tornar o Evangelho atraente",
+      "Criatividade para alcançar quem está fora da comunidade de fé",
+      "Coragem para iniciar conversas espirituais em qualquer contexto"
     ],
     examples: [
-      "Participar de ações evangelísticas e eventos comunitários",
-      "Recepcionar visitantes e conectá-los à comunidade",
-      "Liderar iniciativas que impactem a comunidade local"
+      "Liderar ações evangelísticas e eventos de alcance comunitário",
+      "Ser a ponte entre visitantes e a comunidade da Igreja",
+      "Treinar e mobilizar outros para compartilhar a fé com naturalidade"
     ],
-    calling: "Se você ama estar com pessoas, compartilhar a mensagem de Cristo e ver vidas sendo transformadas, você pode ter o chamado de evangelista."
+    calling: "Se você sente um peso pelas pessoas que ainda não conhecem a Cristo e uma alegria especial ao testemunhar alguém respondendo ao Evangelho, você pode ter o chamado de Evangelista."
   },
   E: {
     name: "Profeta",
     subtitle: "O Sensível e Inspirador",
-    verse: "“Ele designou alguns para serem profetas…” — Efésios 4:11",
-    main: "Você tem um chamado para ouvir a voz de Deus e comunicar Sua vontade à igreja, ajudando a comunidade a permanecer alinhada com os propósitos divinos.",
+    verse: "Efésios 4:11: \"...uns, de fato, para serem apóstolos; outros, profetas...\"",
+    cardVerse: "\"Aquele que profetiza fala aos homens: edificação, exortação e consolação.\" (1 Co 14:3)",
+    bibleRefs: [
+      "1 Co 14:3 — edificação, exortação e consolação",
+      "Am 3:7 — nada faz o Senhor sem revelar o segredo a seus servos profetas",
+      "Lc 2:36-38 — Ana, a profetisa, que servia a Deus com jejuns e orações"
+    ],
+    figure: { name: "Ana e Agabo", text: "Ana, a profetisa de Lucas 2, passava noites no templo em oração e jejum. Não por religiosidade vazia, mas porque percebia o que Deus estava fazendo antes que qualquer um reconhecesse. Agabo (At 11:28) identificou com precisão o que estava por vir. Ambos viviam em sintonização constante com o Espírito." },
+    main: "Você tem um chamado profético: perceber o que Deus está dizendo ao Seu povo agora. Em 1 Coríntios 14:3, Paulo define com clareza o fruto da profecia: edificação, exortação e consolação. O profeta não é necessariamente alguém que prevê eventos futuros. É alguém com sensibilidade aguçada para o estado espiritual de uma comunidade, capaz de identificar desvios antes que se tornem crises, de nomear verdades que outros evitam dizer e de trazer direção quando há confusão. Amós 3:7 nos diz que Deus não age sem revelar o segredo aos Seus servos profetas. Há pessoas que carregam essa antena sintonizada com os propósitos de Deus.",
     characteristics: [
-      "Sensibilidade espiritual e empatia profunda",
-      "Capacidade de discernir o que Deus está falando",
-      "Focado em encorajar e trazer esperança"
+      "Sensibilidade espiritual e capacidade de perceber o que está debaixo da superfície",
+      "Coragem para nomear verdades difíceis com compaixão e respeito",
+      "Forte comprometimento com integridade, propósito e alinhamento com Deus",
+      "Vida de oração e intimidade com Deus como fonte de discernimento"
     ],
     examples: [
-      "Liderar momentos de oração e intercessão",
-      "Aconselhar espiritualmente quem busca direção",
-      "Trazer palavras de encorajamento em momentos críticos"
+      "Liderar momentos de oração, intercessão e busca espiritual",
+      "Discernir o clima espiritual de uma comunidade e trazer direção",
+      "Encorajar, exortar e trazer esperança em momentos de crise coletiva"
     ],
-    calling: "Se você sente que Deus frequentemente fala ao seu coração por meio de convicções, sonhos ou visões, seu chamado pode ser ajudar outros a se conectarem com Ele."
+    calling: "Se você percebe coisas que outros não percebem, sente o peso do que está fora do alinhamento com Deus e carrega um coração que chora pelo que chora o coração de Deus, seu chamado pode ser o de Profeta."
   }
 };
 
-// ── STATE ─────────────────────────────────────────────────
+// ── STATE ──────────────────────────────────────────────────────────────
 
-let currentQ = 0;
-let answers  = new Array(16).fill(null);
-let userName = "";
+let currentQ  = 0;
+let answers   = new Array(18).fill(null);
+let userName  = "";
 let chartInst = null;
-let shuffled = []; // questions with options shuffled per session
+let shuffled  = [];
+let lastScores = null;
+let lastPriKey = null;
+let lastSecKey = null;
 
 function shuffle(arr) {
   const a = [...arr];
@@ -993,7 +945,7 @@ function shuffle(arr) {
   return a;
 }
 
-// ── NAVIGATION ────────────────────────────────────────────
+// ── NAVIGATION ────────────────────────────────────────────────────────
 
 function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1010,10 +962,10 @@ function startQuiz() {
     setTimeout(() => { inp.style.borderColor = ''; }, 2000);
     return;
   }
-  userName = name;
-  currentQ = 0;
-  answers  = new Array(16).fill(null);
-  shuffled = questions.map(q => ({ ...q, options: shuffle(q.options) }));
+  userName  = name;
+  currentQ  = 0;
+  answers   = new Array(18).fill(null);
+  shuffled  = questions.map(q => ({ ...q, options: shuffle(q.options) }));
   renderQ();
   show('screen-quiz');
 }
@@ -1023,16 +975,16 @@ function renderQ() {
   const n     = currentQ + 1;
   const total = questions.length;
 
-  document.getElementById('q-num').textContent     = `Pergunta ${n}`;
-  document.getElementById('q-text').textContent    = q.text;
-  document.getElementById('q-counter').textContent = `Pergunta ${n} de ${total}`;
+  document.getElementById('q-num').textContent      = `Pergunta ${n}`;
+  document.getElementById('q-text').textContent     = q.text;
+  document.getElementById('q-counter').textContent  = `Pergunta ${n} de ${total}`;
   document.getElementById('q-progress').style.width = `${(n / total) * 100}%`;
 
   const container = document.getElementById('q-options');
   container.innerHTML = '';
   q.options.forEach(opt => {
     const btn = document.createElement('button');
-    btn.className = 'q-option' + (answers[currentQ] === opt.key ? ' selected' : '');
+    btn.className   = 'q-option' + (answers[currentQ] === opt.key ? ' selected' : '');
     btn.textContent = opt.text;
     btn.addEventListener('click', () => selectOpt(opt.key));
     container.appendChild(btn);
@@ -1040,9 +992,9 @@ function renderQ() {
 
   const isFirst = currentQ === 0;
   const isLast  = currentQ === total - 1;
-  document.getElementById('btn-prev').disabled         = isFirst;
-  document.getElementById('btn-next').disabled         = answers[currentQ] === null;
-  document.getElementById('btn-next').textContent      = isLast ? 'Ver resultado →' : 'Próxima →';
+  document.getElementById('btn-prev').disabled    = isFirst;
+  document.getElementById('btn-next').disabled    = answers[currentQ] === null;
+  document.getElementById('btn-next').textContent = isLast ? 'Ver resultado →' : 'Próxima →';
 }
 
 function selectOpt(key) {
@@ -1053,56 +1005,48 @@ function selectOpt(key) {
   document.getElementById('btn-next').disabled = false;
 }
 
-function prevQ() {
-  if (currentQ > 0) { currentQ--; renderQ(); }
-}
+function prevQ() { if (currentQ > 0) { currentQ--; renderQ(); } }
 
 function nextQ() {
   if (answers[currentQ] === null) return;
-  if (currentQ < questions.length - 1) {
-    currentQ++;
-    renderQ();
-  } else {
-    showResults();
-  }
+  if (currentQ < questions.length - 1) { currentQ++; renderQ(); }
+  else showResults();
 }
 
 function restart() {
-  currentQ = 0;
-  answers  = new Array(16).fill(null);
+  currentQ   = 0;
+  answers    = new Array(18).fill(null);
   document.getElementById('user-name').value = '';
   if (chartInst) { chartInst.destroy(); chartInst = null; }
   show('screen-welcome');
 }
 
-// ── RESULTS ───────────────────────────────────────────────
+// ── RESULTS ───────────────────────────────────────────────────────────
 
 function showResults() {
   const scores = { A:0, B:0, C:0, D:0, E:0 };
   answers.forEach(a => { if (a) scores[a]++; });
 
-  const sorted   = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const sorted             = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const [priKey, priScore] = sorted[0];
   const [secKey, secScore] = sorted[1];
-  const total    = questions.length;
-  const pri      = ministries[priKey];
-  const sec      = ministries[secKey];
+  const total              = questions.length;
+  const pri                = ministries[priKey];
+  const sec                = ministries[secKey];
 
-  // header
-  document.getElementById('r-name').textContent = userName;
+  lastScores = scores;
+  lastPriKey = priKey;
+  lastSecKey = secKey;
 
-  // primary
-  document.getElementById('r-pri-name').textContent  = pri.name;
-  document.getElementById('r-pri-sub').textContent   = pri.subtitle;
-  document.getElementById('r-pri-bar').style.width   = `${(priScore / total) * 100}%`;
-  document.getElementById('r-pri-score').textContent = `${priScore} de ${total}`;
+  document.getElementById('r-name').textContent     = userName;
+  document.getElementById('r-pri-name').textContent = pri.name;
+  document.getElementById('r-pri-sub').textContent  = pri.subtitle;
+  document.getElementById('r-pri-bar').style.width  = `${(priScore / total) * 100}%`;
+  document.getElementById('r-pri-score').textContent= `${priScore} de ${total}`;
+  document.getElementById('r-sec-name').textContent = sec.name;
+  document.getElementById('r-sec-sub').textContent  = sec.subtitle;
+  document.getElementById('r-sec-score').textContent= `${secScore}`;
 
-  // secondary
-  document.getElementById('r-sec-name').textContent  = sec.name;
-  document.getElementById('r-sec-sub').textContent   = sec.subtitle;
-  document.getElementById('r-sec-score').textContent = `${secScore}`;
-
-  // distribution bars
   const dist = document.getElementById('r-dist');
   dist.innerHTML = '';
   sorted.forEach(([key, val]) => {
@@ -1115,17 +1059,15 @@ function showResults() {
       </div>`;
   });
 
-  // descriptions
   document.getElementById('r-pri-desc').innerHTML = buildDesc(pri, 'Dominante');
   document.getElementById('r-sec-desc').innerHTML = buildDesc(sec, 'Secundário');
 
-  // chart
   renderChart(scores);
-
   show('screen-results');
 }
 
 function buildDesc(m, badge) {
+  const refsHtml = m.bibleRefs.map(r => `<div class="desc-bible-ref">${r}</div>`).join('');
   return `
     <div class="desc-card">
       <div class="desc-head">
@@ -1134,8 +1076,13 @@ function buildDesc(m, badge) {
       </div>
       <div class="desc-body">
         <div class="desc-verse">${m.verse}</div>
-        <div class="desc-section">Sua Função</div>
+        <div class="desc-bible-refs">${refsHtml}</div>
+        <div class="desc-section">Seu Chamado</div>
         <p class="desc-text">${m.main}</p>
+        <div class="desc-figure">
+          <div class="desc-figure-label">Referência bíblica</div>
+          <div class="desc-figure-text">${m.figure.name}: ${m.figure.text}</div>
+        </div>
         <div class="desc-section">Características</div>
         <ul class="desc-list">${m.characteristics.map(c => `<li>${c}</li>`).join('')}</ul>
         <div class="desc-section">Exemplos de Atuação</div>
@@ -1148,7 +1095,6 @@ function buildDesc(m, badge) {
 function renderChart(scores) {
   if (chartInst) chartInst.destroy();
   const ctx = document.getElementById('ministry-chart').getContext('2d');
-  // APEST order: Apóstolo, Profeta, Evangelista, Pastor, Mestre
   chartInst = new Chart(ctx, {
     type: 'radar',
     data: {
@@ -1170,7 +1116,7 @@ function renderChart(scores) {
       scales: {
         r: {
           beginAtZero: true,
-          max: 16,
+          max: 18,
           ticks: { display: false },
           pointLabels: {
             font: { size: 12, weight: '600', family: "'Inter', sans-serif" },
@@ -1184,7 +1130,243 @@ function renderChart(scores) {
   });
 }
 
-// ── KEYBOARD ──────────────────────────────────────────────
+// ── SHARE CARD (1920×1080) ────────────────────────────────────────────
+
+async function shareCard() {
+  if (!lastScores || !lastPriKey || !lastSecKey) return;
+
+  const W = 1920, H = 1080;
+  const canvas = document.createElement('canvas');
+  canvas.width  = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  // Load Inter via FontFace
+  try {
+    const f700 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff2)', { weight: '700' });
+    const f400 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2)', { weight: '400' });
+    await Promise.all([f700, f400].map(f => f.load().then(lf => document.fonts.add(lf)).catch(() => {})));
+  } catch (_) {}
+
+  const pri = ministries[lastPriKey];
+  const sec = ministries[lastSecKey];
+  const scores = lastScores;
+
+  // ── Background
+  ctx.fillStyle = '#0E110D';
+  ctx.fillRect(0, 0, W, H);
+
+  // Subtle dot pattern (brand book: trama de pontos)
+  ctx.fillStyle = 'rgba(122,158,63,0.04)';
+  for (let x = 60; x < W; x += 48) {
+    for (let y = 60; y < H; y += 48) {
+      ctx.beginPath();
+      ctx.arc(x, y, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Vertical divider between left and right columns
+  const divX = Math.round(W * 0.56);
+  ctx.fillStyle = 'rgba(122,158,63,0.12)';
+  ctx.fillRect(divX, 60, 1, H - 120);
+
+  const pad = 80;
+  const leftW = divX - pad;
+
+  // ── CE.X LOGO
+  const fontStack = 'InterCard, Inter, Arial, sans-serif';
+  ctx.font = `700 52px ${fontStack}`;
+  ctx.fillStyle = '#FAFAF7';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('CE', pad, 116);
+  const ceW = ctx.measureText('CE').width;
+  ctx.font = `italic 700 52px ${fontStack}`;
+  ctx.fillStyle = '#7A9E3F';
+  ctx.fillText('.X', pad + ceW, 116);
+
+  // Eyebrow
+  ctx.font = `500 18px ${fontStack}`;
+  ctx.fillStyle = '#555650';
+  ctx.fillText('CAMPUS EXPANSÃO', pad, 154);
+
+  // Thin olive line under header
+  ctx.fillStyle = 'rgba(122,158,63,0.25)';
+  ctx.fillRect(pad, 172, leftW, 1);
+
+  // ── HEADLINE
+  ctx.font = `700 74px ${fontStack}`;
+  ctx.fillStyle = '#FAFAF7';
+  ctx.fillText('Descobri meu', pad, 286);
+  ctx.font = `italic 700 74px ${fontStack}`;
+  ctx.fillStyle = '#7A9E3F';
+  ctx.fillText('ministério.', pad, 370);
+
+  // Person name + "tem o chamado de"
+  ctx.font = `400 26px ${fontStack}`;
+  ctx.fillStyle = '#8B8C82';
+  ctx.fillText(userName + ' tem o chamado de', pad, 436);
+
+  // Ministry name (huge)
+  ctx.font = `700 116px ${fontStack}`;
+  ctx.fillStyle = '#FAFAF7';
+  // Scale down if name is long
+  let fontSize = 116;
+  while (ctx.measureText(pri.name.toUpperCase()).width > leftW && fontSize > 60) {
+    fontSize -= 4;
+    ctx.font = `700 ${fontSize}px ${fontStack}`;
+  }
+  ctx.fillText(pri.name.toUpperCase(), pad, 570);
+
+  // Subtitle italic olive
+  ctx.font = `italic 400 27px ${fontStack}`;
+  ctx.fillStyle = '#94B85C';
+  ctx.fillText(pri.subtitle, pad, 616);
+
+  // Secondary ministry
+  ctx.font = `400 22px ${fontStack}`;
+  ctx.fillStyle = '#555650';
+  ctx.fillText('+ ' + sec.name + ' como ministério secundário', pad, 672);
+
+  // Olive line
+  ctx.fillStyle = 'rgba(122,158,63,0.2)';
+  ctx.fillRect(pad, 700, leftW, 1);
+
+  // Key verse (wrapped)
+  ctx.font = `italic 400 20px ${fontStack}`;
+  ctx.fillStyle = '#555650';
+  wrapText(ctx, pri.cardVerse, pad, 740, leftW, 30);
+
+  // ── FOOTER BAR
+  ctx.fillStyle = 'rgba(122,158,63,0.1)';
+  ctx.fillRect(0, H - 88, W, 88);
+
+  // Footer left text
+  ctx.font = `400 22px ${fontStack}`;
+  ctx.fillStyle = '#8B8C82';
+  ctx.fillText('Quer descobrir qual é o seu?', pad, H - 50);
+  ctx.font = `400 18px ${fontStack}`;
+  ctx.fillStyle = '#555650';
+  ctx.fillText('Acesse o link na bio', pad, H - 22);
+
+  // Footer right: handle
+  ctx.font = `700 30px ${fontStack}`;
+  ctx.fillStyle = '#7A9E3F';
+  ctx.textAlign = 'right';
+  ctx.fillText('@campusexpansao.x', W - pad, H - 44);
+  ctx.font = `400 18px ${fontStack}`;
+  ctx.fillStyle = '#555650';
+  ctx.fillText('e faça o teste', W - pad, H - 18);
+  ctx.textAlign = 'left';
+
+  // ── RIGHT COLUMN: Radar
+  const rightCX = divX + (W - divX) / 2;
+  const rightCY = H / 2 - 40;
+  drawRadar(ctx, scores, rightCX, rightCY, 260, fontStack);
+
+  // ── Download
+  const link = document.createElement('a');
+  link.download = 'meu-ministerio-cex.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function drawRadar(ctx, scores, cx, cy, radius, fontStack) {
+  // APEST order: Apóstolo(A), Profeta(E), Evangelista(D), Pastor(B), Mestre(C)
+  const vals   = [scores.A, scores.E, scores.D, scores.B, scores.C];
+  const labels = ['Apóstolo', 'Profeta', 'Evangelista', 'Pastor', 'Mestre'];
+  const n = 5;
+  const max = 18;
+
+  // Grid pentagons (3 levels)
+  for (let level = 1; level <= 3; level++) {
+    const r = radius * (level / 3);
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Axes
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + radius * Math.cos(angle), cy + radius * Math.sin(angle));
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const r = radius * (vals[i] / max);
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fillStyle   = 'rgba(122,158,63,0.2)';
+  ctx.fill();
+  ctx.strokeStyle = '#7A9E3F';
+  ctx.lineWidth   = 2.5;
+  ctx.stroke();
+
+  // Data points
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const r = radius * (vals[i] / max);
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI * 2);
+    ctx.fillStyle   = '#7A9E3F';
+    ctx.fill();
+    ctx.strokeStyle = '#0E110D';
+    ctx.lineWidth   = 2;
+    ctx.stroke();
+  }
+
+  // Labels
+  ctx.font      = `600 22px ${fontStack}`;
+  ctx.fillStyle = '#8B8C82';
+  ctx.textAlign = 'center';
+  for (let i = 0; i < n; i++) {
+    const angle  = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const labelR = radius + 44;
+    const x = cx + labelR * Math.cos(angle);
+    const y = cy + labelR * Math.sin(angle);
+    ctx.fillText(labels[i], x, y + 8);
+  }
+  ctx.textAlign = 'left';
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+  for (let i = 0; i < words.length; i++) {
+    const test = line + words[i] + ' ';
+    if (ctx.measureText(test).width > maxWidth && i > 0) {
+      ctx.fillText(line.trim(), x, y);
+      line = words[i] + ' ';
+      y += lineHeight;
+    } else {
+      line = test;
+    }
+  }
+  ctx.fillText(line.trim(), x, y);
+}
+
+// ── KEYBOARD ──────────────────────────────────────────────────────────
 
 document.getElementById('user-name').addEventListener('keydown', e => {
   if (e.key === 'Enter') startQuiz();
@@ -1194,7 +1376,7 @@ document.addEventListener('keydown', e => {
   if (!document.getElementById('screen-quiz').classList.contains('active')) return;
   const n = parseInt(e.key);
   if (n >= 1 && n <= 5) {
-    const opt = questions[currentQ].options[n - 1];
+    const opt = shuffled[currentQ].options[n - 1];
     if (opt) selectOpt(opt.key);
   }
   if (e.key === 'Enter' && answers[currentQ] !== null) nextQ();
