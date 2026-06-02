@@ -1130,18 +1130,19 @@ function renderChart(scores) {
   });
 }
 
-// ── SHARE CARD (1920×1080) ────────────────────────────────────────────
+// ── SHARE CARD (1080×1920 — Stories vertical) ────────────────────────
 
 async function shareCard() {
   if (!lastScores || !lastPriKey || !lastSecKey) return;
 
-  const W = 1920, H = 1080;
+  // Portrait 9:16 — Instagram Stories / Reels cover
+  // Safe zone: top ~250px, bottom ~350px (avoid Stories UI chrome)
+  const W = 1080, H = 1920;
   const canvas = document.createElement('canvas');
   canvas.width  = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  // Load Inter via FontFace
   try {
     const f700 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff2)', { weight: '700' });
     const f400 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2)', { weight: '400' });
@@ -1151,118 +1152,124 @@ async function shareCard() {
   const pri = ministries[lastPriKey];
   const sec = ministries[lastSecKey];
   const scores = lastScores;
+  const fontStack = 'InterCard, Inter, Arial, sans-serif';
+  const pad = 80;
+  const contentW = W - pad * 2; // 920px
 
   // ── Background
   ctx.fillStyle = '#0E110D';
   ctx.fillRect(0, 0, W, H);
 
-  // Subtle dot pattern (brand book: trama de pontos)
-  ctx.fillStyle = 'rgba(122,158,63,0.04)';
-  for (let x = 60; x < W; x += 48) {
-    for (let y = 60; y < H; y += 48) {
+  // Dot pattern
+  ctx.fillStyle = 'rgba(122,158,63,0.035)';
+  for (let x = 40; x < W; x += 48) {
+    for (let y = 40; y < H; y += 48) {
       ctx.beginPath();
       ctx.arc(x, y, 1.5, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
-  // Vertical divider between left and right columns
-  const divX = Math.round(W * 0.56);
-  ctx.fillStyle = 'rgba(122,158,63,0.12)';
-  ctx.fillRect(divX, 60, 1, H - 120);
+  // Subtle top vignette to keep clear of Stories UI
+  const topGrad = ctx.createLinearGradient(0, 0, 0, 260);
+  topGrad.addColorStop(0, 'rgba(14,17,13,0.92)');
+  topGrad.addColorStop(1, 'rgba(14,17,13,0)');
+  ctx.fillStyle = topGrad;
+  ctx.fillRect(0, 0, W, 260);
 
-  const pad = 80;
-  const leftW = divX - pad;
+  // Subtle bottom vignette (Stories bottom bar area)
+  const botGrad = ctx.createLinearGradient(0, H - 380, 0, H);
+  botGrad.addColorStop(0, 'rgba(14,17,13,0)');
+  botGrad.addColorStop(1, 'rgba(14,17,13,0.85)');
+  ctx.fillStyle = botGrad;
+  ctx.fillRect(0, H - 380, W, 380);
 
-  // ── CE.X LOGO
-  const fontStack = 'InterCard, Inter, Arial, sans-serif';
-  ctx.font = `700 52px ${fontStack}`;
-  ctx.fillStyle = '#FAFAF7';
   ctx.textBaseline = 'alphabetic';
-  ctx.fillText('CE', pad, 116);
+
+  // ── CE.X LOGO  (safe zone starts ~y=280)
+  ctx.font = `700 48px ${fontStack}`;
+  ctx.fillStyle = '#FAFAF7';
+  ctx.fillText('CE', pad, 322);
   const ceW = ctx.measureText('CE').width;
-  ctx.font = `italic 700 52px ${fontStack}`;
+  ctx.font = `italic 700 48px ${fontStack}`;
   ctx.fillStyle = '#7A9E3F';
-  ctx.fillText('.X', pad + ceW, 116);
+  ctx.fillText('.X', pad + ceW, 322);
 
   // Eyebrow
-  ctx.font = `500 18px ${fontStack}`;
+  ctx.font = `500 15px ${fontStack}`;
   ctx.fillStyle = '#555650';
-  ctx.fillText('CAMPUS EXPANSÃO', pad, 154);
+  ctx.fillText('CAMPUS EXPANSÃO', pad, 356);
 
-  // Thin olive line under header
+  // Separator
   ctx.fillStyle = 'rgba(122,158,63,0.25)';
-  ctx.fillRect(pad, 172, leftW, 1);
+  ctx.fillRect(pad, 376, contentW, 1);
 
   // ── HEADLINE
-  ctx.font = `700 74px ${fontStack}`;
+  ctx.font = `700 72px ${fontStack}`;
   ctx.fillStyle = '#FAFAF7';
-  ctx.fillText('Descobri meu', pad, 286);
-  ctx.font = `italic 700 74px ${fontStack}`;
+  ctx.fillText('Descobri meu', pad, 470);
+  ctx.font = `italic 700 72px ${fontStack}`;
   ctx.fillStyle = '#7A9E3F';
-  ctx.fillText('ministério.', pad, 370);
+  ctx.fillText('ministério.', pad, 556);
 
-  // Person name + "tem o chamado de"
-  ctx.font = `400 26px ${fontStack}`;
+  // Person name
+  ctx.font = `400 23px ${fontStack}`;
   ctx.fillStyle = '#8B8C82';
-  ctx.fillText(userName + ' tem o chamado de', pad, 436);
+  ctx.fillText(userName + ' tem o chamado de', pad, 616);
 
-  // Ministry name (huge)
-  ctx.font = `700 116px ${fontStack}`;
-  ctx.fillStyle = '#FAFAF7';
-  // Scale down if name is long
-  let fontSize = 116;
-  while (ctx.measureText(pri.name.toUpperCase()).width > leftW && fontSize > 60) {
+  // Ministry name (huge, auto-scale)
+  let fontSize = 104;
+  ctx.font = `700 ${fontSize}px ${fontStack}`;
+  while (ctx.measureText(pri.name.toUpperCase()).width > contentW && fontSize > 56) {
     fontSize -= 4;
     ctx.font = `700 ${fontSize}px ${fontStack}`;
   }
-  ctx.fillText(pri.name.toUpperCase(), pad, 570);
+  ctx.fillStyle = '#FAFAF7';
+  ctx.fillText(pri.name.toUpperCase(), pad, 742);
 
-  // Subtitle italic olive
-  ctx.font = `italic 400 27px ${fontStack}`;
+  // Subtitle
+  ctx.font = `italic 400 25px ${fontStack}`;
   ctx.fillStyle = '#94B85C';
-  ctx.fillText(pri.subtitle, pad, 616);
+  ctx.fillText(pri.subtitle, pad, 786);
 
   // Secondary ministry
-  ctx.font = `400 22px ${fontStack}`;
+  ctx.font = `400 19px ${fontStack}`;
   ctx.fillStyle = '#555650';
-  ctx.fillText('+ ' + sec.name + ' como ministério secundário', pad, 672);
+  ctx.fillText('+ ' + sec.name + ' como ministério secundário', pad, 832);
 
-  // Olive line
+  // Thin separator
   ctx.fillStyle = 'rgba(122,158,63,0.2)';
-  ctx.fillRect(pad, 700, leftW, 1);
+  ctx.fillRect(pad, 858, contentW, 1);
 
-  // Key verse (wrapped)
-  ctx.font = `italic 400 20px ${fontStack}`;
+  // Key verse (wrapped, max 2 lines)
+  ctx.font = `italic 400 19px ${fontStack}`;
   ctx.fillStyle = '#555650';
-  wrapText(ctx, pri.cardVerse, pad, 740, leftW, 30);
+  wrapText(ctx, pri.cardVerse, pad, 896, contentW, 30);
 
-  // ── FOOTER BAR
-  ctx.fillStyle = 'rgba(122,158,63,0.1)';
-  ctx.fillRect(0, H - 88, W, 88);
+  // ── RADAR — center at y=1190, radius=182
+  // Top label lands at ~y=984 (gap ~88px from verse end ~896)
+  // Bottom label lands at ~y=1416 (within safe zone)
+  drawRadar(ctx, scores, W / 2, 1200, 182, fontStack);
 
-  // Footer left text
+  // ── BOTTOM CTA (safe zone ends ~y=1570)
+  ctx.fillStyle = 'rgba(122,158,63,0.15)';
+  ctx.fillRect(pad, 1448, contentW, 1);
+
+  ctx.textAlign = 'center';
+
   ctx.font = `400 22px ${fontStack}`;
   ctx.fillStyle = '#8B8C82';
-  ctx.fillText('Quer descobrir qual é o seu?', pad, H - 50);
-  ctx.font = `400 18px ${fontStack}`;
-  ctx.fillStyle = '#555650';
-  ctx.fillText('Acesse o link na bio', pad, H - 22);
+  ctx.fillText('Quer descobrir qual é o seu?', W / 2, 1496);
 
-  // Footer right: handle
   ctx.font = `700 30px ${fontStack}`;
   ctx.fillStyle = '#7A9E3F';
-  ctx.textAlign = 'right';
-  ctx.fillText('@campusexpansao.x', W - pad, H - 44);
-  ctx.font = `400 18px ${fontStack}`;
-  ctx.fillStyle = '#555650';
-  ctx.fillText('e faça o teste', W - pad, H - 18);
-  ctx.textAlign = 'left';
+  ctx.fillText('@campusexpansao.x', W / 2, 1538);
 
-  // ── RIGHT COLUMN: Radar
-  const rightCX = divX + (W - divX) / 2;
-  const rightCY = H / 2 - 40;
-  drawRadar(ctx, scores, rightCX, rightCY, 260, fontStack);
+  ctx.font = `400 17px ${fontStack}`;
+  ctx.fillStyle = '#555650';
+  ctx.fillText('Acesse o link na bio', W / 2, 1566);
+
+  ctx.textAlign = 'left';
 
   // ── Download
   const link = document.createElement('a');
