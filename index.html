@@ -982,6 +982,16 @@ let currentQ = 0;
 let answers  = new Array(16).fill(null);
 let userName = "";
 let chartInst = null;
+let shuffled = []; // questions with options shuffled per session
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 // ── NAVIGATION ────────────────────────────────────────────
 
@@ -1003,12 +1013,13 @@ function startQuiz() {
   userName = name;
   currentQ = 0;
   answers  = new Array(16).fill(null);
+  shuffled = questions.map(q => ({ ...q, options: shuffle(q.options) }));
   renderQ();
   show('screen-quiz');
 }
 
 function renderQ() {
-  const q     = questions[currentQ];
+  const q     = shuffled[currentQ];
   const n     = currentQ + 1;
   const total = questions.length;
 
@@ -1037,7 +1048,7 @@ function renderQ() {
 function selectOpt(key) {
   answers[currentQ] = key;
   document.querySelectorAll('.q-option').forEach((el, i) => {
-    el.classList.toggle('selected', questions[currentQ].options[i].key === key);
+    el.classList.toggle('selected', shuffled[currentQ].options[i].key === key);
   });
   document.getElementById('btn-next').disabled = false;
 }
