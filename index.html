@@ -543,6 +543,83 @@
       line-height: 1.6;
     }
 
+    /* ════════ WELCOME MINISTRY LIST ════════ */
+    .w-verse {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--oliva-p);
+      line-height: 1.82;
+      border-left: 2px solid var(--oliva);
+      padding-left: 14px;
+      margin: 14px 0;
+    }
+    .w-ministry-list {
+      display: flex;
+      flex-direction: column;
+      margin: 18px 0;
+      border: 1px solid rgba(122,158,63,0.25);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .w-m-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(122,158,63,0.12);
+    }
+    .w-m-item:last-child { border-bottom: none; }
+    .w-m-name { font-size: 13px; font-weight: 700; color: var(--oliva); width: 100px; flex-shrink: 0; }
+    .w-m-desc { font-size: 12px; color: var(--cinza-s); line-height: 1.5; }
+
+    /* ════════ NEXT STEPS ════════ */
+    .steps-card {
+      background: var(--grafite);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 14px;
+    }
+    .steps-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--branco);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .steps-intro {
+      font-size: 13px;
+      color: var(--cinza-m);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .steps-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .steps-list li {
+      font-size: 14px;
+      color: var(--cinza-m);
+      line-height: 1.65;
+      padding: 12px 16px 12px 44px;
+      background: rgba(122,158,63,0.05);
+      border-radius: 8px;
+      border-left: 2px solid var(--oliva);
+      position: relative;
+    }
+    .steps-list li .step-n {
+      position: absolute;
+      left: 14px;
+      top: 13px;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--oliva);
+    }
+
     @media (max-width: 480px) {
       .w-hero { padding: 56px 20px 48px; }
       .q-card { padding: 24px 20px; }
@@ -565,8 +642,18 @@
 
   <div class="w-body">
     <div class="w-intro">
-      <span class="eyebrow">Efésios 4:11–13</span>
-      <p>Em Efésios 4:11-13, Paulo descreve cinco dons que Cristo deu à Igreja para equipar o seu povo e edificar o Corpo de Cristo. Este questionário foi desenvolvido para ajudar você a identificar com qual desses chamados você mais se conecta.</p>
+      <span class="eyebrow">Por que os Cinco Ministérios?</span>
+      <p>Em Efésios 4:11-13, Paulo revela como Cristo estruturou a Sua Igreja para que ela pudesse cumprir sua missão no mundo:</p>
+      <p class="w-verse">"E ele mesmo concedeu que uns fossem apóstolos, outros profetas, outros evangelistas e outros pastores e mestres, para o aperfeiçoamento dos santos, para a obra do ministério, para a edificação do corpo de Cristo — até que todos alcancemos a unidade da fé e do pleno conhecimento do Filho de Deus." (Ef 4:11-13)</p>
+      <p>Cristo não apenas salva a Igreja — Ele a equipa com cinco chamados distintos, cada um essencial para que o Corpo funcione em plenitude. Esses não são apenas títulos ou cargos. São formas diferentes de enxergar o mundo, de liderar e de servir ao Reino.</p>
+      <div class="w-ministry-list">
+        <div class="w-m-item"><span class="w-m-name">Apóstolo</span><span class="w-m-desc">Pioneiro e estrategista — estabelece fundamentos onde não há</span></div>
+        <div class="w-m-item"><span class="w-m-name">Profeta</span><span class="w-m-desc">Sensível ao que Deus está dizendo ao Seu povo agora</span></div>
+        <div class="w-m-item"><span class="w-m-name">Evangelista</span><span class="w-m-desc">Construtor de pontes entre pessoas e o Evangelho</span></div>
+        <div class="w-m-item"><span class="w-m-name">Pastor</span><span class="w-m-desc">Cuidador que cria ambientes de crescimento seguro</span></div>
+        <div class="w-m-item"><span class="w-m-name">Mestre</span><span class="w-m-desc">Equipador que torna a Palavra acessível e transformadora</span></div>
+      </div>
+      <p>Quando a Igreja não tem clareza sobre esses papéis, ela tende a operar com apenas um ou dois chamados dominantes — e fica incompleta. Quando cada membro descobre e exerce o seu, o Corpo inteiro é edificado em amor (Ef 4:16). A CE.X acredita que a descoberta do seu ministério não é apenas autoconhecimento — é parte da sua responsabilidade com o Corpo de Cristo.</p>
       <p>São 18 perguntas. Não existe resposta certa ou errada. Responda com sinceridade, escolhendo o que mais se aproxima da sua realidade.</p>
     </div>
 
@@ -618,6 +705,8 @@
   </div>
 
   <div class="r-body">
+    <button class="btn-share" style="margin-bottom:36px" onclick="shareCard()">Compartilhar meu resultado</button>
+
     <div class="r-label">Ministério Dominante</div>
     <div class="r-primary">
       <div class="r-pri-badge">Principal</div>
@@ -652,10 +741,14 @@
     <div id="r-pri-desc"></div>
     <div id="r-sec-desc"></div>
 
+    <div class="r-label">Como Crescer no Seu Chamado</div>
+    <div id="r-steps"></div>
+
     <div class="disclaimer">
       <div class="disclaimer-lbl">Uma nota importante</div>
-      <p>Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados <strong>não são definitivos</strong> e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança.</p>
-      <p>Use este resultado como ponto de partida para reflexão, conversa e oração. Sua jornada ministerial é única e continua sendo moldada por Deus dia a dia. Se quiser ir mais fundo nessa descoberta, converse com seu líder ou pastor na CE.X.</p>
+      <p>Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados <strong>não são definitivos</strong> e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança. Nenhum questionário define quem você é diante de Deus.</p>
+      <p>Use este resultado como ponto de partida para reflexão, conversa e oração. A clareza sobre o seu chamado não vem de uma vez. Ela vai sendo formada através do <strong>aprofundamento bíblico</strong> — estudar as Escrituras com profundidade, não só por cima —, e de uma vida consistente de <strong>oração e jejum</strong>, na qual você busca a face de Deus com intenção. É na <strong>intimidade com Ele</strong> que os propósitos vão ganhando forma.</p>
+      <p>Sua jornada ministerial é única e continua sendo moldada por Deus dia a dia. Se quiser ir mais fundo nessa descoberta, converse com seu líder ou pastor na CE.X.</p>
     </div>
 
     <button class="btn-share" onclick="shareCard()">Compartilhar meu resultado</button>
@@ -928,6 +1021,59 @@ const ministries = {
   }
 };
 
+const ministrySteps = {
+  A: {
+    title: "Crescendo como Apóstolo",
+    intro: "Seu chamado é pioneiro. Para avançar intencionalmente nele:",
+    steps: [
+      "Estude as viagens missionárias de Paulo em Atos — observe como ele plantava, estruturava e delegava sem centralizar.",
+      "Mergulhe nos temas de estratégia, plantação de igrejas e liderança apostólica. Autores como Alan Hirsch, Tim Keller e Neil Cole trazem perspectivas valiosas.",
+      "Converse com líderes que abriram novos ministérios ou obras — pergunte sobre os desafios do pioneirismo e o que aprenderam.",
+      "Identifique um território inexplorado na CE.X ou na sua cidade onde você poderia contribuir com iniciativa, visão e capacidade de estruturar."
+    ]
+  },
+  B: {
+    title: "Crescendo como Pastor",
+    intro: "Seu chamado é cuidar. Para avançar intencionalmente nele:",
+    steps: [
+      "Pratique a presença ativa: escolha uma pessoa por semana para acompanhar intencionalmente — com perguntas reais, não genéricas.",
+      "Estude aconselhamento bíblico: aprenda a ouvir com profundidade e a falar com sabedoria. Livros de Larry Crabb e Jay Adams são boas referências.",
+      "Leia João 10, Ezequiel 34 e 1 Pedro 5 em sequência, meditando no modelo do bom pastor que conhece as ovelhas pelo nome.",
+      "Ofereça-se para liderar um grupo pequeno ou célula na CE.X — o pastoreio se aprende na prática relacional, não apenas na teoria."
+    ]
+  },
+  C: {
+    title: "Crescendo como Mestre",
+    intro: "Seu chamado é equipar pela Palavra. Para avançar intencionalmente nele:",
+    steps: [
+      "Construa uma disciplina consistente de estudo bíblico: vá além da leitura diária e use comentários, dicionários e ferramentas de hermenêutica.",
+      "Pratique a sequência de Esdras (Ed 7:10): investigar a Palavra, praticá-la você mesmo, e só então ensiná-la. Não separe o estudo da vida.",
+      "Escolha um tema bíblico ou livro da Bíblia e prepare um ensino para compartilhar — mesmo que para um grupo pequeno. Ensinar clarifica o que você sabe.",
+      "Considere cursos de teologia bíblica, presenciais ou online — o Mestre verdadeiro nunca para de aprender."
+    ]
+  },
+  D: {
+    title: "Crescendo como Evangelista",
+    intro: "Seu chamado é alcançar. Para avançar intencionalmente nele:",
+    steps: [
+      "Pratique contar sua história de fé em 2-3 minutos de forma natural e não religiosa — direto, honesto, sem jargão.",
+      "Identifique três pessoas na sua vida que ainda não conhecem Cristo. Ore por elas toda semana e busque pontos de conexão genuína.",
+      "Estude Atos 8 (Filipe e o etíope) e Romanos 10:14-15 — deixe a urgência da missão alcançar seu coração antes de querer alcançar outros.",
+      "Convide alguém de fora para um evento da CE.X este mês — e esteja presente para recebê-lo, apresentá-lo às pessoas e acompanhá-lo."
+    ]
+  },
+  E: {
+    title: "Crescendo como Profeta",
+    intro: "Seu chamado é ouvir e falar o que Deus está dizendo. Para avançar intencionalmente nele:",
+    steps: [
+      "Aprofunde sua vida de oração — a sensibilidade profética nasce da intimidade com Deus, não de técnica ou de dom isolado.",
+      "Estude a diferença entre dom de profecia (1 Co 14) e ministério profético (Ef 4:11) — entenda o peso, a responsabilidade e o contexto de cada um.",
+      "Aprenda a testar o que você percebe: sempre pela Palavra escrita, pelo conselho de líderes espirituais maduros e pelo fruto que aparece no tempo.",
+      "Leia os profetas do Antigo Testamento — Isaías, Jeremias, Ezequiel — não para prever o futuro, mas para entender o coração de Deus pelo Seu povo."
+    ]
+  }
+};
+
 // ── STATE ──────────────────────────────────────────────────────────────
 
 let currentQ  = 0;
@@ -1074,6 +1220,7 @@ function showResults() {
 
   document.getElementById('r-pri-desc').innerHTML = buildDesc(pri, 'Dominante');
   document.getElementById('r-sec-desc').innerHTML = buildDesc(sec, 'Secundário');
+  document.getElementById('r-steps').innerHTML    = buildSteps(priKey);
 
   renderChart(scores);
   preloadCardFonts();
@@ -1103,6 +1250,19 @@ function buildDesc(m, badge) {
         <ul class="desc-list">${m.examples.map(e => `<li>${e}</li>`).join('')}</ul>
         <div class="calling-box"><p>${m.calling}</p></div>
       </div>
+    </div>`;
+}
+
+function buildSteps(priKey) {
+  const s = ministrySteps[priKey];
+  const items = s.steps.map((step, i) =>
+    `<li><span class="step-n">${String(i + 1).padStart(2, '0')}</span>${step}</li>`
+  ).join('');
+  return `
+    <div class="steps-card">
+      <div class="steps-title">${s.title}</div>
+      <div class="steps-intro">${s.intro}</div>
+      <ul class="steps-list">${items}</ul>
     </div>`;
 }
 
