@@ -1076,6 +1076,7 @@ function showResults() {
   document.getElementById('r-sec-desc').innerHTML = buildDesc(sec, 'Secundário');
 
   renderChart(scores);
+  preloadCardFonts();
   show('screen-results');
 }
 
@@ -1154,11 +1155,13 @@ async function shareCard() {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    const f700 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff2)', { weight: '700' });
-    const f400 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2)', { weight: '400' });
-    await Promise.all([f700, f400].map(f => f.load().then(lf => document.fonts.add(lf)).catch(() => {})));
-  } catch (_) {}
+  if (!document.fonts.check('700 16px InterCard')) {
+    try {
+      const f700 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff2)', { weight: '700' });
+      const f400 = new FontFace('InterCard', 'url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2)', { weight: '400' });
+      await Promise.all([f700, f400].map(f => f.load().then(lf => document.fonts.add(lf)).catch(() => {})));
+    } catch (_) {}
+  }
 
   const pri    = ministries[lastPriKey];
   const sec    = ministries[lastSecKey];
@@ -1295,6 +1298,17 @@ async function shareCard() {
   link.download = 'meu-ministerio-cex.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
+
+  // Second download: HTML ministry report (staggered to avoid browser blocking)
+  setTimeout(() => {
+    const html = generateMinistryReport();
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const docLink = document.createElement('a');
+    docLink.download = 'ministerio-cex-descricao.html';
+    docLink.href = URL.createObjectURL(blob);
+    docLink.click();
+    URL.revokeObjectURL(docLink.href);
+  }, 700);
 }
 
 
@@ -1363,6 +1377,14 @@ function drawRadar(ctx, scores, cx, cy, radius, fontStack) {
     ctx.stroke();
   }
 
+  // Relative percentages — largest-remainder so they sum to exactly 100
+  const _tot = vals.reduce((s, v) => s + v, 0) || 1;
+  const _fl  = vals.map(v => Math.floor(v / _tot * 100));
+  let   _rem = 100 - _fl.reduce((a, b) => a + b, 0);
+  vals.map((v, i) => [(v / _tot * 100) - _fl[i], i])
+      .sort((a, b) => b[0] - a[0])
+      .forEach(([, i]) => { if (_rem-- > 0) _fl[i]++; });
+
   // Labels + percentage
   ctx.textAlign = 'center';
   for (let i = 0; i < n; i++) {
@@ -1373,10 +1395,9 @@ function drawRadar(ctx, scores, cx, cy, radius, fontStack) {
     ctx.font      = `600 26px ${fontStack}`;
     ctx.fillStyle = '#8B8C82';
     ctx.fillText(labels[i], x, y + 8);
-    const pct = Math.round(vals[i] / max * 100);
     ctx.font      = `700 22px ${fontStack}`;
     ctx.fillStyle = '#7A9E3F';
-    ctx.fillText(`${pct}%`, x, y + 8 + 30);
+    ctx.fillText(`${_fl[i]}%`, x, y + 8 + 30);
   }
   ctx.textAlign = 'left';
 }
@@ -1395,6 +1416,140 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
     }
   }
   ctx.fillText(line.trim(), x, y);
+}
+
+// ── FONT PRELOADER ────────────────────────────────────────────────────
+
+let _cardFontsPreloaded = false;
+function preloadCardFonts() {
+  if (_cardFontsPreloaded) return;
+  _cardFontsPreloaded = true;
+  [
+    ['https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.woff2', '700'],
+    ['https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2', '400']
+  ].forEach(([url, w]) => {
+    new FontFace('InterCard', `url(${url})`, { weight: w })
+      .load().then(f => document.fonts.add(f)).catch(() => {});
+  });
+}
+
+// ── MINISTRY REPORT HTML ──────────────────────────────────────────────
+
+function generateMinistryReport() {
+  if (!lastPriKey || !lastSecKey || !lastScores) return '';
+  const pri    = ministries[lastPriKey];
+  const sec    = ministries[lastSecKey];
+  const scores = lastScores;
+  const total  = Object.values(scores).reduce((s, v) => s + v, 0) || 1;
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const date   = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const distBars = sorted.map(([key, val]) => {
+    const m   = ministries[key];
+    const pct = Math.round(val / total * 100);
+    return `<div class="d-row">
+      <div class="d-name">${m.name}</div>
+      <div class="d-wrap"><div class="d-bar" style="width:${pct}%"></div></div>
+      <div class="d-val">${val} · ${pct}%</div>
+    </div>`;
+  }).join('');
+
+  const miniCard = (m, key, badge) => {
+    const pct   = Math.round(scores[key] / total * 100);
+    const refs  = m.bibleRefs.map(r => `<li>${r}</li>`).join('');
+    const chars = m.characteristics.map(c => `<li>${c}</li>`).join('');
+    const exs   = m.examples.map(e => `<li>${e}</li>`).join('');
+    const cls   = badge === 'Dominante' ? 'primary' : 'secondary';
+    return `<div class="m-card ${cls}">
+  <span class="m-badge">${badge}</span>
+  <h2>${m.name}</h2>
+  <p class="m-sub">${m.subtitle}</p>
+  <p class="m-pct">${scores[key]} resposta${scores[key] !== 1 ? 's' : ''} &middot; ${pct}% do total</p>
+  <blockquote>${m.verse}</blockquote>
+  <div class="s-label">Seu Chamado</div>
+  <p class="m-body">${m.main}</p>
+  <div class="s-label">Referência Bíblica &mdash; ${m.figure.name}</div>
+  <p class="m-fig">${m.figure.text}</p>
+  <div class="s-label">Versículos Relacionados</div>
+  <ul class="refs">${refs}</ul>
+  <div class="s-label">Características</div>
+  <ul>${chars}</ul>
+  <div class="s-label">Exemplos de Atuação</div>
+  <ul>${exs}</ul>
+  <div class="calling">${m.calling}</div>
+</div>`;
+  };
+
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${userName} &mdash; Meu Ministério &middot; CE.X</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f7f7f4;color:#1a1c18;line-height:1.72}
+.cover{background:#0E110D;padding:52px 48px 60px;color:#FAFAF7}
+.c-logo{font-size:36px;font-weight:700}
+.c-logo em{color:#7A9E3F;font-style:italic}
+.c-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#555650;margin-top:4px;margin-bottom:32px}
+.c-name{font-size:28px;font-weight:700}
+.c-sub{font-size:14px;color:#8B8C82;margin-top:8px}
+.c-date{font-size:11px;color:#3a3b35;margin-top:16px}
+.wrap{max-width:720px;margin:0 auto;padding:48px 32px 80px}
+.box{background:#fff;border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.box-title{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A9E3F;margin-bottom:18px}
+.d-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.d-name{font-size:13px;font-weight:600;width:96px;flex-shrink:0}
+.d-wrap{flex:1;height:6px;background:#eeede6;border-radius:4px;overflow:hidden}
+.d-bar{height:100%;background:#7A9E3F;border-radius:4px}
+.d-val{font-size:12px;color:#8B8C82;width:72px;text-align:right;flex-shrink:0}
+.m-card{background:#fff;border-radius:12px;padding:40px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.m-card.primary{border-top:3px solid #7A9E3F}
+.m-card.secondary{border-top:3px solid #4F6B26}
+.m-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:#7A9E3F;padding:3px 10px;border-radius:4px;margin-bottom:12px}
+.m-card.secondary .m-badge{background:#4F6B26}
+h2{font-size:30px;font-weight:700;margin-bottom:4px}
+.m-sub{font-size:15px;color:#4F6B26;font-style:italic;margin-bottom:6px}
+.m-pct{font-size:12px;color:#8B8C82;margin-bottom:20px}
+blockquote{border-left:3px solid #7A9E3F;padding:10px 18px;background:#f4f4ef;border-radius:0 8px 8px 0;font-style:italic;font-size:14px;color:#3a3b35;margin-bottom:20px}
+.s-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7A9E3F;margin:20px 0 8px}
+.m-body{font-size:14px;color:#3a3b35;line-height:1.8}
+.m-fig{font-size:13px;color:#555650;font-style:italic;line-height:1.8}
+ul{list-style:none}
+ul li{font-size:13px;color:#3a3b35;padding:6px 0 6px 18px;position:relative;border-bottom:1px solid #f0f0ea}
+ul li:last-child{border-bottom:none}
+ul li::before{content:'—';position:absolute;left:0;color:#7A9E3F}
+ul.refs li{font-size:12px;color:#555650}
+.calling{background:#f2f8ec;border-radius:8px;padding:18px 22px;margin-top:20px;font-size:13px;color:#2a3d15;font-style:italic;border-left:3px solid #7A9E3F}
+.disc{font-size:12px;color:#8B8C82;line-height:1.8}
+.footer{text-align:center;padding:32px 0 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#aaa}
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="c-logo">CE<em>.X</em></div>
+  <p class="c-eyebrow">Campus Expansão</p>
+  <p class="c-name">${userName}</p>
+  <p class="c-sub">Resultado do Questionário dos Cinco Ministérios</p>
+  <p class="c-date">Gerado em ${date}</p>
+</div>
+<div class="wrap">
+  <div class="box">
+    <div class="box-title">Distribuição dos Ministérios</div>
+    ${distBars}
+  </div>
+  ${miniCard(pri, lastPriKey, 'Dominante')}
+  ${miniCard(sec, lastSecKey, 'Secundário')}
+  <div class="box disc">
+    <strong>Lembrete:</strong> Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados não são definitivos e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança. Use este resultado como ponto de partida para reflexão, conversa e oração.
+  </div>
+  <p class="footer">CE.X &middot; Campus Expansão</p>
+</div>
+</body>
+</html>`;
 }
 
 // ── KEYBOARD ──────────────────────────────────────────────────────────
