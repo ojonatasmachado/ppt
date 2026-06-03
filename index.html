@@ -492,6 +492,8 @@
     .disclaimer p { font-size: 13px; color: #42433c; line-height: 1.78; }
     .disclaimer p + p { margin-top: 10px; }
     .disclaimer strong { font-weight: 700; color: #2a2b26; }
+    .q-hint { font-size: 12px; color: var(--cinza-s); text-align: center; margin: -4px 0 18px; letter-spacing: 0.03em; }
+    .options-full .q-option:not(.selected) { opacity: 0.4; }
     .btn-share {
       display: block;
       width: 100%;
@@ -595,6 +597,7 @@
       <div class="eyebrow q-num" id="q-num">Pergunta 1</div>
       <div class="q-text" id="q-text"></div>
     </div>
+    <p class="q-hint">Selecione até 2 respostas que mais identificam você</p>
     <div class="q-options" id="q-options"></div>
     <div class="q-nav">
       <button class="btn-prev" id="btn-prev" onclick="prevQ()">← Anterior</button>
@@ -928,7 +931,7 @@ const ministries = {
 // ── STATE ──────────────────────────────────────────────────────────────
 
 let currentQ  = 0;
-let answers   = new Array(18).fill(null);
+let answers   = new Array(18).fill([]);
 let userName  = "";
 let chartInst = null;
 let shuffled  = [];
@@ -964,7 +967,7 @@ function startQuiz() {
   }
   userName  = name;
   currentQ  = 0;
-  answers   = new Array(18).fill(null);
+  answers   = new Array(18).fill([]);
   shuffled  = questions.map(q => ({ ...q, options: shuffle(q.options) }));
   renderQ();
   show('screen-quiz');
@@ -982,9 +985,10 @@ function renderQ() {
 
   const container = document.getElementById('q-options');
   container.innerHTML = '';
+  container.classList.toggle('options-full', answers[currentQ].length >= 2);
   q.options.forEach(opt => {
     const btn = document.createElement('button');
-    btn.className   = 'q-option' + (answers[currentQ] === opt.key ? ' selected' : '');
+    btn.className   = 'q-option' + (answers[currentQ].includes(opt.key) ? ' selected' : '');
     btn.textContent = opt.text;
     btn.addEventListener('click', () => selectOpt(opt.key));
     container.appendChild(btn);
@@ -993,22 +997,31 @@ function renderQ() {
   const isFirst = currentQ === 0;
   const isLast  = currentQ === total - 1;
   document.getElementById('btn-prev').disabled    = isFirst;
-  document.getElementById('btn-next').disabled    = answers[currentQ] === null;
+  document.getElementById('btn-next').disabled    = answers[currentQ].length === 0;
   document.getElementById('btn-next').textContent = isLast ? 'Ver resultado →' : 'Próxima →';
 }
 
 function selectOpt(key) {
-  answers[currentQ] = key;
+  const sel = answers[currentQ];
+  const idx = sel.indexOf(key);
+  if (idx >= 0) {
+    answers[currentQ] = sel.filter(k => k !== key);
+  } else if (sel.length < 2) {
+    answers[currentQ] = [...sel, key];
+  }
+  const cur = answers[currentQ];
+  const container = document.getElementById('q-options');
+  container.classList.toggle('options-full', cur.length >= 2);
   document.querySelectorAll('.q-option').forEach((el, i) => {
-    el.classList.toggle('selected', shuffled[currentQ].options[i].key === key);
+    el.classList.toggle('selected', cur.includes(shuffled[currentQ].options[i].key));
   });
-  document.getElementById('btn-next').disabled = false;
+  document.getElementById('btn-next').disabled = cur.length === 0;
 }
 
 function prevQ() { if (currentQ > 0) { currentQ--; renderQ(); } }
 
 function nextQ() {
-  if (answers[currentQ] === null) return;
+  if (answers[currentQ].length === 0) return;
   if (currentQ < questions.length - 1) { currentQ++; renderQ(); }
   else showResults();
 }
@@ -1025,12 +1038,12 @@ function restart() {
 
 function showResults() {
   const scores = { A:0, B:0, C:0, D:0, E:0 };
-  answers.forEach(a => { if (a) scores[a]++; });
+  answers.forEach(arr => { if (Array.isArray(arr)) arr.forEach(k => { if (k) scores[k]++; }); });
 
   const sorted             = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const [priKey, priScore] = sorted[0];
   const [secKey, secScore] = sorted[1];
-  const total              = questions.length;
+  const totalAnswers       = Object.values(scores).reduce((s, v) => s + v, 0);
   const pri                = ministries[priKey];
   const sec                = ministries[secKey];
 
@@ -1041,8 +1054,8 @@ function showResults() {
   document.getElementById('r-name').textContent     = userName;
   document.getElementById('r-pri-name').textContent = pri.name;
   document.getElementById('r-pri-sub').textContent  = pri.subtitle;
-  document.getElementById('r-pri-bar').style.width  = `${(priScore / total) * 100}%`;
-  document.getElementById('r-pri-score').textContent= `${priScore} de ${total}`;
+  document.getElementById('r-pri-bar').style.width  = `${totalAnswers ? (priScore / totalAnswers) * 100 : 0}%`;
+  document.getElementById('r-pri-score').textContent= `${priScore}`;
   document.getElementById('r-sec-name').textContent = sec.name;
   document.getElementById('r-sec-sub').textContent  = sec.subtitle;
   document.getElementById('r-sec-score').textContent= `${secScore}`;
@@ -1054,7 +1067,7 @@ function showResults() {
     dist.innerHTML += `
       <div class="dist-item">
         <div class="dist-name">${m.name}</div>
-        <div class="dist-track"><div class="dist-fill" style="width:${(val/total)*100}%"></div></div>
+        <div class="dist-track"><div class="dist-fill" style="width:${totalAnswers ? (val/totalAnswers)*100 : 0}%"></div></div>
         <div class="dist-val">${val}</div>
       </div>`;
   });
@@ -1116,7 +1129,7 @@ function renderChart(scores) {
       scales: {
         r: {
           beginAtZero: true,
-          max: 18,
+          max: 36,
           ticks: { display: false },
           pointLabels: {
             font: { size: 12, weight: '600', family: "'Inter', sans-serif" },
@@ -1135,8 +1148,6 @@ function renderChart(scores) {
 async function shareCard() {
   if (!lastScores || !lastPriKey || !lastSecKey) return;
 
-  // Portrait 9:16 — Instagram Stories / Reels cover
-  // Safe zone: top ~250px, bottom ~350px (avoid Stories UI chrome)
   const W = 1080, H = 1920;
   const canvas = document.createElement('canvas');
   canvas.width  = W;
@@ -1149,129 +1160,120 @@ async function shareCard() {
     await Promise.all([f700, f400].map(f => f.load().then(lf => document.fonts.add(lf)).catch(() => {})));
   } catch (_) {}
 
-  const pri = ministries[lastPriKey];
-  const sec = ministries[lastSecKey];
-  const scores = lastScores;
-  const fontStack = 'InterCard, Inter, Arial, sans-serif';
-  const pad = 80;
-  const contentW = W - pad * 2; // 920px
+  const pri      = ministries[lastPriKey];
+  const sec      = ministries[lastSecKey];
+  const scores   = lastScores;
+  const F        = 'InterCard, Inter, Arial, sans-serif';
+  const pad      = 72;
+  const cW       = W - pad * 2; // 936px
 
   // ── Background
   ctx.fillStyle = '#0E110D';
   ctx.fillRect(0, 0, W, H);
 
   // Dot pattern
-  ctx.fillStyle = 'rgba(122,158,63,0.035)';
-  for (let x = 40; x < W; x += 48) {
-    for (let y = 40; y < H; y += 48) {
-      ctx.beginPath();
-      ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-      ctx.fill();
+  ctx.fillStyle = 'rgba(122,158,63,0.04)';
+  for (let x = 36; x < W; x += 48) {
+    for (let y = 36; y < H; y += 48) {
+      ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2); ctx.fill();
     }
   }
 
-  // Subtle top vignette to keep clear of Stories UI
-  const topGrad = ctx.createLinearGradient(0, 0, 0, 260);
-  topGrad.addColorStop(0, 'rgba(14,17,13,0.92)');
-  topGrad.addColorStop(1, 'rgba(14,17,13,0)');
-  ctx.fillStyle = topGrad;
-  ctx.fillRect(0, 0, W, 260);
+  // Safe-zone vignettes
+  const tg = ctx.createLinearGradient(0, 0, 0, 240);
+  tg.addColorStop(0, 'rgba(14,17,13,0.95)'); tg.addColorStop(1, 'rgba(14,17,13,0)');
+  ctx.fillStyle = tg; ctx.fillRect(0, 0, W, 240);
 
-  // Subtle bottom vignette (Stories bottom bar area)
-  const botGrad = ctx.createLinearGradient(0, H - 380, 0, H);
-  botGrad.addColorStop(0, 'rgba(14,17,13,0)');
-  botGrad.addColorStop(1, 'rgba(14,17,13,0.85)');
-  ctx.fillStyle = botGrad;
-  ctx.fillRect(0, H - 380, W, 380);
+  const bg = ctx.createLinearGradient(0, H - 320, 0, H);
+  bg.addColorStop(0, 'rgba(14,17,13,0)'); bg.addColorStop(1, 'rgba(14,17,13,0.9)');
+  ctx.fillStyle = bg; ctx.fillRect(0, H - 320, W, 320);
 
   ctx.textBaseline = 'alphabetic';
 
-  // ── CE.X LOGO  (safe zone starts ~y=280)
-  ctx.font = `700 48px ${fontStack}`;
+  // ── CE.X LOGO
+  ctx.font = `700 60px ${F}`;
   ctx.fillStyle = '#FAFAF7';
-  ctx.fillText('CE', pad, 322);
+  ctx.fillText('CE', pad, 314);
   const ceW = ctx.measureText('CE').width;
-  ctx.font = `italic 700 48px ${fontStack}`;
+  ctx.font = `italic 700 60px ${F}`;
   ctx.fillStyle = '#7A9E3F';
-  ctx.fillText('.X', pad + ceW, 322);
+  ctx.fillText('.X', pad + ceW, 314);
 
   // Eyebrow
-  ctx.font = `500 15px ${fontStack}`;
+  ctx.font = `500 28px ${F}`;
   ctx.fillStyle = '#555650';
-  ctx.fillText('CAMPUS EXPANSÃO', pad, 356);
+  ctx.letterSpacing = '0.12em';
+  ctx.fillText('CAMPUS EXPANSÃO', pad, 358);
+  ctx.letterSpacing = '0';
 
   // Separator
-  ctx.fillStyle = 'rgba(122,158,63,0.25)';
-  ctx.fillRect(pad, 376, contentW, 1);
+  ctx.fillStyle = 'rgba(122,158,63,0.28)';
+  ctx.fillRect(pad, 382, cW, 1.5);
 
   // ── HEADLINE
-  ctx.font = `700 72px ${fontStack}`;
+  ctx.font = `700 92px ${F}`;
   ctx.fillStyle = '#FAFAF7';
-  ctx.fillText('Descobri meu', pad, 470);
-  ctx.font = `italic 700 72px ${fontStack}`;
+  ctx.fillText('Descobri meu', pad, 482);
+  ctx.font = `italic 700 92px ${F}`;
   ctx.fillStyle = '#7A9E3F';
-  ctx.fillText('ministério.', pad, 556);
-
-  // Person name
-  ctx.font = `400 23px ${fontStack}`;
-  ctx.fillStyle = '#8B8C82';
-  ctx.fillText(userName + ' tem o chamado de', pad, 616);
-
-  // Ministry name (huge, auto-scale)
-  let fontSize = 104;
-  ctx.font = `700 ${fontSize}px ${fontStack}`;
-  while (ctx.measureText(pri.name.toUpperCase()).width > contentW && fontSize > 56) {
-    fontSize -= 4;
-    ctx.font = `700 ${fontSize}px ${fontStack}`;
-  }
-  ctx.fillStyle = '#FAFAF7';
-  ctx.fillText(pri.name.toUpperCase(), pad, 742);
-
-  // Subtitle
-  ctx.font = `italic 400 25px ${fontStack}`;
-  ctx.fillStyle = '#94B85C';
-  ctx.fillText(pri.subtitle, pad, 786);
-
-  // Secondary ministry
-  ctx.font = `400 19px ${fontStack}`;
-  ctx.fillStyle = '#555650';
-  ctx.fillText('+ ' + sec.name + ' como ministério secundário', pad, 832);
+  ctx.fillText('ministério.', pad, 590);
 
   // Thin separator
-  ctx.fillStyle = 'rgba(122,158,63,0.2)';
-  ctx.fillRect(pad, 858, contentW, 1);
+  ctx.fillStyle = 'rgba(122,158,63,0.18)';
+  ctx.fillRect(pad, 634, cW, 1);
 
-  // Key verse (wrapped, max 2 lines)
-  ctx.font = `italic 400 19px ${fontStack}`;
+  // ── PERSON NAME
+  ctx.font = `400 36px ${F}`;
+  ctx.fillStyle = '#8B8C82';
+  ctx.fillText(userName + ' tem o chamado de', pad, 692);
+
+  // ── MINISTRY NAME (hero, 148px auto-scale)
+  let fs = 148;
+  ctx.font = `700 ${fs}px ${F}`;
+  while (ctx.measureText(pri.name.toUpperCase()).width > cW && fs > 76) {
+    fs -= 4; ctx.font = `700 ${fs}px ${F}`;
+  }
+  ctx.fillStyle = '#FAFAF7';
+  ctx.fillText(pri.name.toUpperCase(), pad, 872);
+
+  // Subtitle
+  ctx.font = `italic 400 40px ${F}`;
+  ctx.fillStyle = '#94B85C';
+  ctx.fillText(pri.subtitle, pad, 930);
+
+  // Secondary
+  ctx.font = `400 32px ${F}`;
   ctx.fillStyle = '#555650';
-  wrapText(ctx, pri.cardVerse, pad, 896, contentW, 30);
+  ctx.fillText('+ ' + sec.name + ' como ministério secundário', pad, 976);
 
-  // ── RADAR — center at y=1190, radius=182
-  // Top label lands at ~y=984 (gap ~88px from verse end ~896)
-  // Bottom label lands at ~y=1416 (within safe zone)
-  drawRadar(ctx, scores, W / 2, 1200, 182, fontStack);
+  // Separator above radar
+  ctx.fillStyle = 'rgba(122,158,63,0.18)';
+  ctx.fillRect(pad, 1002, cW, 1);
 
-  // ── BOTTOM CTA (safe zone ends ~y=1570)
-  ctx.fillStyle = 'rgba(122,158,63,0.15)';
-  ctx.fillRect(pad, 1448, contentW, 1);
+  // ── RADAR
+  // cy=1268, r=210, labelR=242 → top label ≈ y=1034 (32px below sep), bottom ≈ y=1510
+  drawRadar(ctx, scores, W / 2, 1268, 210, F);
+
+  // ── CTA
+  ctx.fillStyle = 'rgba(122,158,63,0.18)';
+  ctx.fillRect(pad, 1545, cW, 1);
 
   ctx.textAlign = 'center';
 
-  ctx.font = `400 22px ${fontStack}`;
+  ctx.font = `400 26px ${F}`;
   ctx.fillStyle = '#8B8C82';
-  ctx.fillText('Quer descobrir qual é o seu?', W / 2, 1496);
+  ctx.fillText('Quer descobrir qual é o seu?', W / 2, 1586);
 
-  ctx.font = `700 30px ${fontStack}`;
+  ctx.font = `700 36px ${F}`;
   ctx.fillStyle = '#7A9E3F';
-  ctx.fillText('@campusexpansao.x', W / 2, 1538);
+  ctx.fillText('@campusexpansao.x', W / 2, 1630);
 
-  ctx.font = `400 17px ${fontStack}`;
+  ctx.font = `400 22px ${F}`;
   ctx.fillStyle = '#555650';
-  ctx.fillText('Acesse o link na bio', W / 2, 1566);
+  ctx.fillText('Acesse o link na bio', W / 2, 1660);
 
   ctx.textAlign = 'left';
 
-  // ── Download
   const link = document.createElement('a');
   link.download = 'meu-ministerio-cex.png';
   link.href = canvas.toDataURL('image/png');
@@ -1283,7 +1285,7 @@ function drawRadar(ctx, scores, cx, cy, radius, fontStack) {
   const vals   = [scores.A, scores.E, scores.D, scores.B, scores.C];
   const labels = ['Apóstolo', 'Profeta', 'Evangelista', 'Pastor', 'Mestre'];
   const n = 5;
-  const max = 18;
+  const max = 36;
 
   // Grid pentagons (3 levels)
   for (let level = 1; level <= 3; level++) {
@@ -1344,12 +1346,12 @@ function drawRadar(ctx, scores, cx, cy, radius, fontStack) {
   }
 
   // Labels
-  ctx.font      = `600 22px ${fontStack}`;
+  ctx.font      = `600 26px ${fontStack}`;
   ctx.fillStyle = '#8B8C82';
   ctx.textAlign = 'center';
   for (let i = 0; i < n; i++) {
     const angle  = (Math.PI * 2 * i / n) - Math.PI / 2;
-    const labelR = radius + 44;
+    const labelR = radius + 32;
     const x = cx + labelR * Math.cos(angle);
     const y = cy + labelR * Math.sin(angle);
     ctx.fillText(labels[i], x, y + 8);
