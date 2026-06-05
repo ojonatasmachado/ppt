@@ -543,6 +543,12 @@
       line-height: 1.6;
     }
 
+    /* ════════ LANGUAGE SWITCHER ════════ */
+    .lang-switcher { display: flex; gap: 6px; margin-bottom: 24px; justify-content: flex-end; }
+    .lang-btn { padding: 5px 10px; background: transparent; border: 1px solid var(--borda-l); border-radius: 6px; font-size: 11px; font-weight: 600; font-family: 'Fira Code', monospace; color: var(--cinza-s); cursor: pointer; letter-spacing: 0.08em; text-transform: uppercase; transition: border-color 0.15s, color 0.15s, background 0.15s; }
+    .lang-btn:hover { border-color: var(--oliva); color: var(--branco); }
+    .lang-btn.active { background: rgba(122,158,63,0.1); border-color: var(--oliva); color: var(--oliva); }
+
     /* ════════ WELCOME MINISTRY LIST ════════ */
     .w-verse {
       font-size: 13px;
@@ -636,31 +642,37 @@
   <div class="w-hero">
     <div class="logo w-logo">CE<span class="x">.X</span></div>
     <div class="w-brand-label">Campus Expansão</div>
-    <h1 class="w-title">Descubra o seu<br><em>Ministério</em></h1>
-    <p class="w-sub">Com qual dos Cinco Ministérios de Efésios 4 Deus te chamou para servir?</p>
+    <h1 class="w-title" id="w-title">Descubra o seu<br><em>Ministério</em></h1>
+    <p class="w-sub" id="w-sub">Com qual dos Cinco Ministérios de Efésios 4 Deus te chamou para servir?</p>
   </div>
 
   <div class="w-body">
+    <div class="lang-switcher" id="lang-sw">
+      <button class="lang-btn active" data-lang="pt-BR" onclick="setLanguage('pt-BR')">PT-BR</button>
+      <button class="lang-btn" data-lang="pt-PT" onclick="setLanguage('pt-PT')">PT-PT</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="setLanguage('es')">ES</button>
+    </div>
     <div class="w-intro">
       <span class="eyebrow">Por que os Cinco Ministérios?</span>
       <p>Em Efésios 4:11-13, Paulo revela como Cristo estruturou a Sua Igreja para que ela pudesse cumprir sua missão no mundo:</p>
-      <p class="w-verse">"E ele mesmo concedeu que uns fossem apóstolos, outros profetas, outros evangelistas e outros pastores e mestres, para o aperfeiçoamento dos santos, para a obra do ministério, para a edificação do corpo de Cristo — até que todos alcancemos a unidade da fé e do pleno conhecimento do Filho de Deus." (Ef 4:11-13)</p>
-      <p>Cristo não apenas salva a Igreja — Ele a equipa com cinco chamados distintos, cada um essencial para que o Corpo funcione em plenitude. Esses não são apenas títulos ou cargos. São formas diferentes de enxergar o mundo, de liderar e de servir ao Reino.</p>
+      <p class="w-verse">"E ele mesmo concedeu que uns fossem apóstolos, outros profetas, outros evangelistas e outros pastores e mestres, para o aperfeiçoamento dos santos, para a obra do ministério, para a edificação do corpo de Cristo, até que todos alcancemos a unidade da fé e do pleno conhecimento do Filho de Deus." (Ef 4:11-13)</p>
+      <p>Cristo não apenas salva a Igreja : Ele a equipa com cinco chamados distintos, cada um essencial para que o Corpo funcione em plenitude. Esses não são apenas títulos ou cargos. São formas diferentes de enxergar o mundo, de liderar e de servir ao Reino.</p>
       <div class="w-ministry-list">
-        <div class="w-m-item"><span class="w-m-name">Apóstolo</span><span class="w-m-desc">Pioneiro e estrategista — estabelece fundamentos onde não há</span></div>
+        <div class="w-m-item"><span class="w-m-name">Apóstolo</span><span class="w-m-desc">Pioneiro e estrategista : estabelece fundamentos onde não há</span></div>
         <div class="w-m-item"><span class="w-m-name">Profeta</span><span class="w-m-desc">Sensível ao que Deus está dizendo ao Seu povo agora</span></div>
         <div class="w-m-item"><span class="w-m-name">Evangelista</span><span class="w-m-desc">Construtor de pontes entre pessoas e o Evangelho</span></div>
         <div class="w-m-item"><span class="w-m-name">Pastor</span><span class="w-m-desc">Cuidador que cria ambientes de crescimento seguro</span></div>
         <div class="w-m-item"><span class="w-m-name">Mestre</span><span class="w-m-desc">Equipador que torna a Palavra acessível e transformadora</span></div>
       </div>
-      <p>Quando a Igreja não tem clareza sobre esses papéis, ela tende a operar com apenas um ou dois chamados dominantes — e fica incompleta. Quando cada membro descobre e exerce o seu, o Corpo inteiro é edificado em amor (Ef 4:16). A CE.X acredita que a descoberta do seu ministério não é apenas autoconhecimento — é parte da sua responsabilidade com o Corpo de Cristo.</p>
+      <p>Quando a Igreja não tem clareza sobre esses papéis, ela tende a operar com apenas um ou dois chamados dominantes : e fica incompleta. Quando cada membro descobre e exerce o seu, o Corpo inteiro é edificado em amor (Ef 4:16). A CE.X acredita que a descoberta do seu ministério não é apenas autoconhecimento : é parte da sua responsabilidade com o Corpo de Cristo.</p>
       <p>São 18 perguntas. Não existe resposta certa ou errada. Responda com sinceridade, escolhendo o que mais se aproxima da sua realidade.</p>
     </div>
 
     <div class="w-form">
-      <label for="user-name">Qual é o seu nome?</label>
+      <label for="user-name" id="w-namelbl">Qual é o seu nome?</label>
       <input type="text" id="user-name" class="w-input" placeholder="Digite seu nome" autocomplete="given-name">
-      <button class="btn-start" onclick="startQuiz()">Começar →</button>
+      <button class="btn-start" id="w-start" onclick="startQuiz()">Começar →</button>
     </div>
   </div>
 </div>
@@ -687,7 +699,7 @@
     <p class="q-hint">Selecione até 2 respostas que mais identificam você</p>
     <div class="q-options" id="q-options"></div>
     <div class="q-nav">
-      <button class="btn-prev" id="btn-prev" onclick="prevQ()">← Anterior</button>
+      <button class="btn-prev" id="btn-prev" onclick="prevQ()" id="btn-prev2">← Anterior</button>
       <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>Próxima →</button>
     </div>
   </div>
@@ -705,9 +717,9 @@
   </div>
 
   <div class="r-body">
-    <button class="btn-share" style="margin-bottom:36px" onclick="shareCard()">Compartilhar meu resultado</button>
+    <button class="btn-share" id="r-share-top" style="margin-bottom:36px" onclick="shareCard()">Compartilhar meu resultado</button>
 
-    <div class="r-label">Ministério Dominante</div>
+    <div class="r-label" id="r-label-dominant">Ministério Dominante</div>
     <div class="r-primary">
       <div class="r-pri-badge">Principal</div>
       <div class="r-pri-name" id="r-pri-name"></div>
@@ -727,32 +739,32 @@
       <div class="r-sec-score" id="r-sec-score"></div>
     </div>
 
-    <div class="r-label">Perfil Completo</div>
+    <div class="r-label" id="r-label-full">Perfil Completo</div>
     <div class="r-chart-card">
       <div class="chart-wrap">
         <canvas id="ministry-chart"></canvas>
       </div>
     </div>
 
-    <div class="r-label">Distribuição</div>
+    <div class="r-label" id="r-label-dist">Distribuição</div>
     <div class="r-dist" id="r-dist"></div>
 
-    <div class="r-label">Entenda Seu Chamado</div>
+    <div class="r-label" id="r-label-understand">Entenda Seu Chamado</div>
     <div id="r-pri-desc"></div>
     <div id="r-sec-desc"></div>
 
-    <div class="r-label">Como Crescer no Seu Chamado</div>
+    <div class="r-label" id="r-label-steps">Como Crescer no Seu Chamado</div>
     <div id="r-steps"></div>
 
     <div class="disclaimer">
-      <div class="disclaimer-lbl">Uma nota importante</div>
+      <div class="disclaimer-lbl" id="r-label-note">Uma nota importante</div>
       <p>Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados <strong>não são definitivos</strong> e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança. Nenhum questionário define quem você é diante de Deus.</p>
-      <p>Use este resultado como ponto de partida para reflexão, conversa e oração. A clareza sobre o seu chamado não vem de uma vez. Ela vai sendo formada através do <strong>aprofundamento bíblico</strong> — estudar as Escrituras com profundidade, não só por cima —, e de uma vida consistente de <strong>oração e jejum</strong>, na qual você busca a face de Deus com intenção. É na <strong>intimidade com Ele</strong> que os propósitos vão ganhando forma.</p>
+      <p>Use este resultado como ponto de partida para reflexão, conversa e oração. A clareza sobre o seu chamado não vem de uma vez. Ela vai sendo formada através do <strong>aprofundamento bíblico</strong> : estudar as Escrituras com profundidade, não só por cima :, e de uma vida consistente de <strong>oração e jejum</strong>, na qual você busca a face de Deus com intenção. É na <strong>intimidade com Ele</strong> que os propósitos vão ganhando forma.</p>
       <p>Sua jornada ministerial é única e continua sendo moldada por Deus dia a dia. Se quiser ir mais fundo nessa descoberta, converse com seu líder ou pastor na CE.X.</p>
     </div>
 
-    <button class="btn-share" onclick="shareCard()">Compartilhar meu resultado</button>
-    <button class="btn-restart" onclick="restart()">Refazer o questionário</button>
+    <button class="btn-share" id="r-share-bot" onclick="shareCard()">Compartilhar meu resultado</button>
+    <button class="btn-restart" id="r-restart" onclick="restart()">Refazer o questionário</button>
 
     <div class="r-footer">
       <div class="logo r-footer-logo">CE<span class="x">.X</span></div>
@@ -762,9 +774,188 @@
 </div>
 
 <script>
+// ── LANGUAGE SYSTEM ────────────────────────────────────────────────────
+
+function detectLanguage() {
+  const l = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  if (l.startsWith('pt-pt')) return 'pt-PT';
+  if (l.startsWith('pt')) return 'pt-BR';
+  if (l.startsWith('es')) return 'es';
+  if (l.startsWith('en')) return 'en';
+  return 'pt-BR';
+}
+
+let currentLang = detectLanguage();
+
+const UI_STRINGS = {
+  'pt-BR': {
+    pageTitle: 'Descubra Seu Ministério · CE.X',
+    wTitle: 'Descubra o seu<br><em>Ministério</em>',
+    wSub: 'Com qual dos Cinco Ministérios de Efésios 4 Deus te chamou para servir?',
+    wNameLbl: 'Qual é o seu nome?',
+    wNamePh: 'Digite seu nome',
+    wStart: 'Começar →',
+    qHint: 'Selecione até 2 respostas que mais identificam você',
+    qPrev: '← Anterior',
+    qNext: 'Próxima →',
+    qFinish: 'Ver resultado →',
+    rGreeting: 'Resultado de',
+    rMeta: 'Cinco Ministérios · Efésios 4:11–13',
+    rDominant: 'Ministério Dominante',
+    rBadge: 'Principal',
+    rSecLbl: 'Ministério Secundário',
+    rFull: 'Perfil Completo',
+    rDist: 'Distribuição',
+    rUnderstand: 'Entenda Seu Chamado',
+    rSteps: 'Como Crescer no Seu Chamado',
+    rNote: 'Uma nota importante',
+    rShare: 'Compartilhar meu resultado',
+    rRestart: 'Refazer o questionário',
+    rFooterSub: 'Campus Expansão · Preparamos trabalhadores\npara a Grande Comissão',
+    disclLbl: 'Uma nota importante',
+    reportSubtitle: 'Resultado do Questionário dos Cinco Ministérios'
+  },
+  'pt-PT': {
+    pageTitle: 'Descubra o Seu Ministério · CE.X',
+    wTitle: 'Descubra o seu<br><em>Ministério</em>',
+    wSub: 'Com qual dos Cinco Ministérios de Efésios 4 Deus te chamou para servir?',
+    wNameLbl: 'Qual é o seu nome?',
+    wNamePh: 'Escreva o seu nome',
+    wStart: 'Começar →',
+    qHint: 'Selecione até 2 respostas que mais se identificam consigo',
+    qPrev: '← Anterior',
+    qNext: 'Seguinte →',
+    qFinish: 'Ver resultado →',
+    rGreeting: 'Resultado de',
+    rMeta: 'Cinco Ministérios · Efésios 4:11–13',
+    rDominant: 'Ministério Dominante',
+    rBadge: 'Principal',
+    rSecLbl: 'Ministério Secundário',
+    rFull: 'Perfil Completo',
+    rDist: 'Distribuição',
+    rUnderstand: 'Compreenda o Seu Chamado',
+    rSteps: 'Como Crescer no Seu Chamado',
+    rNote: 'Uma nota importante',
+    rShare: 'Partilhar o meu resultado',
+    rRestart: 'Refazer o questionário',
+    rFooterSub: 'Campus Expansão · Preparamos trabalhadores\npara a Grande Comissão',
+    disclLbl: 'Uma nota importante',
+    reportSubtitle: 'Resultado do Questionário dos Cinco Ministérios'
+  },
+  'en': {
+    pageTitle: 'Discover Your Ministry · CE.X',
+    wTitle: 'Discover your<br><em>Ministry</em>',
+    wSub: 'Which of the Five Ministries of Ephesians 4 has God called you to serve in?',
+    wNameLbl: 'What is your name?',
+    wNamePh: 'Enter your name',
+    wStart: 'Begin →',
+    qHint: 'Select up to 2 answers that best describe you',
+    qPrev: '← Previous',
+    qNext: 'Next →',
+    qFinish: 'See results →',
+    rGreeting: 'Results for',
+    rMeta: 'Five Ministries · Ephesians 4:11–13',
+    rDominant: 'Dominant Ministry',
+    rBadge: 'Primary',
+    rSecLbl: 'Secondary Ministry',
+    rFull: 'Full Profile',
+    rDist: 'Distribution',
+    rUnderstand: 'Understand Your Calling',
+    rSteps: 'How to Grow in Your Calling',
+    rNote: 'An important note',
+    rShare: 'Share my result',
+    rRestart: 'Retake the quiz',
+    rFooterSub: 'Campus Expansão · Equipping workers\nfor the Great Commission',
+    disclLbl: 'An important note',
+    reportSubtitle: 'Five Ministries Quiz Results'
+  },
+  'es': {
+    pageTitle: 'Descubre Tu Ministerio · CE.X',
+    wTitle: 'Descubre tu<br><em>Ministerio</em>',
+    wSub: '¿A cuál de los Cinco Ministerios de Efesios 4 te llamó Dios a servir?',
+    wNameLbl: '¿Cuál es tu nombre?',
+    wNamePh: 'Escribe tu nombre',
+    wStart: 'Comenzar →',
+    qHint: 'Selecciona hasta 2 respuestas que más te identifiquen',
+    qPrev: '← Anterior',
+    qNext: 'Siguiente →',
+    qFinish: 'Ver resultado →',
+    rGreeting: 'Resultado de',
+    rMeta: 'Cinco Ministerios · Efesios 4:11–13',
+    rDominant: 'Ministerio Dominante',
+    rBadge: 'Principal',
+    rSecLbl: 'Ministerio Secundario',
+    rFull: 'Perfil Completo',
+    rDist: 'Distribución',
+    rUnderstand: 'Entiende Tu Llamado',
+    rSteps: 'Cómo Crecer en Tu Llamado',
+    rNote: 'Una nota importante',
+    rShare: 'Compartir mi resultado',
+    rRestart: 'Volver a hacer el cuestionario',
+    rFooterSub: 'Campus Expansão · Formando trabajadores\npara la Gran Comisión',
+    disclLbl: 'Una nota importante',
+    reportSubtitle: 'Resultado del Cuestionario de los Cinco Ministerios'
+  }
+};
+
+function t(key) {
+  const src2 = UI_STRINGS[currentLang] || UI_STRINGS['pt-BR'];
+  return src2[key] !== undefined ? src2[key] : (UI_STRINGS['pt-BR'][key] || key);
+}
+
+function updateUI() {
+  document.title = t('pageTitle');
+  const wt = document.getElementById('w-title');
+  if (wt) wt.innerHTML = t('wTitle');
+  const ws = document.getElementById('w-sub');
+  if (ws) ws.textContent = t('wSub');
+  const wn = document.getElementById('w-namelbl');
+  if (wn) wn.textContent = t('wNameLbl');
+  const inp = document.getElementById('user-name');
+  if (inp) inp.placeholder = t('wNamePh');
+  const wb = document.getElementById('w-start');
+  if (wb) wb.textContent = t('wStart');
+  const labels = [
+    ['r-label-dominant', 'rDominant'],
+    ['r-label-full', 'rFull'],
+    ['r-label-dist', 'rDist'],
+    ['r-label-understand', 'rUnderstand'],
+    ['r-label-steps', 'rSteps'],
+    ['r-label-note', 'rNote']
+  ];
+  labels.forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t(key);
+  });
+  ['r-share-top','r-share-bot'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t('rShare');
+  });
+  const rr = document.getElementById('r-restart');
+  if (rr) rr.textContent = t('rRestart');
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === currentLang);
+  });
+}
+
+function setLanguage(lang) {
+  if (!['pt-BR','pt-PT','en','es'].includes(lang)) return;
+  currentLang = lang;
+  const qSrc = QUESTIONS_ALL[lang] || QUESTIONS_ALL['pt-BR'];
+  const mSrc = MINISTRIES_ALL[lang] || MINISTRIES_ALL['pt-BR'];
+  const sSrc = MINISTRY_STEPS_ALL[lang] || MINISTRY_STEPS_ALL['pt-BR'];
+  for (let i = 0; i < questions.length; i++) questions[i] = qSrc[i];
+  Object.keys(ministries).forEach(k => { ministries[k] = mSrc[k]; });
+  Object.keys(ministrySteps).forEach(k => { ministrySteps[k] = sSrc[k]; });
+  shuffled = [];
+  updateUI();
+  const screen = document.querySelector('.screen.active');
+  if (screen && screen.id === 'screen-quiz') { renderQ(); }
+}
+
 // ── DATA ──────────────────────────────────────────────────────────────
 
-const questions = [
+const QUESTIONS_ALL_PTBR = [
   { text: "Como você normalmente se comporta quando entra em um ambiente novo?", options: [
     { key:"A", text:"Começo a entender como tudo funciona e penso em como poderia ser melhor." },
     { key:"B", text:"Procuro perceber quem está sozinho ou desconfortável." },
@@ -893,16 +1084,16 @@ const questions = [
   ]}
 ];
 
-const ministries = {
+const MINISTRIES_ALL_PTBR = {
   A: {
     name: "Apóstolo",
     subtitle: "O Visionário e Estrategista",
     verse: "Efésios 4:11: \"Ele mesmo concedeu que uns fossem apóstolos...\"",
     cardVerse: "\"...para equipar os santos para as obras do serviço\" (Ef 4:12)",
     bibleRefs: [
-      "Ef 2:20 — edificados sobre o fundamento dos apóstolos e profetas",
-      "1 Co 12:28 — Deus colocou na Igreja, em primeiro lugar, apóstolos",
-      "Rm 15:20 — Paulo: pregar onde Cristo ainda não era conhecido"
+      "Ef 2:20: edificados sobre o fundamento dos apóstolos e profetas",
+      "1 Co 12:28: Deus colocou na Igreja, em primeiro lugar, apóstolos",
+      "Rm 15:20: Paulo: pregar onde Cristo ainda não era conhecido"
     ],
     figure: { name: "Paulo", text: "O maior exemplo apostólico do Novo Testamento. Não apenas pregava, mas plantava igrejas, formava líderes, estabelecia doutrinas e conectava comunidades inteiras à missão de Cristo. Seu lema era ir onde Cristo ainda não era conhecido (Rm 15:20)." },
     main: "Você tem um chamado apostólico: construir o que ainda não existe e estabelecer fundamentos sólidos para que o Reino de Deus avance. O apóstolo não se contenta com o que já foi construído. Ele enxerga territórios inexplorados, reúne pessoas ao redor de uma visão maior e lança alicerces para que outros possam edificar. Em Efésios 2:20, Paulo descreve a Igreja como edificada sobre o fundamento dos apóstolos e profetas. Esse fundamento não é apenas histórico: é um chamado vivo, para pessoas que carregam a coragem de ir além do familiar e estabelecer o que ainda não existe.",
@@ -925,9 +1116,9 @@ const ministries = {
     verse: "Efésios 4:11: \"...outros, pastores e doutores...\"",
     cardVerse: "\"Apascenta as minhas ovelhas.\" (Jo 21:17)",
     bibleRefs: [
-      "Jo 10:11 — o bom pastor dá a sua vida pelas ovelhas",
-      "1 Pe 5:2-3 — apascentai o rebanho de Deus que está entre vós",
-      "Ez 34:15-16 — eu mesmo apascentarei o meu rebanho"
+      "Jo 10:11: o bom pastor dá a sua vida pelas ovelhas",
+      "1 Pe 5:2-3: apascentai o rebanho de Deus que está entre vós",
+      "Ez 34:15-16: eu mesmo apascentarei o meu rebanho"
     ],
     figure: { name: "Pedro", text: "Restaurado por Jesus às margens do mar da Galileia, Pedro recebeu três vezes o mesmo comissionamento: apascenta as minhas ovelhas (Jo 21:15-17). O cuidado pastoral nasce de um coração que foi ele mesmo cuidado por Deus." },
     main: "Você tem um chamado pastoral: criar o ambiente onde as pessoas podem crescer com segurança. Em João 10:11, Jesus se descreve como o bom pastor, aquele que conhece as ovelhas pelo nome e dá a vida por elas. O pastor não cuida de longe: ele caminha junto, suporta o peso dos outros, identifica os que se perderam e vai buscá-los. Pastorear não é apenas consolar. É nutrir intencionalmente, proteger de ameaças espirituais e relacionais e guiar pessoas em direção à maturidade no Senhor. Pedro foi comissionado por Jesus exatamente para isso: apascenta as minhas ovelhas.",
@@ -950,9 +1141,9 @@ const ministries = {
     verse: "Efésios 4:11: \"...outros, pastores e doutores...\"",
     cardVerse: "\"Esdras preparou seu coração para investigar a lei do Senhor, cumpri-la e ensiná-la.\" (Ed 7:10)",
     bibleRefs: [
-      "2 Tm 2:2 — ensina a homens fiéis que sejam capazes de ensinar outros",
-      "Ed 7:10 — investigar, praticar e ensinar a lei do Senhor",
-      "At 18:24 — Apolo, homem eloquente e poderoso nas Escrituras"
+      "2 Tm 2:2: ensina a homens fiéis que sejam capazes de ensinar outros",
+      "Ed 7:10: investigar, praticar e ensinar a lei do Senhor",
+      "At 18:24: Apolo, homem eloquente e poderoso nas Escrituras"
     ],
     figure: { name: "Apolo e Esdras", text: "Apolo era \"poderoso nas Escrituras\" (At 18:24) e instruía com precisão e fervor. Esdras, séculos antes, seguia uma sequência clara: primeiro investigar a Palavra, depois praticá-la, e só então ensiná-la a outros. Essa é a marca do verdadeiro Mestre." },
     main: "Você tem um chamado de ensino: tornar a Palavra de Deus acessível, profunda e transformadora para outros. Em Esdras 7:10 vemos a sequência do Mestre: ele preparou seu coração para investigar a lei do Senhor, para cumpri-la e para ensiná-la. Estudo, prática, transmissão. O Mestre não é apenas alguém que sabe muito. É alguém que sabe fazer outros saberem, de forma que a Palavra entre pela mente, mude o coração e transforme a vida. Paulo chama isso de discipular através da Palavra: ensinar a homens fiéis que por sua vez sejam capazes de ensinar a outros (2 Tm 2:2).",
@@ -975,9 +1166,9 @@ const ministries = {
     verse: "Efésios 4:11: \"...outros, evangelistas...\"",
     cardVerse: "\"Como crerão naquele de quem não ouviram falar? E como ouvirão, sem haver quem pregue?\" (Rm 10:14)",
     bibleRefs: [
-      "At 21:8 — Filipe, o evangelista",
-      "2 Tm 4:5 — faça o trabalho de evangelista",
-      "Rm 10:14-15 — como crerão sem quem lhes pregue?"
+      "At 21:8: Filipe, o evangelista",
+      "2 Tm 4:5: faça o trabalho de evangelista",
+      "Rm 10:14-15: como crerão sem quem lhes pregue?"
     ],
     figure: { name: "Filipe", text: "Em Atos 8, o Espírito enviou Filipe para um deserto, onde encontrou um único homem lendo Isaías num carro de bois. Filipe não hesitou, aproximou-se, perguntou, explicou e conduziu à fé. Esse é o evangelista: movido pelo Espírito, confortável em qualquer contexto, sempre pronto a construir uma ponte." },
     main: "Você tem um chamado evangelístico: construir pontes entre as pessoas e o Evangelho de Jesus Cristo. O evangelista não espera que os perdidos apareçam. Ele vai até onde estão. Em Atos 8:26-40, Filipe foi enviado pelo Espírito ao deserto, um lugar improvável, para alcançar um único homem. Evangelistas se movem com naturalidade entre mundos diferentes, traduzem o Evangelho para linguagens que pessoas de fora conseguem entender e têm uma convicção inabalável de que toda pessoa pode responder ao chamado de Deus. Paulo instrui Timóteo a fazer o trabalho de evangelista (2 Tm 4:5): não é apenas um dom especial, é uma responsabilidade de todo seguidor de Cristo, mas há aqueles para quem isso é fogo no coração.",
@@ -1000,9 +1191,9 @@ const ministries = {
     verse: "Efésios 4:11: \"...uns, de fato, para serem apóstolos; outros, profetas...\"",
     cardVerse: "\"Aquele que profetiza fala aos homens: edificação, exortação e consolação.\" (1 Co 14:3)",
     bibleRefs: [
-      "1 Co 14:3 — edificação, exortação e consolação",
-      "Am 3:7 — nada faz o Senhor sem revelar o segredo a seus servos profetas",
-      "Lc 2:36-38 — Ana, a profetisa, que servia a Deus com jejuns e orações"
+      "1 Co 14:3: edificação, exortação e consolação",
+      "Am 3:7: nada faz o Senhor sem revelar o segredo a seus servos profetas",
+      "Lc 2:36-38: Ana, a profetisa, que servia a Deus com jejuns e orações"
     ],
     figure: { name: "Ana e Agabo", text: "Ana, a profetisa de Lucas 2, passava noites no templo em oração e jejum. Não por religiosidade vazia, mas porque percebia o que Deus estava fazendo antes que qualquer um reconhecesse. Agabo (At 11:28) identificou com precisão o que estava por vir. Ambos viviam em sintonização constante com o Espírito." },
     main: "Você tem um chamado profético: perceber o que Deus está dizendo ao Seu povo agora. Em 1 Coríntios 14:3, Paulo define com clareza o fruto da profecia: edificação, exortação e consolação. O profeta não é necessariamente alguém que prevê eventos futuros. É alguém com sensibilidade aguçada para o estado espiritual de uma comunidade, capaz de identificar desvios antes que se tornem crises, de nomear verdades que outros evitam dizer e de trazer direção quando há confusão. Amós 3:7 nos diz que Deus não age sem revelar o segredo aos Seus servos profetas. Há pessoas que carregam essa antena sintonizada com os propósitos de Deus.",
@@ -1021,14 +1212,14 @@ const ministries = {
   }
 };
 
-const ministrySteps = {
+const MINISTRY_STEPS_ALL_PTBR = {
   A: {
     title: "Crescendo como Apóstolo",
     intro: "Seu chamado é pioneiro. Para avançar intencionalmente nele:",
     steps: [
-      "Estude as viagens missionárias de Paulo em Atos — observe como ele plantava, estruturava e delegava sem centralizar.",
+      "Estude as viagens missionárias de Paulo em Atos : observe como ele plantava, estruturava e delegava sem centralizar.",
       "Mergulhe nos temas de estratégia, plantação de igrejas e liderança apostólica. Autores como Alan Hirsch, Tim Keller e Neil Cole trazem perspectivas valiosas.",
-      "Converse com líderes que abriram novos ministérios ou obras — pergunte sobre os desafios do pioneirismo e o que aprenderam.",
+      "Converse com líderes que abriram novos ministérios ou obras : pergunte sobre os desafios do pioneirismo e o que aprenderam.",
       "Identifique um território inexplorado na CE.X ou na sua cidade onde você poderia contribuir com iniciativa, visão e capacidade de estruturar."
     ]
   },
@@ -1036,10 +1227,10 @@ const ministrySteps = {
     title: "Crescendo como Pastor",
     intro: "Seu chamado é cuidar. Para avançar intencionalmente nele:",
     steps: [
-      "Pratique a presença ativa: escolha uma pessoa por semana para acompanhar intencionalmente — com perguntas reais, não genéricas.",
+      "Pratique a presença ativa: escolha uma pessoa por semana para acompanhar intencionalmente : com perguntas reais, não genéricas.",
       "Estude aconselhamento bíblico: aprenda a ouvir com profundidade e a falar com sabedoria. Livros de Larry Crabb e Jay Adams são boas referências.",
       "Leia João 10, Ezequiel 34 e 1 Pedro 5 em sequência, meditando no modelo do bom pastor que conhece as ovelhas pelo nome.",
-      "Ofereça-se para liderar um grupo pequeno ou célula na CE.X — o pastoreio se aprende na prática relacional, não apenas na teoria."
+      "Ofereça-se para liderar um grupo pequeno ou célula na CE.X : o pastoreio se aprende na prática relacional, não apenas na teoria."
     ]
   },
   C: {
@@ -1048,31 +1239,1599 @@ const ministrySteps = {
     steps: [
       "Construa uma disciplina consistente de estudo bíblico: vá além da leitura diária e use comentários, dicionários e ferramentas de hermenêutica.",
       "Pratique a sequência de Esdras (Ed 7:10): investigar a Palavra, praticá-la você mesmo, e só então ensiná-la. Não separe o estudo da vida.",
-      "Escolha um tema bíblico ou livro da Bíblia e prepare um ensino para compartilhar — mesmo que para um grupo pequeno. Ensinar clarifica o que você sabe.",
-      "Considere cursos de teologia bíblica, presenciais ou online — o Mestre verdadeiro nunca para de aprender."
+      "Escolha um tema bíblico ou livro da Bíblia e prepare um ensino para compartilhar : mesmo que para um grupo pequeno. Ensinar clarifica o que você sabe.",
+      "Considere cursos de teologia bíblica, presenciais ou online : o Mestre verdadeiro nunca para de aprender."
     ]
   },
   D: {
     title: "Crescendo como Evangelista",
     intro: "Seu chamado é alcançar. Para avançar intencionalmente nele:",
     steps: [
-      "Pratique contar sua história de fé em 2-3 minutos de forma natural e não religiosa — direto, honesto, sem jargão.",
+      "Pratique contar sua história de fé em 2-3 minutos de forma natural e não religiosa : direto, honesto, sem jargão.",
       "Identifique três pessoas na sua vida que ainda não conhecem Cristo. Ore por elas toda semana e busque pontos de conexão genuína.",
-      "Estude Atos 8 (Filipe e o etíope) e Romanos 10:14-15 — deixe a urgência da missão alcançar seu coração antes de querer alcançar outros.",
-      "Convide alguém de fora para um evento da CE.X este mês — e esteja presente para recebê-lo, apresentá-lo às pessoas e acompanhá-lo."
+      "Estude Atos 8 (Filipe e o etíope) e Romanos 10:14-15 : deixe a urgência da missão alcançar seu coração antes de querer alcançar outros.",
+      "Convide alguém de fora para um evento da CE.X este mês : e esteja presente para recebê-lo, apresentá-lo às pessoas e acompanhá-lo."
     ]
   },
   E: {
     title: "Crescendo como Profeta",
     intro: "Seu chamado é ouvir e falar o que Deus está dizendo. Para avançar intencionalmente nele:",
     steps: [
-      "Aprofunde sua vida de oração — a sensibilidade profética nasce da intimidade com Deus, não de técnica ou de dom isolado.",
-      "Estude a diferença entre dom de profecia (1 Co 14) e ministério profético (Ef 4:11) — entenda o peso, a responsabilidade e o contexto de cada um.",
+      "Aprofunde sua vida de oração : a sensibilidade profética nasce da intimidade com Deus, não de técnica ou de dom isolado.",
+      "Estude a diferença entre dom de profecia (1 Co 14) e ministério profético (Ef 4:11) : entenda o peso, a responsabilidade e o contexto de cada um.",
       "Aprenda a testar o que você percebe: sempre pela Palavra escrita, pelo conselho de líderes espirituais maduros e pelo fruto que aparece no tempo.",
-      "Leia os profetas do Antigo Testamento — Isaías, Jeremias, Ezequiel — não para prever o futuro, mas para entender o coração de Deus pelo Seu povo."
+      "Leia os profetas do Antigo Testamento : Isaías, Jeremias, Ezequiel : não para prever o futuro, mas para entender o coração de Deus pelo Seu povo."
     ]
   }
 };
+
+const QUESTIONS_ALL_EN = [
+  { text: "How do you typically behave when entering a new environment?", options: [
+    { key:"A", text:"I start understanding how things work and think about improvements." },
+    { key:"B", text:"I try to notice who is alone or uncomfortable." },
+    { key:"C", text:"I observe to understand the rules and dynamics of the place." },
+    { key:"D", text:"I start talking and getting to know the people around me." },
+    { key:"E", text:"I try to sense the spiritual atmosphere and culture of the place." }
+  ]},
+  { text: "When a problem arises in a group, you tend to:", options: [
+    { key:"A", text:"Take the lead to find a solution." },
+    { key:"B", text:"Care for the emotionally affected people." },
+    { key:"C", text:"Analyze the causes to understand what really happened." },
+    { key:"D", text:"Motivate people to keep moving forward together." },
+    { key:"E", text:"Identify what needs to be corrected to prevent future problems." }
+  ]},
+  { text: "What gives you the most satisfaction?", options: [
+    { key:"A", text:"Seeing something you started growing and bearing fruit." },
+    { key:"B", text:"Seeing people being restored and strengthened." },
+    { key:"C", text:"Seeing people understanding the Word and growing in it." },
+    { key:"D", text:"Seeing new people arriving, being welcomed and participating." },
+    { key:"E", text:"Seeing people aligned with God's purpose for them." }
+  ]},
+  { text: "If organizing a major event, what role would you choose?", options: [
+    { key:"A", text:"Coordinate the entire operation and ensure the vision is fulfilled." },
+    { key:"B", text:"Ensure every person feels welcomed and cared for." },
+    { key:"C", text:"Train and guide the teams with clarity." },
+    { key:"D", text:"Promote, invite, and attract new participants." },
+    { key:"E", text:"Ensure the original purpose of the event is not lost." }
+  ]},
+  { text: "People usually come to you to:", options: [
+    { key:"A", text:"Ask for direction and help with decision-making." },
+    { key:"B", text:"Open up, be heard, and receive counsel." },
+    { key:"C", text:"Get questions answered, learn, or better understand something." },
+    { key:"D", text:"Make friends, expand connections, or integrate into a group." },
+    { key:"E", text:"Seek discernment about important situations in their lives." }
+  ]},
+  { text: "What bothers you most when you look around?", options: [
+    { key:"A", text:"Lack of vision and clear direction." },
+    { key:"B", text:"People being abandoned or not cared for." },
+    { key:"C", text:"Lack of preparation and biblical foundation." },
+    { key:"D", text:"Lack of growth and community outreach." },
+    { key:"E", text:"Lack of integrity and consistency between what is said and lived." }
+  ]},
+  { text: "When you learn something new from the Word:", options: [
+    { key:"A", text:"I think about how it can be applied in new projects and initiatives." },
+    { key:"B", text:"I immediately think about who needs to hear this to be helped." },
+    { key:"C", text:"I want to go deeper, research, and understand thoroughly." },
+    { key:"D", text:"I want to share it with as many people as possible." },
+    { key:"E", text:"I evaluate whether it aligns with God's character and purposes." }
+  ]},
+  { text: "Which phrase best describes you?", options: [
+    { key:"A", text:"Let's build something that doesn't exist here yet." },
+    { key:"B", text:"Tell me. How are you really doing?" },
+    { key:"C", text:"Let me explain what this passage means." },
+    { key:"D", text:"You need to meet this person. They'll bless you." },
+    { key:"E", text:"We need to return to the purpose we were called to." }
+  ]},
+  { text: "When you observe a service team:", options: [
+    { key:"A", text:"I see opportunities for growth and expansion." },
+    { key:"B", text:"I see people who need care and attention." },
+    { key:"C", text:"I see training and development needs." },
+    { key:"D", text:"I see opportunities to reach more people." },
+    { key:"E", text:"I see adjustments needed so everything is aligned." }
+  ]},
+  { text: "What motivates you most to serve?", options: [
+    { key:"A", text:"The desire to build something lasting for God's Kingdom." },
+    { key:"B", text:"The joy of caring for people and watching them flourish." },
+    { key:"C", text:"The satisfaction of passing on knowledge that transforms lives." },
+    { key:"D", text:"The passion to influence lives and bring people closer to God." },
+    { key:"E", text:"The commitment to genuine transformation and alignment with God." }
+  ]},
+  { text: "In a conversation you typically:", options: [
+    { key:"A", text:"Present paths, strategies, and solutions." },
+    { key:"B", text:"Listen attentively and make the person feel welcomed." },
+    { key:"C", text:"Explain concepts and deepen understanding." },
+    { key:"D", text:"Tell stories, enthuse, and inspire people to action." },
+    { key:"E", text:"Ask deep questions that lead to reflection and self-knowledge." }
+  ]},
+  { text: "What result brings you the most joy?", options: [
+    { key:"A", text:"Seeing a project working and creating real impact." },
+    { key:"B", text:"Seeing a person strengthened after a difficult time." },
+    { key:"C", text:"Seeing a person growing in their understanding of the Bible." },
+    { key:"D", text:"Seeing a person connecting with the community and finding belonging." },
+    { key:"E", text:"Seeing a person finding clarity about God's calling for them." }
+  ]},
+  { text: "If you had a free day, you would probably:", options: [
+    { key:"A", text:"Plan something new or think about how to expand an initiative." },
+    { key:"B", text:"Spend quality time with people close to you." },
+    { key:"C", text:"Read, study, or deepen a biblical topic." },
+    { key:"D", text:"Take the opportunity to meet new people or visit someone." },
+    { key:"E", text:"Reflect on life, purpose, and what God has been speaking to your heart." }
+  ]},
+  { text: "What do you value most in your life of faith?", options: [
+    { key:"A", text:"Growth and expansion of God's Kingdom." },
+    { key:"B", text:"Deep relationships and true community." },
+    { key:"C", text:"Solid biblical knowledge and maturity in the Word." },
+    { key:"D", text:"Reach and influence to transform lives." },
+    { key:"E", text:"Truth, integrity, and alignment with God's purposes." }
+  ]},
+  { text: "When you see potential in someone:", options: [
+    { key:"A", text:"You want to help them develop their gifts and put them into practice." },
+    { key:"B", text:"You want to walk alongside that person, supporting and encouraging them." },
+    { key:"C", text:"You want to teach them and help them grow in knowledge of the Word." },
+    { key:"D", text:"You want to connect them with the right people and opportunities." },
+    { key:"E", text:"You want to help them identify and live God's purpose for them." }
+  ]},
+  { text: "What legacy would you like to leave?", options: [
+    { key:"A", text:"Initiatives and works that continue bearing fruit after you." },
+    { key:"B", text:"People cared for, loved, and strengthened by your presence." },
+    { key:"C", text:"People equipped, mature, and grounded in the Word." },
+    { key:"D", text:"Many lives reached and transformed by the Gospel." },
+    { key:"E", text:"People fully living the purpose God prepared for them." }
+  ]},
+  { text: "When you think about the Church, what moves you most?", options: [
+    { key:"A", text:"I want to see it growing and reaching new territories for God." },
+    { key:"B", text:"I want it to be a safe place for those who are hurting." },
+    { key:"C", text:"I want it to be deep in the Word and firm in doctrine." },
+    { key:"D", text:"I want it to always be making room for new people." },
+    { key:"E", text:"I want it to remain faithful to the purpose it was called to." }
+  ]},
+  { text: "What weighs on you most when the Church is not functioning well?", options: [
+    { key:"A", text:"That there is a lack of leadership and clear direction." },
+    { key:"B", text:"That people get lost without care and accompaniment." },
+    { key:"C", text:"That there is much enthusiasm but little biblical foundation." },
+    { key:"D", text:"That it is closed in on itself, not reaching those outside." },
+    { key:"E", text:"That it has lost its sense of purpose and original calling." }
+  ]}
+];
+const QUESTIONS_ALL_ES = [
+  { text: "¿Cómo te comportas normalmente cuando entras en un ambiente nuevo?", options: [
+    { key:"A", text:"Empiezo a entender cómo funciona todo y pienso en cómo podría mejorar." },
+    { key:"B", text:"Trato de notar quién está solo o incómodo." },
+    { key:"C", text:"Observo para entender las reglas y la dinámica del lugar." },
+    { key:"D", text:"Empiezo a conversar y conocer a las personas a mi alrededor." },
+    { key:"E", text:"Trato de percibir el ambiente espiritual y la cultura del lugar." }
+  ]},
+  { text: "Cuando surge un problema en un grupo, sueles:", options: [
+    { key:"A", text:"Asumir el liderazgo para encontrar una solución." },
+    { key:"B", text:"Cuidar a las personas emocionalmente afectadas." },
+    { key:"C", text:"Analizar las causas para entender lo que realmente ocurrió." },
+    { key:"D", text:"Motivar a las personas a seguir avanzando juntas." },
+    { key:"E", text:"Identificar lo que necesita corregirse para evitar futuros problemas." }
+  ]},
+  { text: "¿Qué te genera más satisfacción?", options: [
+    { key:"A", text:"Ver algo que iniciaste crecer y generar fruto." },
+    { key:"B", text:"Ver personas restauradas y fortalecidas." },
+    { key:"C", text:"Ver personas comprendiendo la Palabra y creciendo en ella." },
+    { key:"D", text:"Ver nuevas personas llegando, siendo acogidas y participando." },
+    { key:"E", text:"Ver personas alineadas con el propósito de Dios para ellas." }
+  ]},
+  { text: "Si participaras en organizar un gran evento, ¿qué función elegirías?", options: [
+    { key:"A", text:"Coordinar toda la operación y garantizar que la visión se cumpla." },
+    { key:"B", text:"Garantizar que cada persona se sienta acogida y cuidada." },
+    { key:"C", text:"Entrenar y orientar a los equipos con claridad." },
+    { key:"D", text:"Difundir, invitar y atraer nuevos participantes." },
+    { key:"E", text:"Garantizar que el propósito original del evento no se pierda." }
+  ]},
+  { text: "Las personas normalmente te buscan para:", options: [
+    { key:"A", text:"Pedir dirección y ayuda en la toma de decisiones." },
+    { key:"B", text:"Desahogarse, ser escuchadas y recibir consejería." },
+    { key:"C", text:"Resolver dudas, aprender o entender algo mejor." },
+    { key:"D", text:"Hacer amistad, ampliar conexiones o integrarse a un grupo." },
+    { key:"E", text:"Buscar discernimiento sobre situaciones importantes de su vida." }
+  ]},
+  { text: "¿Qué te incomoda más cuando miras a tu alrededor?", options: [
+    { key:"A", text:"Falta de visión y de dirección clara." },
+    { key:"B", text:"Personas siendo abandonadas o no cuidadas." },
+    { key:"C", text:"Falta de preparación y de fundamento bíblico." },
+    { key:"D", text:"Falta de crecimiento y de alcance de la comunidad." },
+    { key:"E", text:"Falta de integridad y coherencia entre lo que se dice y lo que se vive." }
+  ]},
+  { text: "Cuando aprendes algo nuevo de la Palabra:", options: [
+    { key:"A", text:"Pienso en cómo puede aplicarse en nuevos proyectos e iniciativas." },
+    { key:"B", text:"Pienso inmediatamente en quién necesita escuchar esto para ser ayudado." },
+    { key:"C", text:"Quiero profundizar más, investigar y entender en profundidad." },
+    { key:"D", text:"Quiero compartirlo con la mayor cantidad de personas posible." },
+    { key:"E", text:"Evalúo si esto está alineado con el carácter y los propósitos de Dios." }
+  ]},
+  { text: "¿Cuál de estas frases te describe mejor?", options: [
+    { key:"A", text:"Construyamos algo que todavía no existe aquí." },
+    { key:"B", text:"Cuéntame. ¿Cómo estás de verdad?" },
+    { key:"C", text:"Déjame explicarte qué significa este pasaje." },
+    { key:"D", text:"Necesitas conocer a esta persona. Te va a bendecir." },
+    { key:"E", text:"Necesitamos volver al propósito para el que fuimos llamados." }
+  ]},
+  { text: "Cuando observas un equipo de servicio:", options: [
+    { key:"A", text:"Veo oportunidades de crecimiento y expansión." },
+    { key:"B", text:"Veo personas que necesitan cuidado y atención." },
+    { key:"C", text:"Veo necesidades de entrenamiento y capacitación." },
+    { key:"D", text:"Veo oportunidades de alcanzar a más personas." },
+    { key:"E", text:"Veo ajustes que necesitan hacerse para que todo esté alineado." }
+  ]},
+  { text: "¿Qué te mueve más a servir?", options: [
+    { key:"A", text:"El deseo de construir algo duradero para el Reino de Dios." },
+    { key:"B", text:"La alegría de cuidar personas y verlas florecer." },
+    { key:"C", text:"La satisfacción de transmitir conocimiento que transforma vidas." },
+    { key:"D", text:"La pasión de influenciar vidas y acercar personas a Dios." },
+    { key:"E", text:"El compromiso con la transformación genuina y el alineamiento con Dios." }
+  ]},
+  { text: "En una conversación normalmente:", options: [
+    { key:"A", text:"Presentas caminos, estrategias y soluciones." },
+    { key:"B", text:"Escuchas con atención y haces que la persona se sienta acogida." },
+    { key:"C", text:"Explicas conceptos y profundizas el entendimiento." },
+    { key:"D", text:"Cuentas historias, entusiasmas e inspiras personas a la acción." },
+    { key:"E", text:"Haces preguntas profundas que llevan a la reflexión y al autoconocimiento." }
+  ]},
+  { text: "¿Qué resultado te genera más alegría?", options: [
+    { key:"A", text:"Ver un proyecto funcionando y generando impacto real." },
+    { key:"B", text:"Ver a una persona fortalecida después de un momento difícil." },
+    { key:"C", text:"Ver a una persona creciendo en la comprensión de la Biblia." },
+    { key:"D", text:"Ver a una persona conectándose con la comunidad y encontrando pertenencia." },
+    { key:"E", text:"Ver a una persona encontrando claridad sobre el llamado de Dios." }
+  ]},
+  { text: "Si tuvieras un día libre, probablemente:", options: [
+    { key:"A", text:"Planificarías algo nuevo o pensarías en cómo expandir alguna iniciativa." },
+    { key:"B", text:"Pasarías tiempo de calidad con personas cercanas." },
+    { key:"C", text:"Leerías, estudiarías o profundizarías algún tema bíblico." },
+    { key:"D", text:"Aprovecharías para conocer personas nuevas o visitar a alguien." },
+    { key:"E", text:"Reflexionarías sobre la vida, el propósito y lo que Dios ha hablado a tu corazón." }
+  ]},
+  { text: "¿Qué valoras más en tu vida de fe?", options: [
+    { key:"A", text:"Crecimiento y expansión del Reino de Dios." },
+    { key:"B", text:"Relaciones profundas y comunidad verdadera." },
+    { key:"C", text:"Conocimiento bíblico sólido y madurez en la Palabra." },
+    { key:"D", text:"Alcance e influencia para transformar vidas." },
+    { key:"E", text:"Verdad, integridad y alineamiento con los propósitos de Dios." }
+  ]},
+  { text: "Cuando ves potencial en alguien:", options: [
+    { key:"A", text:"Quieres ayudarle a desarrollar sus dones y ponerlos en práctica." },
+    { key:"B", text:"Quieres caminar junto a esa persona, apoyando y animando." },
+    { key:"C", text:"Quieres enseñarle y ayudarle a crecer en el conocimiento de la Palabra." },
+    { key:"D", text:"Quieres conectarle con las personas y oportunidades correctas." },
+    { key:"E", text:"Quieres ayudarle a identificar y vivir el propósito de Dios para él/ella." }
+  ]},
+  { text: "¿Qué legado te gustaría dejar?", options: [
+    { key:"A", text:"Iniciativas y obras que continúen generando fruto después de ti." },
+    { key:"B", text:"Personas cuidadas, amadas y fortalecidas por tu presencia." },
+    { key:"C", text:"Personas capacitadas, maduras y firmes en la Palabra." },
+    { key:"D", text:"Muchas vidas alcanzadas y transformadas por el Evangelio." },
+    { key:"E", text:"Personas viviendo plenamente el propósito que Dios preparó para ellas." }
+  ]},
+  { text: "Cuando piensas en la Iglesia, ¿qué es lo que más te mueve?", options: [
+    { key:"A", text:"Quiero verla crecer y alcanzar nuevos territorios para Dios." },
+    { key:"B", text:"Quiero que sea un lugar seguro para quien está herido." },
+    { key:"C", text:"Quiero que sea profunda en la Palabra y firme en la doctrina." },
+    { key:"D", text:"Quiero que siempre esté abriendo espacio para personas nuevas." },
+    { key:"E", text:"Quiero que permanezca fiel al propósito para el que fue llamada." }
+  ]},
+  { text: "¿Qué te pesa más cuando la Iglesia no funciona bien?", options: [
+    { key:"A", text:"Que falta liderazgo y dirección clara hacia dónde ir." },
+    { key:"B", text:"Que las personas se pierden sin cuidado y acompañamiento." },
+    { key:"C", text:"Que hay mucho entusiasmo pero poco fundamento bíblico." },
+    { key:"D", text:"Que está cerrada en sí misma, sin alcanzar a quien está fuera." },
+    { key:"E", text:"Que perdió el sentido del propósito y el llamado original." }
+  ]}
+];
+const QUESTIONS_ALL = {
+  'pt-BR': QUESTIONS_ALL_PTBR,
+  'pt-PT': QUESTIONS_ALL_PTBR,
+  'en': QUESTIONS_ALL_EN,
+  'es': QUESTIONS_ALL_ES
+};
+
+const MINISTRIES_ALL_EN = {
+  A: {
+    name: "Apostle",
+    subtitle: "The Visionary and Strategist",
+    verse: "Ephesians 4:11: \"He himself gave some to be apostles...\"",
+    cardVerse: "\"...to equip the saints for works of service\" (Eph 4:12)",
+    bibleRefs: [
+      "Eph 2:20: built on the foundation of the apostles and prophets",
+      "1 Cor 12:28: God has placed in the church first of all apostles",
+      "Rom 15:20: Paul's ambition to preach where Christ was not known"
+    ],
+    figure: { name: "Paul", text: "The greatest apostolic example in the New Testament. He not only preached but planted churches, formed leaders, established doctrines, and connected entire communities to Christ's mission. His aim was to preach where Christ was not yet known (Rom 15:20)." },
+    main: "You have an apostolic calling: to build what does not yet exist and establish solid foundations for the Kingdom of God to advance. The apostle is not satisfied with what has already been built. They see unexplored territories, gather people around a greater vision, and lay foundations so others can build. In Ephesians 2:20, Paul describes the Church as built on the foundation of apostles and prophets. This is not merely historical: it is a living calling for people who carry the courage to go beyond the familiar.",
+    characteristics: [
+      "Strategic leadership with long-term vision",
+      "Ability to see potential where others see only challenges",
+      "Pioneer spirit: comfort with the new, unknown, and unfinished",
+      "Ability to gather people around a greater cause"
+    ],
+    examples: [
+      "Starting new ministries, cells, or mission fronts",
+      "Planting churches or establishing works in new territories",
+      "Creating structures and systems that sustain the Church's growth"
+    ],
+    calling: "If you feel restless about what has not yet been done, if you naturally think in strategy and expansion, God may be calling you to build foundations upon which others will build."
+  },
+  B: {
+    name: "Shepherd",
+    subtitle: "The Caregiver and Protector",
+    verse: "Ephesians 4:11: \"...some to be pastors and teachers...\"",
+    cardVerse: "\"Feed my sheep.\" (John 21:17)",
+    bibleRefs: [
+      "John 10:11: the good shepherd lays down his life for the sheep",
+      "1 Pet 5:2-3: be shepherds of God's flock that is under your care",
+      "Ezek 34:15-16: I myself will tend my flock"
+    ],
+    figure: { name: "Peter", text: "Restored by Jesus on the shore of the Sea of Galilee, Peter received the same commission three times: feed my sheep (John 21:15-17). Pastoral care is born from a heart that has itself been cared for by God." },
+    main: "You have a pastoral calling: to create the environment where people can grow in safety. In John 10:11, Jesus describes himself as the good shepherd, who knows the sheep by name and lays down his life for them. The shepherd does not care from a distance: they walk alongside, bear others' burdens, identify those who are lost and go after them. Shepherding is not only comforting. It is intentional nurturing, protecting from spiritual threats, and guiding people toward maturity in the Lord.",
+    characteristics: [
+      "Deep empathy and ability to be present in suffering",
+      "Ability to listen without rushing and counsel with wisdom",
+      "Commitment to long-term accompaniment",
+      "Sensitivity to perceive when someone is drifting"
+    ],
+    examples: [
+      "Caring for people in moments of crisis, grief, or difficulty",
+      "Leading discipleship groups and creating accountability bonds",
+      "Creating a culture of belonging and mutual care in community"
+    ],
+    calling: "If you find genuine joy in being present in people's lives, walking with them through hard times, and watching them flourish, your calling may be that of Shepherd."
+  },
+  C: {
+    name: "Teacher",
+    subtitle: "The Educator and Equipper",
+    verse: "Ephesians 4:11: \"...some to be pastors and teachers...\"",
+    cardVerse: "\"Ezra had devoted himself to the study and observance of the Law.\" (Ezra 7:10)",
+    bibleRefs: [
+      "2 Tim 2:2: entrust to reliable people who will be able to teach others",
+      "Ezra 7:10: to study, practice, and teach the Law of the Lord",
+      "Acts 18:24: Apollos, a learned man with thorough knowledge of the Scriptures"
+    ],
+    figure: { name: "Apollos and Ezra", text: "Apollos was 'mighty in the Scriptures' (Acts 18:24) and instructed with precision and fervor. Ezra, centuries earlier, followed a clear sequence: first study the Word, then practice it, and only then teach it to others. This is the mark of the true Teacher." },
+    main: "You have a teaching calling: to make the Word of God accessible, deep, and transformative for others. In Ezra 7:10 we see the Teacher's sequence: he devoted his heart to study the law of the Lord, to practice it, and to teach it. Study, practice, transmission. The Teacher is not merely someone who knows a lot. They are someone who knows how to help others know, so that the Word enters the mind, changes the heart, and transforms life.",
+    characteristics: [
+      "Genuine love for studying Scripture and theology",
+      "Ability to explain the complex in a simple and applicable way",
+      "Rigor and care for biblical and doctrinal accuracy",
+      "Patience to accompany others' learning over time"
+    ],
+    examples: [
+      "Teaching discipleship classes, Bible school, or study groups",
+      "Creating teaching materials that help people understand the Bible",
+      "Preparing and teaching messages that form and equip the Church"
+    ],
+    calling: "If you find pleasure in studying the Word, preparing explanations, and watching people grow in biblical understanding, God may be calling you to the ministry of teaching."
+  },
+  D: {
+    name: "Evangelist",
+    subtitle: "The Communicator and Connector",
+    verse: "Ephesians 4:11: \"...some to be evangelists...\"",
+    cardVerse: "\"How will they believe in the one they have not heard of? And how can they hear without someone preaching?\" (Rom 10:14)",
+    bibleRefs: [
+      "Acts 21:8: Philip the evangelist",
+      "2 Tim 4:5: do the work of an evangelist",
+      "Rom 10:14-15: how can they hear without someone to preach?"
+    ],
+    figure: { name: "Philip", text: "In Acts 8, the Spirit sent Philip to a desert, where he found a single man reading Isaiah in a chariot. Philip did not hesitate, approached, asked, explained, and led him to faith. That is the evangelist: moved by the Spirit, comfortable in any context, always ready to build a bridge." },
+    main: "You have an evangelistic calling: to build bridges between people and the Gospel of Jesus Christ. The evangelist does not wait for the lost to appear. They go to where they are. In Acts 8:26-40, Philip was sent by the Spirit to the desert to reach a single man. Evangelists move naturally between different worlds, translate the Gospel into languages outsiders can understand, and have an unshakeable conviction that every person can respond to God's call.",
+    characteristics: [
+      "Natural ease in connecting with people from diverse backgrounds",
+      "Passionate communication and ability to make the Gospel attractive",
+      "Creativity to reach those outside the faith community",
+      "Courage to initiate spiritual conversations in any context"
+    ],
+    examples: [
+      "Leading evangelistic actions and community outreach events",
+      "Being the bridge between visitors and the Church community",
+      "Training and mobilizing others to share faith naturally"
+    ],
+    calling: "If you feel a burden for those who do not yet know Christ and a special joy when witnessing someone respond to the Gospel, you may have the calling of Evangelist."
+  },
+  E: {
+    name: "Prophet",
+    subtitle: "The Sensitive and Inspiring",
+    verse: "Ephesians 4:11: \"...some to be apostles, some to be prophets...\"",
+    cardVerse: "\"The one who prophesies speaks to people for their strengthening, encouraging and comfort.\" (1 Cor 14:3)",
+    bibleRefs: [
+      "1 Cor 14:3: strengthening, encouraging, and comfort",
+      "Amos 3:7: Surely the Sovereign Lord does nothing without revealing his plan to his servants",
+      "Luke 2:36-38: Anna the prophet, who served God with fasting and prayer"
+    ],
+    figure: { name: "Anna and Agabus", text: "Anna the prophetess in Luke 2 spent nights in the temple in prayer and fasting. Not from empty religiosity, but because she perceived what God was doing before anyone else recognized it. Agabus (Acts 11:28) identified with precision what was coming. Both lived in constant attunement with the Spirit." },
+    main: "You have a prophetic calling: to perceive what God is saying to His people now. In 1 Corinthians 14:3, Paul clearly defines the fruit of prophecy: strengthening, encouragement, and comfort. The prophet is not necessarily someone who predicts future events. They are someone with sharpened sensitivity to the spiritual state of a community, capable of identifying deviations before they become crises, naming truths others avoid, and bringing direction when there is confusion.",
+    characteristics: [
+      "Spiritual sensitivity and ability to perceive what is below the surface",
+      "Courage to name difficult truths with compassion and respect",
+      "Strong commitment to integrity, purpose, and alignment with God",
+      "Life of prayer and intimacy with God as the source of discernment"
+    ],
+    examples: [
+      "Leading moments of prayer, intercession, and spiritual seeking",
+      "Discerning the spiritual climate of a community and bringing direction",
+      "Encouraging, exhorting, and bringing hope in moments of collective crisis"
+    ],
+    calling: "If you perceive things others do not, feel the weight of what is out of alignment with God, and carry a heart that grieves what grieves God's heart, your calling may be that of Prophet."
+  }
+};
+
+const MINISTRIES_ALL_ES = {
+  A: {
+    name: "Apóstol",
+    subtitle: "El Visionario y Estratega",
+    verse: "Efesios 4:11: \"Él mismo constituyó a unos, apóstoles...\"",
+    cardVerse: "\"...para equipar a su pueblo para la obra del servicio\" (Ef 4:12)",
+    bibleRefs: [
+      "Ef 2:20: edificados sobre el fundamento de los apóstoles y profetas",
+      "1 Co 12:28: Dios ha puesto en la iglesia, en primer lugar, apóstoles",
+      "Rm 15:20: Pablo: predicar donde Cristo todavía no era conocido"
+    ],
+    figure: { name: "Pablo", text: "El mayor ejemplo apostólico del Nuevo Testamento. No solo predicaba, sino que plantaba iglesias, formaba líderes, establecía doctrinas y conectaba comunidades enteras con la misión de Cristo. Su ambición era predicar donde Cristo aún no era conocido (Rm 15:20)." },
+    main: "Tienes un llamado apostólico: construir lo que todavía no existe y establecer fundamentos sólidos para que el Reino de Dios avance. El apóstol no se conforma con lo que ya fue construido. Ve territorios inexplorados, reúne personas alrededor de una visión mayor y coloca cimientos para que otros puedan edificar. En Efesios 2:20, Pablo describe la Iglesia como edificada sobre el fundamento de los apóstoles y profetas. Este fundamento no es solo histórico: es un llamado vivo para personas que tienen el coraje de ir más allá de lo familiar.",
+    characteristics: [
+      "Liderazgo estratégico con visión a largo plazo",
+      "Capacidad de ver potencial donde otros solo ven desafíos",
+      "Espíritu pionero: comodidad con lo nuevo, lo desconocido y lo inacabado",
+      "Habilidad para reunir personas alrededor de una causa mayor"
+    ],
+    examples: [
+      "Iniciar nuevos ministerios, células o frentes de misión",
+      "Plantar iglesias o establecer obras en nuevos territorios",
+      "Crear estructuras y sistemas que sustenten el crecimiento de la Iglesia"
+    ],
+    calling: "Si sientes inquietud por lo que todavía no se ha hecho, si naturalmente piensas en estrategia y expansión, Dios puede estar llamándote a construir fundamentos sobre los que otros edificarán."
+  },
+  B: {
+    name: "Pastor",
+    subtitle: "El Cuidador y Protector",
+    verse: "Efesios 4:11: \"...otros, pastores y maestros...\"",
+    cardVerse: "\"Apacienta mis ovejas.\" (Jn 21:17)",
+    bibleRefs: [
+      "Jn 10:11: el buen pastor da su vida por las ovejas",
+      "1 Pe 5:2-3: apacentad el rebaño de Dios que está entre vosotros",
+      "Ez 34:15-16: yo mismo apacentaré mi rebaño"
+    ],
+    figure: { name: "Pedro", text: "Restaurado por Jesús a orillas del mar de Galilea, Pedro recibió tres veces el mismo encargo: apacienta mis ovejas (Jn 21:15-17). El cuidado pastoral nace de un corazón que él mismo fue cuidado por Dios." },
+    main: "Tienes un llamado pastoral: crear el ambiente donde las personas pueden crecer con seguridad. En Juan 10:11, Jesús se describe como el buen pastor, que conoce las ovejas por su nombre y da su vida por ellas. El pastor no cuida desde lejos: camina junto, soporta el peso de los demás, identifica a los que se han perdido y va a buscarlos. Pastorear no es solo consolar. Es nutrir intencionalmente, proteger de amenazas espirituales y guiar personas hacia la madurez en el Señor.",
+    characteristics: [
+      "Empatía profunda y capacidad de estar presente en el sufrimiento",
+      "Habilidad para escuchar sin prisa y aconsejar con sabiduría",
+      "Compromiso con el acompañamiento a largo plazo",
+      "Sensibilidad para percibir cuando alguien se está alejando"
+    ],
+    examples: [
+      "Cuidar a personas en momentos de crisis, duelo o dificultad",
+      "Liderar grupos de discipulado y crear vínculos de responsabilidad",
+      "Crear cultura de pertenencia y cuidado mutuo en la comunidad"
+    ],
+    calling: "Si encuentras alegría genuina en estar presente en la vida de las personas, caminar con ellas en los momentos difíciles y verlas florecer, tu llamado puede ser el de Pastor."
+  },
+  C: {
+    name: "Maestro",
+    subtitle: "El Educador y Equipador",
+    verse: "Efesios 4:11: \"...otros, pastores y maestros...\"",
+    cardVerse: "\"Esdras dedicó su corazón a estudiar la ley del Señor.\" (Esd 7:10)",
+    bibleRefs: [
+      "2 Ti 2:2: confíaselo a personas fieles que sean capaces de enseñar a otros",
+      "Esd 7:10: estudiar, practicar y enseñar la ley del Señor",
+      "Hch 18:24: Apolos, hombre elocuente y poderoso en las Escrituras"
+    ],
+    figure: { name: "Apolos y Esdras", text: "Apolos era 'poderoso en las Escrituras' (Hch 18:24) e instruía con precisión y fervor. Esdras, siglos antes, seguía una secuencia clara: primero estudiar la Palabra, luego practicarla, y solo entonces enseñarla a otros. Esta es la marca del verdadero Maestro." },
+    main: "Tienes un llamado de enseñanza: hacer la Palabra de Dios accesible, profunda y transformadora para otros. En Esdras 7:10 vemos la secuencia del Maestro: dedicó su corazón a estudiar la ley del Señor, a practicarla y a enseñarla. Estudio, práctica, transmisión. El Maestro no es simplemente alguien que sabe mucho. Es alguien que sabe hacer que otros sepan, de forma que la Palabra entre por la mente, cambie el corazón y transforme la vida.",
+    characteristics: [
+      "Amor genuino por el estudio de las Escrituras y la teología",
+      "Capacidad de explicar lo complejo de forma simple y aplicable",
+      "Rigor y cuidado con la precisión bíblica y doctrinal",
+      "Paciencia para acompañar el aprendizaje de otros a lo largo del tiempo"
+    ],
+    examples: [
+      "Enseñar clases de discipulado, escuela bíblica o grupos de estudio",
+      "Crear materiales didácticos que ayuden a las personas a comprender la Biblia",
+      "Preparar y enseñar mensajes que formen y equiden a la Iglesia"
+    ],
+    calling: "Si encuentras placer en estudiar la Palabra, preparar explicaciones y ver personas creciendo en el entendimiento bíblico, Dios puede estar llamándote al ministerio de enseñanza."
+  },
+  D: {
+    name: "Evangelista",
+    subtitle: "El Comunicador y Conector",
+    verse: "Efesios 4:11: \"...otros, evangelistas...\"",
+    cardVerse: "\"¿Cómo creerán en aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique?\" (Rm 10:14)",
+    bibleRefs: [
+      "Hch 21:8: Felipe el evangelista",
+      "2 Ti 4:5: haz el trabajo de evangelista",
+      "Rm 10:14-15: ¿cómo creerán sin quien les predique?"
+    ],
+    figure: { name: "Felipe", text: "En Hechos 8, el Espíritu envió a Felipe al desierto, donde encontró a un solo hombre leyendo Isaías en un carro. Felipe no dudó, se acercó, preguntó, explicó y lo condujo a la fe. Ese es el evangelista: movido por el Espíritu, cómodo en cualquier contexto, siempre listo para construir un puente." },
+    main: "Tienes un llamado evangelístico: construir puentes entre las personas y el Evangelio de Jesucristo. El evangelista no espera que los perdidos aparezcan. Va a donde están. En Hechos 8:26-40, Felipe fue enviado por el Espíritu al desierto para alcanzar a un solo hombre. Los evangelistas se mueven con naturalidad entre mundos diferentes, traducen el Evangelio a lenguajes que las personas de fuera pueden entender y tienen una convicción inamovible de que toda persona puede responder al llamado de Dios.",
+    characteristics: [
+      "Facilidad natural para conectar con personas de distintos orígenes",
+      "Comunicación apasionada y capacidad de hacer el Evangelio atractivo",
+      "Creatividad para alcanzar a quienes están fuera de la comunidad de fe",
+      "Valor para iniciar conversaciones espirituales en cualquier contexto"
+    ],
+    examples: [
+      "Liderar acciones evangelísticas y eventos de alcance comunitario",
+      "Ser el puente entre visitantes y la comunidad de la Iglesia",
+      "Entrenar y movilizar a otros para compartir la fe con naturalidad"
+    ],
+    calling: "Si sientes una carga por las personas que aún no conocen a Cristo y una alegría especial al ver a alguien responder al Evangelio, puedes tener el llamado de Evangelista."
+  },
+  E: {
+    name: "Profeta",
+    subtitle: "El Sensible e Inspirador",
+    verse: "Efesios 4:11: \"...unos, para ser apóstoles; otros, profetas...\"",
+    cardVerse: "\"El que profetiza habla a los hombres: edificación, exhortación y consolación.\" (1 Co 14:3)",
+    bibleRefs: [
+      "1 Co 14:3: edificación, exhortación y consolación",
+      "Am 3:7: el Señor no hace nada sin revelar su secreto a sus siervos los profetas",
+      "Lc 2:36-38: Ana, la profetisa, que servía a Dios con ayunos y oraciones"
+    ],
+    figure: { name: "Ana y Agabo", text: "Ana, la profetisa de Lucas 2, pasaba noches en el templo en oración y ayuno. No por religiosidad vacía, sino porque percibía lo que Dios estaba haciendo antes de que nadie lo reconociera. Agabo (Hch 11:28) identificó con precisión lo que estaba por venir. Ambos vivían en sintonización constante con el Espíritu." },
+    main: "Tienes un llamado profético: percibir lo que Dios está diciendo a Su pueblo ahora. En 1 Corintios 14:3, Pablo define claramente el fruto de la profecía: edificación, exhortación y consolación. El profeta no es necesariamente alguien que predice eventos futuros. Es alguien con sensibilidad agudizada para el estado espiritual de una comunidad, capaz de identificar desvíos antes de que se conviertan en crisis, nombrar verdades que otros evitan decir y traer dirección cuando hay confusión.",
+    characteristics: [
+      "Sensibilidad espiritual y capacidad de percibir lo que está debajo de la superficie",
+      "Valor para nombrar verdades difíciles con compasión y respeto",
+      "Fuerte compromiso con la integridad, el propósito y el alineamiento con Dios",
+      "Vida de oración e intimidad con Dios como fuente de discernimiento"
+    ],
+    examples: [
+      "Liderar momentos de oración, intercesión y búsqueda espiritual",
+      "Discernir el clima espiritual de una comunidad y traer dirección",
+      "Animar, exhortar y traer esperanza en momentos de crisis colectiva"
+    ],
+    calling: "Si percibes cosas que otros no perciben, sientes el peso de lo que está fuera del alineamiento con Dios y llevas un corazón que llora por lo que llora el corazón de Dios, tu llamado puede ser el de Profeta."
+  }
+};
+
+const MINISTRIES_ALL = {
+  'pt-BR': MINISTRIES_ALL_PTBR,
+  'pt-PT': MINISTRIES_ALL_PTBR,
+  'en': MINISTRIES_ALL_EN,
+  'es': MINISTRIES_ALL_ES
+};
+
+const MINISTRY_STEPS_ALL_EN = {
+  A: {
+    title: "Growing as an Apostle",
+    intro: "Your calling is pioneering. To advance intentionally in it:",
+    steps: [
+      "Study Paul's missionary journeys in Acts: observe how he planted, structured, and delegated without centralizing.",
+      "Dive into themes of strategy, church planting, and apostolic leadership. Authors like Alan Hirsch, Tim Keller, and Neil Cole offer valuable perspectives.",
+      "Talk with leaders who have opened new ministries or works: ask about the challenges of pioneering and what they learned.",
+      "Identify an unexplored territory in your church or city where you could contribute with initiative, vision, and the ability to structure."
+    ]
+  },
+  B: {
+    title: "Growing as a Shepherd",
+    intro: "Your calling is to care. To advance intentionally in it:",
+    steps: [
+      "Practice active presence: choose one person each week to accompany intentionally with real questions, not generic ones.",
+      "Study biblical counseling: learn to listen deeply and speak with wisdom. Books by Larry Crabb and Jay Adams are good references.",
+      "Read John 10, Ezekiel 34, and 1 Peter 5 in sequence, meditating on the model of the good shepherd who knows the sheep by name.",
+      "Offer to lead a small group or cell: shepherding is learned in relational practice, not just in theory."
+    ]
+  },
+  C: {
+    title: "Growing as a Teacher",
+    intro: "Your calling is to equip through the Word. To advance intentionally in it:",
+    steps: [
+      "Build a consistent discipline of biblical study: go beyond daily reading and use commentaries, dictionaries, and hermeneutic tools.",
+      "Practice the Ezra sequence (Ezra 7:10): study the Word, practice it yourself, and only then teach it. Do not separate study from life.",
+      "Choose a biblical theme or book of the Bible and prepare a teaching to share, even for a small group. Teaching clarifies what you know.",
+      "Consider biblical theology courses, in person or online: the true Teacher never stops learning."
+    ]
+  },
+  D: {
+    title: "Growing as an Evangelist",
+    intro: "Your calling is to reach. To advance intentionally in it:",
+    steps: [
+      "Practice telling your faith story in 2-3 minutes in a natural and non-religious way: direct, honest, without jargon.",
+      "Identify three people in your life who do not yet know Christ. Pray for them every week and seek points of genuine connection.",
+      "Study Acts 8 (Philip and the Ethiopian) and Romans 10:14-15: let the urgency of mission reach your heart before wanting to reach others.",
+      "Invite someone from outside to a church event this month, and be there to welcome them, introduce them to people, and accompany them."
+    ]
+  },
+  E: {
+    title: "Growing as a Prophet",
+    intro: "Your calling is to hear and speak what God is saying. To advance intentionally in it:",
+    steps: [
+      "Deepen your prayer life: prophetic sensitivity is born of intimacy with God, not of technique or isolated gift.",
+      "Study the difference between the gift of prophecy (1 Cor 14) and prophetic ministry (Eph 4:11): understand the weight, responsibility, and context of each.",
+      "Learn to test what you perceive: always through the written Word, through the counsel of mature spiritual leaders, and by the fruit that appears over time.",
+      "Read the Old Testament prophets, Isaiah, Jeremiah, Ezekiel, not to predict the future, but to understand the heart of God for His people."
+    ]
+  }
+};
+
+const MINISTRY_STEPS_ALL_ES = {
+  A: {
+    title: "Creciendo como Apóstol",
+    intro: "Tu llamado es pionero. Para avanzar intencionalmente en él:",
+    steps: [
+      "Estudia los viajes misioneros de Pablo en Hechos: observa cómo plantaba, estructuraba y delegaba sin centralizar.",
+      "Profundiza en temas de estrategia, plantación de iglesias y liderazgo apostólico. Autores como Alan Hirsch, Tim Keller y Neil Cole ofrecen perspectivas valiosas.",
+      "Conversa con líderes que hayan abierto nuevos ministerios u obras: pregunta sobre los desafíos del pionerismo y lo que aprendieron.",
+      "Identifica un territorio inexplorado en tu iglesia o ciudad donde puedas contribuir con iniciativa, visión y capacidad de estructurar."
+    ]
+  },
+  B: {
+    title: "Creciendo como Pastor",
+    intro: "Tu llamado es cuidar. Para avanzar intencionalmente en él:",
+    steps: [
+      "Practica la presencia activa: elige a una persona cada semana para acompañarla intencionalmente, con preguntas reales, no genéricas.",
+      "Estudia consejería bíblica: aprende a escuchar con profundidad y a hablar con sabiduría. Libros de Larry Crabb y Jay Adams son buenas referencias.",
+      "Lee Juan 10, Ezequiel 34 y 1 Pedro 5 en secuencia, meditando en el modelo del buen pastor que conoce las ovejas por su nombre.",
+      "Ofrécete para liderar un grupo pequeño o célula: el pastoreo se aprende en la práctica relacional, no solo en la teoría."
+    ]
+  },
+  C: {
+    title: "Creciendo como Maestro",
+    intro: "Tu llamado es equipar por medio de la Palabra. Para avanzar intencionalmente en él:",
+    steps: [
+      "Construye una disciplina consistente de estudio bíblico: ve más allá de la lectura diaria y usa comentarios, diccionarios y herramientas hermenéuticas.",
+      "Practica la secuencia de Esdras (Esd 7:10): estudia la Palabra, ponla en práctica tú mismo, y solo entonces enséñala. No separes el estudio de la vida.",
+      "Elige un tema bíblico o libro de la Biblia y prepara una enseñanza para compartir, aunque sea para un grupo pequeño. Enseñar clarifica lo que sabes.",
+      "Considera cursos de teología bíblica, presenciales o en línea: el verdadero Maestro nunca deja de aprender."
+    ]
+  },
+  D: {
+    title: "Creciendo como Evangelista",
+    intro: "Tu llamado es alcanzar. Para avanzar intencionalmente en él:",
+    steps: [
+      "Practica contar tu historia de fe en 2-3 minutos de forma natural y no religiosa: directo, honesto, sin jerga.",
+      "Identifica tres personas en tu vida que todavía no conocen a Cristo. Ora por ellas cada semana y busca puntos de conexión genuina.",
+      "Estudia Hechos 8 (Felipe y el etíope) y Romanos 10:14-15: deja que la urgencia de la misión llegue a tu corazón antes de querer alcanzar a otros.",
+      "Invita a alguien de fuera a un evento de la iglesia este mes, y está presente para recibirlo, presentarlo a las personas y acompañarlo."
+    ]
+  },
+  E: {
+    title: "Creciendo como Profeta",
+    intro: "Tu llamado es escuchar y hablar lo que Dios está diciendo. Para avanzar intencionalmente en él:",
+    steps: [
+      "Profundiza tu vida de oración: la sensibilidad profética nace de la intimidad con Dios, no de técnica o de don aislado.",
+      "Estudia la diferencia entre el don de profecía (1 Co 14) y el ministerio profético (Ef 4:11): entiende el peso, la responsabilidad y el contexto de cada uno.",
+      "Aprende a probar lo que percibes: siempre por la Palabra escrita, por el consejo de líderes espirituales maduros y por el fruto que aparece con el tiempo.",
+      "Lee los profetas del Antiguo Testamento, Isaías, Jeremías, Ezequiel, no para predecir el futuro, sino para entender el corazón de Dios por Su pueblo."
+    ]
+  }
+};
+
+const MINISTRY_STEPS_ALL = {
+  'pt-BR': MINISTRY_STEPS_ALL_PTBR,
+  'pt-PT': MINISTRY_STEPS_ALL_PTBR,
+  'en': MINISTRY_STEPS_ALL_EN,
+  'es': MINISTRY_STEPS_ALL_ES
+};
+
+let questions = [...QUESTIONS_ALL_PTBR];
+let ministries = Object.assign({}, MINISTRIES_ALL_PTBR);
+let ministrySteps = Object.assign({}, MINISTRY_STEPS_ALL_PTBR);
+
+const DEEP_PROFILES = {
+'pt-BR': {
+A: `<div class="dp-profile">
+  <h2 class="dp-h2">Apóstolo: O Visionário e Estrategista</h2>
+  <p class="dp-intro">Você tem um chamado apostólico. Isso significa que Deus colocou em você a capacidade de enxergar o que ainda não existe e a coragem de construí-lo. Não é apenas liderança: é uma forma particular de ver o mundo, marcada por visão de longo prazo, inquietação saudável diante do que ainda não foi feito, e uma compulsão por estabelecer fundamentos sólidos onde o Reino de Deus ainda não chegou com plenitude.</p>
+
+  <h3 class="dp-h3">Como esse chamado se expressa</h3>
+  <p>O apóstolo não se contenta com o que já foi construído. Há algo dentro de você que naturalmente questiona: "por que estamos fazendo isso dessa forma? Existe um jeito melhor? Existe um lugar onde isso ainda não existe e precisamos levar?" Você pensa em sistemas, estruturas e estratégias antes de pensar em rotinas. Você não apenas participa de um ministério: você quer entender como funciona, o que falta e como poderia crescer.</p>
+  <p>Esse impulso não é ambição carnal. É o DNA apostólico em ação. Paulo descreve seu próprio chamado em Romanos 15:20: "o meu empenho sempre foi pregar o Evangelho onde Cristo ainda não era conhecido, para não edificar sobre fundamento alheio." Essa é a marca do apóstolo: o desejo de ir além do familiar, além do que já está estabelecido.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>Em Efésios 2:20, Paulo diz que a Igreja é "edificada sobre o fundamento dos apóstolos e profetas, sendo o próprio Cristo Jesus a pedra angular." O chamado apostólico não é apenas histórico: é um presente contínuo na Igreja. Enquanto houver territórios, culturas, comunidades e gerações onde Cristo ainda não é conhecido e a Igreja ainda não está estabelecida, haverá necessidade de homens e mulheres com esse chamado.</p>
+  <p>Em 1 Coríntios 12:28, Paulo afirma que "Deus colocou na Igreja, em primeiro lugar, apóstolos." Primeiro não significa mais importante do que os outros chamados, mas fundacional: o apóstolo prepara o terreno para que todos os outros ministérios possam se desenvolver.</p>
+
+  <h4 class="dp-h4">Referências-chave</h4>
+  <ul class="dp-list">
+    <li>Efésios 2:20: o fundamento dos apóstolos e profetas</li>
+    <li>1 Coríntios 12:28: Deus colocou na Igreja, em primeiro lugar, apóstolos</li>
+    <li>Romanos 15:20: pregar onde Cristo ainda não era conhecido</li>
+    <li>Atos 13-14: a primeira viagem missionária de Paulo como modelo apostólico</li>
+    <li>Gálatas 1:15-16: chamado antes do nascimento, revelado em seu tempo</li>
+  </ul>
+
+  <h3 class="dp-h3">Referência histórica: Paulo</h3>
+  <p>O maior exemplo apostólico do Novo Testamento é Paulo. Não apenas por ter escrito metade do Novo Testamento ou por ter viajado mais de 20.000 km a pé e de barco, mas pela forma como ele compreendia seu chamado. Paulo não apenas pregava: ele plantava igrejas, formava líderes locais, estabelecia doutrinas, enfrentava oposição com persistência, e em seguida partia para o próximo território. Ele não se apegava ao que havia construído. Em Filipenses 4:11, ele diz que aprendeu a estar contente em todo estado: isso inclui a contente em partir, em deixar para trás, em confiar o que foi plantado a outros e ir mais longe.</p>
+  <p>O que move um apóstolo não é o prazer da construção em si, mas a certeza de que Deus tem um plano maior e que você foi chamado para contribuir com ele de forma estrutural e pioneira.</p>
+
+  <h3 class="dp-h3">O que o apóstolo percebe</h3>
+  <p>Você provavelmente percebe lacunas que outros não veem. Você entra em um ambiente e antes de sentir a atmosfera ou conhecer as pessoas, já está analisando: o que está faltando? O que poderia ser diferente? Onde há potencial inexplorado? Isso pode parecer frio para os outros, mas não é. É o modo como Deus te equipou para cumprir seu chamado: você vê o que ainda não é, mas poderia ser.</p>
+
+  <h3 class="dp-h3">O que o apóstolo entrega</h3>
+  <ul class="dp-list">
+    <li>Visão clara de longo prazo que mobiliza pessoas</li>
+    <li>Estruturas que sustentam o crescimento além de uma única geração</li>
+    <li>Fundamentos que permitem que outros ministérios floresçam</li>
+    <li>Coragem para entrar em territórios desconhecidos ou difíceis</li>
+    <li>Capacidade de identificar e desenvolver outros líderes</li>
+  </ul>
+
+  <h3 class="dp-h3">Áreas de atuação</h3>
+  <ul class="dp-list">
+    <li>Plantação de igrejas e estabelecimento de novos ministérios</li>
+    <li>Liderança estratégica de missões e frentes de expansão</li>
+    <li>Desenvolvimento de líderes e formação de equipes pioneiras</li>
+    <li>Criação de estruturas organizacionais para o crescimento saudável da Igreja</li>
+    <li>Expansão do Evangelho para grupos culturais ou geográficos ainda não alcançados</li>
+  </ul>
+
+  <h3 class="dp-h3">Níveis de maturidade apostólica</h3>
+  <p><strong>Iniciante:</strong> Você tem a visão mas ainda não sabe como estruturá-la. Tende a iniciar muitas coisas e terminar poucas. A inquietação está lá, mas a disciplina estratégica ainda precisa ser desenvolvida.</p>
+  <p><strong>Em desenvolvimento:</strong> Você já aprendeu a completar ciclos, a delegar e a formar outros. Começa a entender que o apostolado não é solitário: é relacional e plural.</p>
+  <p><strong>Maduro:</strong> Você opera com paciência estratégica. Sabe que fundamentos levam tempo. Você não precisa ver o resultado imediato. Você planta convicto de que outros vão colher, e isso não te incomoda.</p>
+
+  <h3 class="dp-h3">Cuidados e tensões</h3>
+  <p>O chamado apostólico carrega tensões reais que precisam ser administradas com maturidade:</p>
+  <ul class="dp-list">
+    <li><strong>Tendência ao controle:</strong> Quem vê a visão com clareza pode ter dificuldade em soltar o leme. Aprenda que delegar não é perder: é multiplicar.</li>
+    <li><strong>Impaciência com o processo:</strong> O pioneiro quer ver resultados rápidos. Mas fundamentos levam tempo. Jesus levou três anos formando doze pessoas antes de mudar o mundo.</li>
+    <li><strong>Dificuldade relacional:</strong> A orientação para visão pode fazer com que pessoas se sintam como meios, não como fins. Cultive intencionalmente o pastoreio dentro do apostolado.</li>
+    <li><strong>Isolamento:</strong> A liderança apostólica pode ser solitária. Busque cobertura espiritual e parceiros que falem verdade sobre você.</li>
+  </ul>
+
+  <h3 class="dp-h3">Uso saudável desse chamado</h3>
+  <p>O apostolado saudável sempre gera comunidade, não apenas estrutura. Paulo nunca plantou uma igreja e foi embora sem se preocupar com ela: ele escrevia cartas, mandava representantes, orava continuamente. A estrutura estava a serviço da comunidade, não o contrário.</p>
+  <p>Use sua visão para servir às pessoas, não para usar as pessoas para servir à visão. Essa distinção é sutil, mas é a diferença entre liderança apostólica saudável e autoritarismo espiritual disfarçado de chamado.</p>
+
+  <h3 class="dp-h3">Como crescer no seu chamado: estudo de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Atos 13-14: observe cada decisão estratégica de Paulo. O que ele priorizou? O que ele delegou?</li>
+    <li><strong>Semana 2:</strong> Efésios 2-4: entenda o papel do apóstolo na construção do Corpo de Cristo.</li>
+    <li><strong>Semana 3:</strong> 1 Coríntios 3:5-15: a diferença entre plantar, regar e edificar.</li>
+    <li><strong>Semana 4:</strong> Neemias 1-6: um modelo de apostolado no Antigo Testamento. Visão, oração, estratégia, oposição e persistência.</li>
+    <li><strong>Semana 5:</strong> Filipenses 4:10-13: o apostolado contente. Como cultivar equanimidade apostólica.</li>
+    <li><strong>Semana 6:</strong> Leia "The Permanent Revolution" de Alan Hirsch e Tim Catchim, ou "Center Church" de Tim Keller. Reflita sobre o que significa apostolado no seu contexto hoje.</li>
+  </ul>
+
+  <h3 class="dp-h3">Ferramenta prática</h3>
+  <p>Escreva um "Mapa de Visão" pessoal: quais são os três territórios (pessoas, lugares, contextos) onde você sente que Deus quer avançar por meio de você nos próximos 3 anos? Para cada um, escreva: o que precisaria ser construído? Quem precisaria ser envolvido? O que eu posso iniciar agora, mesmo que seja pequeno?</p>
+
+  <h3 class="dp-h3">Leitura recomendada</h3>
+  <ul class="dp-list">
+    <li>The Permanent Revolution - Alan Hirsch e Tim Catchim</li>
+    <li>Center Church - Tim Keller</li>
+    <li>The Forgotten Ways - Alan Hirsch</li>
+    <li>Planting Missional Churches - Ed Stetzer</li>
+  </ul>
+
+  <div class="dp-final-phrase">"Deus não te chamou apenas para servir o que já existe. Ele te chamou para construir o que ainda não existe. Vá com coragem, com estrutura, e com o coração voltado para as pessoas, não apenas para a visão."</div>
+</div>`,
+
+B: `<div class="dp-profile">
+  <h2 class="dp-h2">Pastor: O Cuidador e Protetor</h2>
+  <p class="dp-intro">Você tem um chamado pastoral. Isso significa que Deus colocou em você uma capacidade singular de cuidar das pessoas com profundidade, paciência e presença. Pastorear não é um cargo: é uma forma de amar. E você faz isso de forma natural, quase instintiva.</p>
+
+  <h3 class="dp-h3">Como esse chamado se expressa</h3>
+  <p>Quando você entra em um ambiente, você não vê apenas rostos: você percebe estados de alma. Você nota quem está em silêncio quando deveria estar falando, quem sorri mas tem olhos vazios, quem chegou mas parece que está em outro lugar. Essa sensibilidade não é fraqueza: é dom. É o coração pastoral em ação.</p>
+  <p>Você provavelmente tem uma capacidade natural de fazer as pessoas se sentirem ouvidas. Não apenas escutadas, mas realmente compreendidas. As pessoas falam coisas para você que não falam para mais ninguém, não porque você tem as respostas certas, mas porque você cria um espaço seguro onde a verdade pode ser dita sem julgamento.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>Em João 10:11, Jesus se descreve como "o bom pastor", aquele que "dá a sua vida pelas ovelhas." Três coisas marcam o bom pastor: ele conhece as ovelhas pelo nome (v.3), elas ouvem sua voz (v.4), e ele vai buscá-las quando se perdem (v.11-13). O pastoral não é apenas consolar: é conhecer, guiar e proteger.</p>
+  <p>Em Ezequiel 34:4, Deus critica duramente os pastores que não cuidam do rebanho: "não fortalecestes as fracas, não curastes a enferma, não atiastes a ferida, não tornardes a que se havia desviado." O pastoral saudável atua nessas quatro dimensões: fortalecer, curar, restaurar e resgatar.</p>
+
+  <h4 class="dp-h4">Referências-chave</h4>
+  <ul class="dp-list">
+    <li>João 10:1-18: o bom pastor e as ovelhas</li>
+    <li>João 21:15-17: o comissionamento de Pedro</li>
+    <li>1 Pedro 5:1-4: pastoreai o rebanho de Deus</li>
+    <li>Ezequiel 34:1-16: a responsabilidade do pastor</li>
+    <li>Lucas 15:3-7: a parábola da ovelha perdida</li>
+  </ul>
+
+  <h3 class="dp-h3">Referência histórica: Pedro</h3>
+  <p>Pedro é o exemplo pastoral mais poderoso do Novo Testamento. Não pela perfeição, mas pela restauração. Após negar Jesus três vezes, ele é restaurado em João 21 com uma pergunta repetida três vezes: "Simão, filho de Jonas, você me ama?" Cada afirmação de amor é respondida com uma comissão: "apascenta as minhas ovelhas." O pastoreio nasce de um coração restaurado. Quem pastorou outros primeiro foi ele mesmo pastorado por Deus.</p>
+  <p>Pedro depois se tornaria o pastor da primeira comunidade cristã em Jerusalém, presente nas crises, nos milagres, na perseguição e no crescimento. O pastoreio autêntico é marcado pela presença constante, não apenas pela intervenção em momentos especiais.</p>
+
+  <h3 class="dp-h3">O que o pastor percebe</h3>
+  <p>Você percebe quando alguém está se perdendo antes que qualquer crise exploda. Você tem um senso quase intuitivo de quando uma pessoa está em processo de afastamento, não apenas da comunidade, mas de Deus. Esse discernimento relacional é uma das ferramentas mais poderosas do ministério pastoral.</p>
+
+  <h3 class="dp-h3">O que o pastor entrega</h3>
+  <ul class="dp-list">
+    <li>Segurança emocional e espiritual para as pessoas ao seu redor</li>
+    <li>Acompanhamento consistente e fiel, especialmente nos momentos difíceis</li>
+    <li>Cultura de pertencimento e cuidado mútuo na comunidade</li>
+    <li>Capacidade de criar vínculos profundos que sustentam o crescimento espiritual</li>
+    <li>Presença que comunica: "você importa, você é visto, você não está sozinho"</li>
+  </ul>
+
+  <h3 class="dp-h3">Áreas de atuação</h3>
+  <ul class="dp-list">
+    <li>Liderança de grupos de discipulado e células de cuidado mútuo</li>
+    <li>Aconselhamento pastoral e acompanhamento em crises</li>
+    <li>Integração de novos membros na comunidade</li>
+    <li>Criação de redes de cuidado para pessoas em situações vulneráveis</li>
+    <li>Mentoria e acompanhamento individual de longo prazo</li>
+  </ul>
+
+  <h3 class="dp-h3">Níveis de maturidade pastoral</h3>
+  <p><strong>Iniciante:</strong> Você cuida com genuinidade, mas ainda tem dificuldade de estabelecer limites saudáveis. A tendência é absorver o peso dos outros sem saber como depositá-lo em Deus.</p>
+  <p><strong>Em desenvolvimento:</strong> Você aprendeu que cuidar de muitos começa por cuidar de poucos com profundidade. Você desenvolve discipulado intencional, não apenas presença reativa.</p>
+  <p><strong>Maduro:</strong> Você opera com sustentabilidade espiritual. Você sabe que não pode carregar o que pertence a Deus. Você cuida com presença, mas com discernimento sobre o que você pode e o que você não pode fazer pelos outros.</p>
+
+  <h3 class="dp-h3">Cuidados e tensões</h3>
+  <ul class="dp-list">
+    <li><strong>Burnout relacional:</strong> O pastor tende a absorver o sofrimento alheio. Sem uma vida de oração robusta e limites claros, o esgotamento é inevitável.</li>
+    <li><strong>Codependência espiritual:</strong> O cuidado excessivo pode criar dependência em vez de maturidade. O objetivo do pastoral é levar as pessoas a dependerem de Deus, não do pastor.</li>
+    <li><strong>Dificuldade com confronto:</strong> O amor pastoral pode evitar a confrontação necessária. Mas o bom pastor também protege o rebanho de ameaças, inclusive internas.</li>
+    <li><strong>Negligência do cuidado próprio:</strong> Você cuida bem dos outros, mas frequentemente se esquece de receber cuidado. Encontre alguém que pastorei você.</li>
+  </ul>
+
+  <h3 class="dp-h3">Uso saudável desse chamado</h3>
+  <p>O pastoral saudável cria autonomia, não dependência. O objetivo não é que as pessoas precisem sempre de você, mas que, por causa do seu cuidado, elas aprendam a receber o cuidado de Deus de forma direta. Você é um instrumento, não a fonte.</p>
+
+  <h3 class="dp-h3">Como crescer no seu chamado: estudo de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> João 10:1-18 e 21:15-17. Medite no modelo de Jesus como pastor.</li>
+    <li><strong>Semana 2:</strong> Ezequiel 34. O que Deus esperava dos pastores de Israel?</li>
+    <li><strong>Semana 3:</strong> 1 Pedro 5:1-11. Pastoreio como serviço, não como poder.</li>
+    <li><strong>Semana 4:</strong> Lucas 15. As três parábolas da restauração.</li>
+    <li><strong>Semana 5:</strong> Estude aconselhamento bíblico pastoral. Leia "Caring for Souls" de Harold Senkbeil.</li>
+    <li><strong>Semana 6:</strong> Escreva um plano de acompanhamento para três pessoas que Deus colocou no seu coração.</li>
+  </ul>
+
+  <h3 class="dp-h3">Leitura recomendada</h3>
+  <ul class="dp-list">
+    <li>Caring for Souls - Harold Senkbeil</li>
+    <li>Soul Care - Rob Reimer</li>
+    <li>Competent to Counsel - Jay Adams</li>
+    <li>The Wounded Healer - Henri Nouwen</li>
+  </ul>
+
+  <div class="dp-final-phrase">"O mundo tem muitos gestores e poucos pastores. A sua presença no sofrimento alheio não é fraqueza: é o sinal mais claro de que o amor de Cristo habita em você."</div>
+</div>`,
+
+C: `<div class="dp-profile">
+  <h2 class="dp-h2">Mestre: O Educador e Equipador</h2>
+  <p class="dp-intro">Você tem um chamado de ensino. Isso significa que Deus colocou em você a capacidade de tornar a Palavra de Deus acessível, profunda e transformadora para outros. Não é apenas saber muito sobre a Bíblia: é saber fazer outros saberem, de uma forma que a verdade entre pela mente, mude o coração e se manifeste na vida.</p>
+
+  <h3 class="dp-h3">Como esse chamado se expressa</h3>
+  <p>Você provavelmente se incomoda quando a Bíblia é ensinada de forma superficial ou imprecisa. Não por arrogância, mas porque você sente o peso da responsabilidade: a Palavra de Deus merece ser tratada com seriedade. Você naturalmente quer ir mais fundo, perguntar "mas o que isso significa realmente?", e não se satisfaz com respostas genéricas.</p>
+  <p>Ao mesmo tempo, você tem uma habilidade particular de traduzir o complexo em algo que as pessoas conseguem entender e aplicar. Você conecta passagens bíblicas a situações reais da vida. Você pensa em ilustrações. Você se perturba quando a teologia fica na cabeça e não desce para a vida prática.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>Esdras 7:10 é talvez o versículo mais preciso sobre o chamado de Mestre: "Esdras preparou seu coração para investigar a lei do Senhor, cumpri-la e ensiná-la em Israel." Três etapas indissociáveis: investigar, praticar, ensinar. O Mestre que pula a segunda etapa e vai direto do estudo para o ensino sem ter vivido o que ensina é apenas um transmissor de informação, não um formador de discípulos.</p>
+  <p>Paulo instrui Timóteo em 2 Timóteo 2:2: "as coisas que ouviste de mim perante muitas testemunhas, confia-as a homens fiéis, que sejam idôneos para também ensinarem a outros." O ensino no Reino de Deus é multiplicador: não apenas transmitir, mas formar outros que também transmitirão.</p>
+
+  <h4 class="dp-h4">Referências-chave</h4>
+  <ul class="dp-list">
+    <li>Esdras 7:10: investigar, praticar e ensinar</li>
+    <li>2 Timóteo 2:2: ensinar homens fiéis que ensinarão outros</li>
+    <li>2 Timóteo 3:16-17: toda Escritura é inspirada e útil para ensinar</li>
+    <li>Atos 18:24-28: Apolo, poderoso nas Escrituras</li>
+    <li>Tiago 3:1: nem muitos devem ser mestres</li>
+  </ul>
+
+  <h3 class="dp-h3">Referência histórica: Apolo e Esdras</h3>
+  <p>Atos 18:24 apresenta Apolo como "homem eloquente e poderoso nas Escrituras". Ele ensinava com precisão e fervor. Mas havia uma lacuna: ele conhecia "apenas o batismo de João" (v.25). Quando Priscila e Áquila o ouviram, não o criticaram publicamente: "tomaram-no consigo e lhe explicaram mais exatamente o caminho de Deus" (v.26). Apolo foi ensinado, e foi transformado em um dos mais poderosos mestres do mundo antigo.</p>
+  <p>Esdras, séculos antes, representa o modelo mais completo: um escriba que não apenas sabia a lei, mas que a vivia e a ensinava com a autoridade de quem não separa teoria de vida. O Mestre maduro é sempre, antes de tudo, um discípulo.</p>
+
+  <h3 class="dp-h3">O que o Mestre percebe</h3>
+  <p>Você percebe quando as pessoas estão operando com teologia incorreta ou incompleta, e isso te incomoda. Você vê as consequências práticas de crenças erradas na vida das pessoas. Você sente uma urgência de corrigir, não por perfeccionismo, mas porque sabe que a verdade liberta e o erro machuca.</p>
+
+  <h3 class="dp-h3">O que o Mestre entrega</h3>
+  <ul class="dp-list">
+    <li>Clareza bíblica e teológica que fundamenta a fé da comunidade</li>
+    <li>Ferramentas de estudo que capacitam outros a lerem a Bíblia por si mesmos</li>
+    <li>Correção de erros doutrinários com gentileza e precisão</li>
+    <li>Discipulado profundo que forma caráter, não apenas conhecimento</li>
+    <li>Materiais e recursos que multiplicam o ensino além da presença física</li>
+  </ul>
+
+  <h3 class="dp-h3">Áreas de atuação</h3>
+  <ul class="dp-list">
+    <li>Escola bíblica, grupos de estudo e formação de discípulos</li>
+    <li>Pregação e ensino que forma e equipa a Igreja</li>
+    <li>Produção de materiais didáticos e de formação</li>
+    <li>Aconselhamento baseado na Palavra</li>
+    <li>Treinamento de outros mestres e líderes de grupos de estudo</li>
+  </ul>
+
+  <h3 class="dp-h3">Níveis de maturidade no ensino</h3>
+  <p><strong>Iniciante:</strong> Você acumula conhecimento e tem dificuldade em traduzir para a vida prática. O estudo é um fim em si mesmo, não um meio para a transformação.</p>
+  <p><strong>Em desenvolvimento:</strong> Você começa a ensinar e descobre que ensinar clarifica o que você sabe. Você aprende a simplificar sem perder a profundidade.</p>
+  <p><strong>Maduro:</strong> Você ensina com autoridade, porque ensina a partir da vida vivida. Você não apenas transmite informação: você forma pessoas.</p>
+
+  <h3 class="dp-h3">Cuidados e tensões</h3>
+  <ul class="dp-list">
+    <li><strong>Orgulho intelectual:</strong> O conhecimento pode inflar se não for mantido sob a sombra da cruz. Paulo alerta: "o conhecimento ensoberbece, mas o amor edifica" (1 Co 8:1).</li>
+    <li><strong>Ensino sem prática:</strong> O Mestre que ensina o que não vive perde a autoridade espiritual, mesmo que mantenha a precisão técnica.</li>
+    <li><strong>Dificuldade relacional:</strong> A orientação para conteúdo pode criar distância das pessoas. O ensino mais transformador sempre nasce de um relacionamento.</li>
+    <li><strong>Perfeccionismo:</strong> A busca pela precisão pode paralisar. A perfeição é inimiga do progresso no ensino.</li>
+  </ul>
+
+  <h3 class="dp-h3">Como crescer no seu chamado: estudo de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Esdras 7:1-10 e Neemias 8:1-12. O Mestre que estuda, vive e ensina.</li>
+    <li><strong>Semana 2:</strong> 2 Timóteo 2:1-15. O chamado de transmitir o que foi recebido com fidelidade.</li>
+    <li><strong>Semana 3:</strong> Atos 18:24-28. Apolo como modelo de humildade intelectual e abertura ao crescimento.</li>
+    <li><strong>Semana 4:</strong> Tiago 3:1-12. O peso de ser Mestre.</li>
+    <li><strong>Semana 5:</strong> Escolha um livro da Bíblia e prepare uma série de estudos de cinco semanas sobre ele.</li>
+    <li><strong>Semana 6:</strong> Leia "Knowing Scripture" de R.C. Sproul ou "How to Read the Bible for All Its Worth" de Gordon Fee.</li>
+  </ul>
+
+  <h3 class="dp-h3">Leitura recomendada</h3>
+  <ul class="dp-list">
+    <li>Knowing Scripture - R.C. Sproul</li>
+    <li>How to Read the Bible for All Its Worth - Gordon Fee e Douglas Stuart</li>
+    <li>The Hermeneutical Spiral - Grant Osborne</li>
+    <li>The Trellis and the Vine - Colin Marshall e Tony Payne</li>
+  </ul>
+
+  <div class="dp-final-phrase">"Você não foi chamado apenas para saber a Verdade. Foi chamado para transmiti-la de uma forma que mude vidas. Estude com rigor, viva com integridade, e ensine com amor."</div>
+</div>`,
+
+D: `<div class="dp-profile">
+  <h2 class="dp-h2">Evangelista: O Comunicador e Conector</h2>
+  <p class="dp-intro">Você tem um chamado evangelístico. Isso significa que Deus colocou em você uma capacidade singular de construir pontes entre pessoas e o Evangelho de Jesus Cristo. Não apenas compartilhar informação sobre Jesus: criar conexões reais que levam pessoas à fé.</p>
+
+  <h3 class="dp-h3">Como esse chamado se expressa</h3>
+  <p>Você provavelmente pensa em pessoas específicas que ainda não conhecem Cristo. Não de forma abstrata, mas pelo nome, pelo rosto, pela história. Você se lembra de conversas que teve, de perguntas que pessoas fizeram, de momentos em que a porta estava aberta mas você não sabia o que dizer, ou que disse algo e não sabe se teve impacto.</p>
+  <p>Você tem uma facilidade natural de se conectar com pessoas de origens diferentes. Você não precisar de um contexto "cristão" para falar sobre Jesus. Você consegue traduzir o Evangelho para linguagens que pessoas de fora conseguem entender sem se sentir estranhas. Essa capacidade de ponte cultural é uma das marcas mais fortes do evangelista.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>Em Romanos 10:14-15, Paulo faz uma cadeia de perguntas retóricas: "Como, pois, invocarão aquele em quem não creram? E como crerão naquele de quem não ouviram? E como ouvirão sem haver quem pregue? E como pregarão, se não forem enviados?" O evangelista é o elo essencial nessa cadeia: ele é quem vai até onde as pessoas estão e leva o Evangelho.</p>
+  <p>Em Atos 8:26-40, o Espírito enviou Filipe para o deserto, um lugar improvável, para alcançar um único homem. A disposição do evangelista não é proporcional ao tamanho da audiência. Ela é proporcional à convicção de que cada pessoa importa.</p>
+
+  <h4 class="dp-h4">Referências-chave</h4>
+  <ul class="dp-list">
+    <li>Atos 8:26-40: Filipe e o etíope</li>
+    <li>Romanos 10:14-15: a cadeia da missão</li>
+    <li>2 Timóteo 4:5: faça o trabalho de evangelista</li>
+    <li>João 4:1-42: Jesus e a samaritana como modelo de evangelismo contextualizado</li>
+    <li>1 Coríntios 9:19-23: Paulo: tornar-me tudo para todos</li>
+  </ul>
+
+  <h3 class="dp-h3">Referência histórica: Filipe</h3>
+  <p>Filipe é o único personagem do Novo Testamento explicitamente chamado de "evangelista" (At 21:8). Em Atos 8, vemos duas histórias sobre ele que revelam os dois lados do evangelismo: primeiro, ele prega para multidões em Samaria com sinais e milagres. Depois, o mesmo Espírito que o enviou para a multidão o envia para o deserto, para uma conversa particular com um único homem, o etíope.</p>
+  <p>O evangelista não escolhe o contexto. Ele é enviado. E em qualquer contexto, ele encontra a mesma abertura: a Palavra de Deus, que está viva e pronta para falar.</p>
+
+  <h3 class="dp-h3">O que o Evangelista percebe</h3>
+  <p>Você percebe oportunidades de conversa espiritual onde outros não veem. Você nota quando alguém está buscando, quando uma pergunta tem mais profundidade do que parece, quando um momento de dor ou transição pode se tornar um encontro com Deus. Você não precisa forçar o Evangelho: você aprende a reconhecer os momentos em que a porta já está aberta.</p>
+
+  <h3 class="dp-h3">O que o Evangelista entrega</h3>
+  <ul class="dp-list">
+    <li>Pontes relacionais entre a Igreja e pessoas de fora</li>
+    <li>Cultura de alcance dentro da comunidade cristã</li>
+    <li>Capacidade de tornar o Evangelho atraente sem diluí-lo</li>
+    <li>Mobilização de outros crentes para o evangelismo natural</li>
+    <li>Conexão entre visitantes e a vida da comunidade</li>
+  </ul>
+
+  <h3 class="dp-h3">Áreas de atuação</h3>
+  <ul class="dp-list">
+    <li>Evangelismo pessoal e relacional no cotidiano</li>
+    <li>Liderança de ações evangelísticas e eventos de alcance</li>
+    <li>Integração de novos convertidos na comunidade</li>
+    <li>Treinamento de outros para compartilhar a fé naturalmente</li>
+    <li>Presença em contextos seculares como embaixadores do Evangelho</li>
+  </ul>
+
+  <h3 class="dp-h3">Níveis de maturidade evangelística</h3>
+  <p><strong>Iniciante:</strong> Você tem o coração certo, mas ainda tem receio da rejeição. O evangelismo acontece em contextos seguros, com pessoas já próximas.</p>
+  <p><strong>Em desenvolvimento:</strong> Você aprendeu que o evangelismo não é uma técnica, mas um estilo de vida. Você cria pontes relacionais intencionalmente.</p>
+  <p><strong>Maduro:</strong> Você opera com naturalidade em qualquer contexto. Você treina outros. Você pensa estrategicamente em como alcançar grupos específicos que a sua comunidade ainda não está alcançando.</p>
+
+  <h3 class="dp-h3">Cuidados e tensões</h3>
+  <ul class="dp-list">
+    <li><strong>Superficialidade relacional:</strong> O evangelista pode desenvolver muitos contatos sem nenhum relacionamento profundo. Cultive amizades de longo prazo, não apenas conexões de alcance.</li>
+    <li><strong>Diluição da mensagem:</strong> A busca por relevância pode levar a um Evangelho sem cruz. A mensagem precisa ser fiel, não apenas atraente.</li>
+    <li><strong>Falta de discipulado:</strong> O evangelista tende a plantar sem regar. Conecte-se com quem tem chamado pastoral para garantir que os novos convertidos sejam cuidados.</li>
+    <li><strong>Negligência da comunidade interna:</strong> O foco em quem está fora pode criar descuido com quem está dentro.</li>
+  </ul>
+
+  <h3 class="dp-h3">Como crescer no seu chamado: estudo de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Atos 8:1-40. Filipe: da multidão ao indivíduo.</li>
+    <li><strong>Semana 2:</strong> João 4:1-42. Jesus como modelo de evangelismo contextualizado.</li>
+    <li><strong>Semana 3:</strong> 1 Coríntios 9:19-23. "Tornei-me tudo para todos."</li>
+    <li><strong>Semana 4:</strong> Romanos 10:14-15. A urgência da missão.</li>
+    <li><strong>Semana 5:</strong> Escreva sua história de fé em 2-3 minutos. Pratique com alguém de confiança.</li>
+    <li><strong>Semana 6:</strong> Leia "Evangelism and the Sovereignty of God" de J.I. Packer.</li>
+  </ul>
+
+  <h3 class="dp-h3">Leitura recomendada</h3>
+  <ul class="dp-list">
+    <li>Evangelism and the Sovereignty of God - J.I. Packer</li>
+    <li>The Art of Personal Evangelism - Will McRaney</li>
+    <li>Questioning Evangelism - Randy Newman</li>
+    <li>Contagious Faith - Mark Mittelberg</li>
+  </ul>
+
+  <div class="dp-final-phrase">"Você não precisa ter todas as respostas para ser uma ponte. Você precisa ter Jesus e a disposição de encontrar as pessoas onde elas estão."</div>
+</div>`,
+
+E: `<div class="dp-profile">
+  <h2 class="dp-h2">Profeta: O Sensível e Inspirador</h2>
+  <p class="dp-intro">Você tem um chamado profético. Isso significa que Deus colocou em você uma sensibilidade espiritual aguçada para perceber o que Ele está dizendo ao Seu povo, identificar o que está fora do alinhamento com os propósitos de Deus, e trazer direção, exortação e consolo com autoridade e compaixão.</p>
+
+  <h3 class="dp-h3">Como esse chamado se expressa</h3>
+  <p>Você provavelmente percebe coisas que outros não percebem. Você entra em um ambiente e sente antes de ver: há algo errado aqui, há uma tensão não resolvida, há uma abertura espiritual, há algo que Deus quer dizer para esse grupo. Essa sensibilidade não é nervosismo ou hipervigilância: é um senso espiritual treinado pela intimidade com Deus.</p>
+  <p>Você provavelmente se incomoda com hipocrisia, com a distância entre o que a comunidade diz que é e o que ela realmente pratica. Não por julgamento, mas porque você sente o quanto isso dói no coração de Deus. Você carrega um peso pela integridade do povo de Deus que vai além do interesse pessoal.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>Em 1 Coríntios 14:3, Paulo define o fruto da profecia com precisão: "o que profetiza fala aos homens: edificação, exortação e consolação." Três dimensões: fortalecer o que está fraco, corrigir o que está errado com amor, e confortar o que está sofrendo. O chamado profético não é apenas sobre revelação: é sobre comunicação transformadora a serviço do povo de Deus.</p>
+  <p>Em Amós 3:7, o texto revela que "o Senhor Deus não fará coisa alguma sem revelar o seu segredo aos seus servos os profetas." Há pessoas que Deus equipa com uma capacidade peculiar de perceber o que Ele está fazendo antes que outros reconheçam. Essa é uma responsabilidade, não um privilégio.</p>
+
+  <h4 class="dp-h4">Referências-chave</h4>
+  <ul class="dp-list">
+    <li>1 Coríntios 14:3: edificação, exortação e consolação</li>
+    <li>Amós 3:7: Deus revela seus segredos aos profetas</li>
+    <li>Lucas 2:36-38: Ana, a profetisa</li>
+    <li>Jeremias 1:4-10: o chamado profético como chamado antes do nascimento</li>
+    <li>1 Reis 18:1-19:18: Elias, a crise e a restauração</li>
+  </ul>
+
+  <h3 class="dp-h3">Referência histórica: Ana e Agabo</h3>
+  <p>Ana, a profetisa de Lucas 2, tinha 84 anos e passava dia e noite no templo com jejuns e orações (v.37). Não por obrigação religiosa, mas porque ela havia aprendido que a percepção do que Deus está fazendo nasce da intimidade sustentada com Ele. Quando o menino Jesus foi apresentado no templo, ela o reconheceu imediatamente como o Messias, mesmo quando a maioria não o reconheceu. O profeta percebe antes: não porque é mais inteligente, mas porque está mais próximo.</p>
+  <p>Agabo, em Atos 11:28 e 21:10-11, aparece com precisão específica: ele identifica o que está por vir. O profeta não apenas sente: ele nomeia. E ao nomear, permite que a comunidade se prepare, ore e responda com fé.</p>
+
+  <h3 class="dp-h3">O que o Profeta percebe</h3>
+  <p>Você percebe o estado espiritual real de uma comunidade, não apenas o aparente. Você sente quando há orgulho coletivo mascarado de unidade, quando há medo coletivo mascarado de paz, quando há desvio doutrinário mascarado de graça. Isso não é paranoia: é discernimento. E quando exercido com humildade e submissão, é um dos dons mais necessários no corpo de Cristo.</p>
+
+  <h3 class="dp-h3">O que o Profeta entrega</h3>
+  <ul class="dp-list">
+    <li>Discernimento espiritual que protege a comunidade de desvios</li>
+    <li>Exortação que convoca o povo de Deus de volta ao seu propósito</li>
+    <li>Consolo e esperança em momentos de crise coletiva</li>
+    <li>Intercessão profunda e informada pelo que Deus está fazendo</li>
+    <li>Liderança em momentos de busca espiritual e oração corporativa</li>
+  </ul>
+
+  <h3 class="dp-h3">Áreas de atuação</h3>
+  <ul class="dp-list">
+    <li>Liderança de oração, intercessão e momentos de busca espiritual</li>
+    <li>Aconselhamento profético e discernimento espiritual individual</li>
+    <li>Pregação e ensino com ênfase em arrependimento, restauração e propósito</li>
+    <li>Mentoria de líderes em discernimento espiritual</li>
+    <li>Identificação de desvios espirituais e culturais dentro da comunidade</li>
+  </ul>
+
+  <h3 class="dp-h3">Níveis de maturidade profética</h3>
+  <p><strong>Iniciante:</strong> Você percebe coisas com intensidade, mas ainda não sabe como comunicá-las de forma construtiva. Tende a falar tudo o que percebe, sem testar.</p>
+  <p><strong>Em desenvolvimento:</strong> Você aprende a testar o que percebe pela Palavra, pelo conselho de líderes maduros e pelo fruto. Você desenvolve a habilidade de falar a verdade com compaixão.</p>
+  <p><strong>Maduro:</strong> Você opera com autoridade e humildade ao mesmo tempo. Você sabe que a voz mais confiável é sempre a Escritura, e que sua percepção está sempre sujeita a ela.</p>
+
+  <h3 class="dp-h3">Cuidados e tensões</h3>
+  <ul class="dp-list">
+    <li><strong>Isolamento:</strong> O profeta tende a se sentir incompreendido. Busque comunidade com outros líderes maduros que possam cobri-lo espiritualmente.</li>
+    <li><strong>Julgamento sem compaixão:</strong> A sensibilidade para o que está errado pode gerar crítica constante sem a contraparte do amor. A profecia que não tem misericórdia não tem a voz de Deus.</li>
+    <li><strong>Não testar as percepções:</strong> Nem tudo o que você percebe vem do Espírito Santo. 1 João 4:1 exorta: "provai os espíritos, se são de Deus."</li>
+    <li><strong>Orgulho espiritual:</strong> A percepção peculiar pode gerar a sensação de superioridade espiritual. Isso é uma armadilha séria para o chamado profético.</li>
+  </ul>
+
+  <h3 class="dp-h3">Como crescer no seu chamado: estudo de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> 1 Coríntios 14:1-5 e 29-33. O uso ordenado e edificante do chamado profético.</li>
+    <li><strong>Semana 2:</strong> Jeremias 1:4-19. O chamado antes do nascimento e a resistência inicial.</li>
+    <li><strong>Semana 3:</strong> 1 Reis 18-19. A crise do profeta. O que acontece quando a voz profética enfrenta oposição?</li>
+    <li><strong>Semana 4:</strong> Lucas 2:36-38. Ana como modelo de vida profética sustentada por oração e jejum.</li>
+    <li><strong>Semana 5:</strong> Leia Isaías 1-6 meditando: o que Deus viu no Seu povo e como Ele comunicou?</li>
+    <li><strong>Semana 6:</strong> Leia "The Prophet" de Abraham Joshua Heschel, ou "Prophetic Ministry" de Graham Cooke.</li>
+  </ul>
+
+  <h3 class="dp-h3">Leitura recomendada</h3>
+  <ul class="dp-list">
+    <li>The Prophets - Abraham Joshua Heschel</li>
+    <li>Prophetic Ministry - Graham Cooke</li>
+    <li>Surprised by the Voice of God - Jack Deere</li>
+    <li>The Gift of Prophecy - Wayne Grudem</li>
+  </ul>
+
+  <div class="dp-final-phrase">"O profeta não foi chamado para ser popular. Foi chamado para ser fiel. E a fidelidade ao coração de Deus sempre produz, a seu tempo, transformação real."</div>
+</div>`
+},
+
+'pt-PT': null,
+
+'en': {
+A: `<div class="dp-profile">
+  <h2 class="dp-h2">Apostle: The Visionary and Strategist</h2>
+  <p class="dp-intro">You have an apostolic calling. God has placed in you the capacity to see what does not yet exist and the courage to build it. This is not merely leadership: it is a particular way of seeing the world, marked by long-term vision, healthy restlessness before what has not yet been done, and a drive to establish solid foundations where God's Kingdom has not yet fully arrived.</p>
+
+  <h3 class="dp-h3">How this calling expresses itself</h3>
+  <p>You are not satisfied with what has already been built. Something in you naturally asks: why are we doing it this way? Is there a better approach? Is there a place where this does not yet exist and we need to take it there? You think about systems, structures, and strategies before thinking about routines. You do not merely participate in a ministry: you want to understand how it works, what is missing, and how it could grow.</p>
+  <p>This impulse is not carnal ambition. It is apostolic DNA in action. Paul describes his own calling in Romans 15:20: "It has always been my ambition to preach the gospel where Christ was not known." That is the mark of the apostle: the desire to go beyond the familiar, beyond what is already established.</p>
+
+  <h3 class="dp-h3">Biblical foundation</h3>
+  <p>In Ephesians 2:20, Paul says the Church is "built on the foundation of the apostles and prophets, with Christ Jesus himself as the chief cornerstone." In 1 Corinthians 12:28, he affirms that "God has placed in the church first of all apostles." First does not mean more important than others, but foundational: the apostle prepares the ground so that all other ministries can develop.</p>
+
+  <h4 class="dp-h4">Key references</h4>
+  <ul class="dp-list">
+    <li>Ephesians 2:20: the foundation of the apostles and prophets</li>
+    <li>1 Corinthians 12:28: God placed in the church first of all apostles</li>
+    <li>Romans 15:20: preaching where Christ was not known</li>
+    <li>Acts 13-14: Paul's first missionary journey as apostolic model</li>
+    <li>Galatians 1:15-16: called before birth, revealed in due time</li>
+  </ul>
+
+  <h3 class="dp-h3">Historical reference: Paul</h3>
+  <p>The greatest apostolic example in the New Testament is Paul. Not just because he wrote half the New Testament or traveled more than 12,000 miles, but because of how he understood his calling. Paul did not merely preach: he planted churches, formed local leaders, established doctrines, faced opposition with persistence, and then departed for the next territory. He did not cling to what he had built.</p>
+
+  <h3 class="dp-h3">What the Apostle delivers</h3>
+  <ul class="dp-list">
+    <li>Clear long-term vision that mobilizes people</li>
+    <li>Structures that sustain growth beyond a single generation</li>
+    <li>Foundations that allow other ministries to flourish</li>
+    <li>Courage to enter unknown or difficult territories</li>
+    <li>Ability to identify and develop other leaders</li>
+  </ul>
+
+  <h3 class="dp-h3">Cautions and tensions</h3>
+  <ul class="dp-list">
+    <li><strong>Tendency to control:</strong> Whoever sees the vision clearly may struggle to release the helm. Learn that delegating is not losing: it is multiplying.</li>
+    <li><strong>Impatience with process:</strong> The pioneer wants quick results. But foundations take time. Jesus spent three years forming twelve people before changing the world.</li>
+    <li><strong>Relational difficulty:</strong> Vision-orientation can make people feel like means rather than ends. Intentionally cultivate pastoral care within the apostolate.</li>
+    <li><strong>Isolation:</strong> Apostolic leadership can be lonely. Seek spiritual covering and partners who will speak truth to you.</li>
+  </ul>
+
+  <h3 class="dp-h3">How to grow in your calling: 6-week study</h3>
+  <ul class="dp-list">
+    <li><strong>Week 1:</strong> Acts 13-14: observe every strategic decision Paul made.</li>
+    <li><strong>Week 2:</strong> Ephesians 2-4: the apostle's role in building the Body of Christ.</li>
+    <li><strong>Week 3:</strong> 1 Corinthians 3:5-15: the difference between planting, watering, and building.</li>
+    <li><strong>Week 4:</strong> Nehemiah 1-6: an Old Testament model of apostolate.</li>
+    <li><strong>Week 5:</strong> Philippians 4:10-13: the contented apostle.</li>
+    <li><strong>Week 6:</strong> Read "The Permanent Revolution" by Alan Hirsch and Tim Catchim.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"God has not called you only to serve what already exists. He has called you to build what does not yet exist. Go with courage, with structure, and with your heart turned toward people, not just toward the vision."</div>
+</div>`,
+
+B: `<div class="dp-profile">
+  <h2 class="dp-h2">Shepherd: The Caregiver and Protector</h2>
+  <p class="dp-intro">You have a pastoral calling. God has placed in you a singular capacity to care for people with depth, patience, and presence. Shepherding is not a position: it is a way of loving. And you do it naturally, almost instinctively.</p>
+
+  <h3 class="dp-h3">How this calling expresses itself</h3>
+  <p>When you enter a room, you do not just see faces: you perceive states of soul. You notice who is silent when they should be speaking, who smiles but has empty eyes, who arrived but seems to be somewhere else. This sensitivity is not weakness: it is a gift. It is the pastoral heart in action.</p>
+  <p>You probably have a natural ability to make people feel heard. Not merely listened to, but truly understood. People tell you things they tell no one else, not because you have all the right answers, but because you create a safe space where truth can be spoken without judgment.</p>
+
+  <h3 class="dp-h3">Biblical foundation</h3>
+  <p>In John 10:11, Jesus describes himself as "the good shepherd" who "lays down his life for the sheep." Three things mark the good shepherd: he knows the sheep by name (v.3), they hear his voice (v.4), and he goes after them when they are lost (v.11-13). Pastoral ministry is not only comforting: it is knowing, guiding, and protecting.</p>
+  <p>In Ezekiel 34:4, God sharply rebukes shepherds who do not care for the flock: "You have not strengthened the weak or healed the sick or bound up the injured or brought back the strays." Healthy pastoral ministry operates in all four dimensions: strengthen, heal, restore, and rescue.</p>
+
+  <h3 class="dp-h3">Key references</h3>
+  <ul class="dp-list">
+    <li>John 10:1-18: the good shepherd and the sheep</li>
+    <li>John 21:15-17: the commissioning of Peter</li>
+    <li>1 Peter 5:1-4: be shepherds of God's flock</li>
+    <li>Ezekiel 34:1-16: the shepherd's responsibility</li>
+    <li>Luke 15:3-7: the parable of the lost sheep</li>
+  </ul>
+
+  <h3 class="dp-h3">What the Shepherd delivers</h3>
+  <ul class="dp-list">
+    <li>Emotional and spiritual safety for those around you</li>
+    <li>Consistent, faithful accompaniment especially in difficult moments</li>
+    <li>Culture of belonging and mutual care in community</li>
+    <li>Deep bonds that sustain spiritual growth</li>
+    <li>Presence that communicates: you matter, you are seen, you are not alone</li>
+  </ul>
+
+  <h3 class="dp-h3">Cautions and tensions</h3>
+  <ul class="dp-list">
+    <li><strong>Relational burnout:</strong> The shepherd tends to absorb others' suffering. Without a robust prayer life and clear boundaries, exhaustion is inevitable.</li>
+    <li><strong>Spiritual codependence:</strong> Excessive care can create dependency rather than maturity. The goal of pastoral ministry is to lead people to depend on God, not on the shepherd.</li>
+    <li><strong>Difficulty with confrontation:</strong> Pastoral love can avoid necessary confrontation. But the good shepherd also protects the flock from threats, including internal ones.</li>
+    <li><strong>Neglecting self-care:</strong> You care well for others but often forget to receive care yourself. Find someone to shepherd you.</li>
+  </ul>
+
+  <h3 class="dp-h3">How to grow in your calling: 6-week study</h3>
+  <ul class="dp-list">
+    <li><strong>Week 1:</strong> John 10:1-18 and 21:15-17. Meditate on Jesus' model as shepherd.</li>
+    <li><strong>Week 2:</strong> Ezekiel 34. What did God expect of Israel's shepherds?</li>
+    <li><strong>Week 3:</strong> 1 Peter 5:1-11. Shepherding as service, not power.</li>
+    <li><strong>Week 4:</strong> Luke 15. The three parables of restoration.</li>
+    <li><strong>Week 5:</strong> Study biblical pastoral counseling. Read "Caring for Souls" by Harold Senkbeil.</li>
+    <li><strong>Week 6:</strong> Write an accompaniment plan for three people God has placed on your heart.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"The world has many managers and few shepherds. Your presence in the suffering of others is not weakness: it is the clearest sign that the love of Christ dwells in you."</div>
+</div>`,
+
+C: `<div class="dp-profile">
+  <h2 class="dp-h2">Teacher: The Educator and Equipper</h2>
+  <p class="dp-intro">You have a teaching calling. God has placed in you the capacity to make the Word of God accessible, deep, and transformative for others. It is not merely knowing much about the Bible: it is knowing how to help others know, in a way that truth enters the mind, changes the heart, and manifests in life.</p>
+
+  <h3 class="dp-h3">How this calling expresses itself</h3>
+  <p>You are probably bothered when the Bible is taught superficially or inaccurately. Not out of arrogance, but because you feel the weight of responsibility: the Word of God deserves to be handled with seriousness. You naturally want to go deeper, to ask "but what does this really mean?", and you are not satisfied with generic answers.</p>
+  <p>At the same time, you have a particular ability to translate the complex into something people can understand and apply. You connect biblical passages to real life situations. You think in illustrations. You are troubled when theology stays in the head and does not come down into practical life.</p>
+
+  <h3 class="dp-h3">Biblical foundation</h3>
+  <p>Ezra 7:10 is perhaps the most precise verse about the Teacher's calling: "For Ezra had devoted himself to the study and observance of the Law of the Lord, and to teaching its decrees and laws in Israel." Three inseparable stages: study, practice, teach. The Teacher who skips the second stage and goes directly from study to teaching without having lived what they teach is merely an information transmitter, not a disciple-former.</p>
+  <p>Paul instructs Timothy in 2 Timothy 2:2: "entrust to reliable people who will also be qualified to teach others." Teaching in God's Kingdom is multiplicative: not merely transmitting, but forming others who will also transmit.</p>
+
+  <h3 class="dp-h3">Key references</h3>
+  <ul class="dp-list">
+    <li>Ezra 7:10: study, practice, and teach</li>
+    <li>2 Timothy 2:2: teach faithful men who will teach others</li>
+    <li>2 Timothy 3:16-17: all Scripture is God-breathed and useful for teaching</li>
+    <li>Acts 18:24-28: Apollos, mighty in the Scriptures</li>
+    <li>James 3:1: not many should become teachers</li>
+  </ul>
+
+  <h3 class="dp-h3">What the Teacher delivers</h3>
+  <ul class="dp-list">
+    <li>Biblical and theological clarity that grounds the community's faith</li>
+    <li>Study tools that equip others to read the Bible for themselves</li>
+    <li>Correction of doctrinal errors with gentleness and accuracy</li>
+    <li>Deep discipleship that forms character, not just knowledge</li>
+    <li>Materials and resources that multiply teaching beyond physical presence</li>
+  </ul>
+
+  <h3 class="dp-h3">Cautions and tensions</h3>
+  <ul class="dp-list">
+    <li><strong>Intellectual pride:</strong> Knowledge can puff up if not kept under the shadow of the cross. Paul warns: "knowledge puffs up while love builds up" (1 Cor 8:1).</li>
+    <li><strong>Teaching without practice:</strong> The Teacher who teaches what they do not live loses spiritual authority, even if they maintain technical accuracy.</li>
+    <li><strong>Relational distance:</strong> Content-orientation can create distance from people. The most transformative teaching always comes from relationship.</li>
+    <li><strong>Perfectionism:</strong> The pursuit of precision can paralyze. Perfection is the enemy of progress in teaching.</li>
+  </ul>
+
+  <h3 class="dp-h3">How to grow in your calling: 6-week study</h3>
+  <ul class="dp-list">
+    <li><strong>Week 1:</strong> Ezra 7:1-10 and Nehemiah 8:1-12. The Teacher who studies, lives, and teaches.</li>
+    <li><strong>Week 2:</strong> 2 Timothy 2:1-15. The calling to transmit what was received with faithfulness.</li>
+    <li><strong>Week 3:</strong> Acts 18:24-28. Apollos as model of intellectual humility and openness to growth.</li>
+    <li><strong>Week 4:</strong> James 3:1-12. The weight of being a Teacher.</li>
+    <li><strong>Week 5:</strong> Choose a book of the Bible and prepare a five-session study on it.</li>
+    <li><strong>Week 6:</strong> Read "Knowing Scripture" by R.C. Sproul.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"You were not called only to know the Truth. You were called to transmit it in a way that changes lives. Study with rigor, live with integrity, and teach with love."</div>
+</div>`,
+
+D: `<div class="dp-profile">
+  <h2 class="dp-h2">Evangelist: The Communicator and Connector</h2>
+  <p class="dp-intro">You have an evangelistic calling. God has placed in you a singular capacity to build bridges between people and the Gospel of Jesus Christ. Not merely sharing information about Jesus: creating real connections that lead people to faith.</p>
+
+  <h3 class="dp-h3">How this calling expresses itself</h3>
+  <p>You probably think about specific people who do not yet know Christ. Not in an abstract way, but by name, by face, by story. You remember conversations you have had, questions people asked, moments when the door was open. You have a natural ease connecting with people from different backgrounds. You do not need a "Christian" context to talk about Jesus. You can translate the Gospel into languages outsiders understand without feeling strange.</p>
+
+  <h3 class="dp-h3">Biblical foundation</h3>
+  <p>In Romans 10:14-15, Paul makes a chain of rhetorical questions: "How can they believe in the one of whom they have not heard? And how can they hear without someone preaching to them? And how can anyone preach unless they are sent?" The evangelist is the essential link in this chain: they go to where people are and bring the Gospel.</p>
+  <p>In Acts 8:26-40, the Spirit sent Philip to the desert, an unlikely place, to reach a single man. The evangelist's readiness is not proportional to the size of the audience. It is proportional to the conviction that every person matters.</p>
+
+  <h3 class="dp-h3">Key references</h3>
+  <ul class="dp-list">
+    <li>Acts 8:26-40: Philip and the Ethiopian eunuch</li>
+    <li>Romans 10:14-15: the chain of mission</li>
+    <li>2 Timothy 4:5: do the work of an evangelist</li>
+    <li>John 4:1-42: Jesus and the Samaritan woman</li>
+    <li>1 Corinthians 9:19-23: becoming all things to all people</li>
+  </ul>
+
+  <h3 class="dp-h3">What the Evangelist delivers</h3>
+  <ul class="dp-list">
+    <li>Relational bridges between the Church and those outside</li>
+    <li>Culture of outreach within the Christian community</li>
+    <li>Ability to make the Gospel attractive without diluting it</li>
+    <li>Mobilizing other believers for natural evangelism</li>
+    <li>Connection between visitors and community life</li>
+  </ul>
+
+  <h3 class="dp-h3">Cautions and tensions</h3>
+  <ul class="dp-list">
+    <li><strong>Relational superficiality:</strong> The evangelist may develop many contacts without deep relationships. Cultivate long-term friendships, not just outreach connections.</li>
+    <li><strong>Diluting the message:</strong> The pursuit of relevance can lead to a Gospel without the cross. The message must be faithful, not just attractive.</li>
+    <li><strong>Lack of discipleship:</strong> The evangelist tends to plant without watering. Connect with those with pastoral callings to ensure new believers are cared for.</li>
+    <li><strong>Neglecting the internal community:</strong> Focus on those outside can create neglect of those inside.</li>
+  </ul>
+
+  <h3 class="dp-h3">How to grow in your calling: 6-week study</h3>
+  <ul class="dp-list">
+    <li><strong>Week 1:</strong> Acts 8:1-40. Philip: from the multitude to the individual.</li>
+    <li><strong>Week 2:</strong> John 4:1-42. Jesus as model of contextualized evangelism.</li>
+    <li><strong>Week 3:</strong> 1 Corinthians 9:19-23. "I have become all things to all people."</li>
+    <li><strong>Week 4:</strong> Romans 10:14-15. The urgency of mission.</li>
+    <li><strong>Week 5:</strong> Write your faith story in 2-3 minutes. Practice with someone you trust.</li>
+    <li><strong>Week 6:</strong> Read "Evangelism and the Sovereignty of God" by J.I. Packer.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"You do not need to have all the answers to be a bridge. You need to have Jesus and the willingness to meet people where they are."</div>
+</div>`,
+
+E: `<div class="dp-profile">
+  <h2 class="dp-h2">Prophet: The Sensitive and Inspiring</h2>
+  <p class="dp-intro">You have a prophetic calling. God has placed in you a sharpened spiritual sensitivity to perceive what He is saying to His people, identify what is out of alignment with God's purposes, and bring direction, exhortation, and comfort with authority and compassion.</p>
+
+  <h3 class="dp-h3">How this calling expresses itself</h3>
+  <p>You probably perceive things others do not. You enter a room and feel before you see: something is wrong here, there is unresolved tension, there is spiritual openness, there is something God wants to say to this group. This sensitivity is not anxiety or hypervigilance: it is a spiritual sense trained by intimacy with God.</p>
+  <p>You are probably bothered by hypocrisy, by the gap between what a community says it is and what it actually practices. Not out of judgment, but because you feel how much this grieves God's heart. You carry a weight for the integrity of God's people that goes beyond personal interest.</p>
+
+  <h3 class="dp-h3">Biblical foundation</h3>
+  <p>In 1 Corinthians 14:3, Paul defines the fruit of prophecy precisely: "the one who prophesies speaks to people for their strengthening, encouraging and comfort." Three dimensions: strengthen what is weak, correct what is wrong with love, and comfort what is suffering. The prophetic calling is not only about revelation: it is about transformative communication in service of God's people.</p>
+  <p>In Amos 3:7, the text reveals that "Surely the Sovereign Lord does nothing without revealing his plan to his servants the prophets." There are people God equips with a peculiar capacity to perceive what He is doing before others recognize it. This is a responsibility, not a privilege.</p>
+
+  <h3 class="dp-h3">Key references</h3>
+  <ul class="dp-list">
+    <li>1 Corinthians 14:3: strengthening, encouraging, and comfort</li>
+    <li>Amos 3:7: God reveals his secrets to the prophets</li>
+    <li>Luke 2:36-38: Anna the prophetess</li>
+    <li>Jeremiah 1:4-10: the prophetic calling before birth</li>
+    <li>1 Kings 18-19: Elijah, the crisis, and restoration</li>
+  </ul>
+
+  <h3 class="dp-h3">What the Prophet delivers</h3>
+  <ul class="dp-list">
+    <li>Spiritual discernment that protects the community from deviations</li>
+    <li>Exhortation that calls God's people back to their purpose</li>
+    <li>Comfort and hope in moments of collective crisis</li>
+    <li>Deep and Spirit-informed intercession</li>
+    <li>Leadership in moments of spiritual seeking and corporate prayer</li>
+  </ul>
+
+  <h3 class="dp-h3">Cautions and tensions</h3>
+  <ul class="dp-list">
+    <li><strong>Isolation:</strong> The prophet tends to feel misunderstood. Seek community with other mature leaders who can provide spiritual covering.</li>
+    <li><strong>Judgment without compassion:</strong> Sensitivity to what is wrong can generate constant criticism without the counterpart of love. Prophecy without mercy does not carry God's voice.</li>
+    <li><strong>Failing to test perceptions:</strong> Not everything you perceive comes from the Holy Spirit. 1 John 4:1 exhorts: "test the spirits to see whether they are from God."</li>
+    <li><strong>Spiritual pride:</strong> Peculiar perception can generate a sense of spiritual superiority. This is a serious trap for the prophetic calling.</li>
+  </ul>
+
+  <h3 class="dp-h3">How to grow in your calling: 6-week study</h3>
+  <ul class="dp-list">
+    <li><strong>Week 1:</strong> 1 Corinthians 14:1-5 and 29-33. Ordered and edifying use of the prophetic calling.</li>
+    <li><strong>Week 2:</strong> Jeremiah 1:4-19. The calling before birth and the initial resistance.</li>
+    <li><strong>Week 3:</strong> 1 Kings 18-19. The prophet's crisis. What happens when the prophetic voice faces opposition?</li>
+    <li><strong>Week 4:</strong> Luke 2:36-38. Anna as model of prophetic life sustained by prayer and fasting.</li>
+    <li><strong>Week 5:</strong> Read Isaiah 1-6 meditating: what did God see in His people and how did He communicate it?</li>
+    <li><strong>Week 6:</strong> Read "The Prophets" by Abraham Joshua Heschel.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"The prophet was not called to be popular. They were called to be faithful. And faithfulness to the heart of God always produces, in its time, real transformation."</div>
+</div>`
+},
+
+'es': {
+A: `<div class="dp-profile">
+  <h2 class="dp-h2">Apóstol: El Visionario y Estratega</h2>
+  <p class="dp-intro">Tienes un llamado apostólico. Dios ha puesto en ti la capacidad de ver lo que todavía no existe y el valor para construirlo. No es simplemente liderazgo: es una forma particular de ver el mundo, marcada por visión a largo plazo, inquietud saludable ante lo que todavía no se ha hecho, y una compulsión por establecer fundamentos sólidos donde el Reino de Dios aún no ha llegado plenamente.</p>
+
+  <h3 class="dp-h3">Cómo se expresa este llamado</h3>
+  <p>No te conformas con lo que ya fue construido. Algo en ti naturalmente pregunta: ¿por qué estamos haciendo esto de esta manera? ¿Existe un mejor enfoque? ¿Hay algún lugar donde esto aún no existe y necesitamos llevarlo? Piensas en sistemas, estructuras y estrategias antes que en rutinas. No solo participas en un ministerio: quieres entender cómo funciona, qué falta y cómo podría crecer.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>En Efesios 2:20, Pablo dice que la Iglesia está "edificada sobre el fundamento de los apóstoles y profetas, siendo Cristo Jesús mismo la piedra angular." En 1 Corintios 12:28 afirma que "Dios ha puesto en la iglesia, en primer lugar, apóstoles." Primero no significa más importante que los otros, sino fundacional: el apóstol prepara el terreno para que todos los demás ministerios puedan desarrollarse.</p>
+
+  <h4 class="dp-h4">Referencias clave</h4>
+  <ul class="dp-list">
+    <li>Efesios 2:20: el fundamento de los apóstoles y profetas</li>
+    <li>1 Corintios 12:28: Dios puso en la iglesia, en primer lugar, apóstoles</li>
+    <li>Romanos 15:20: predicar donde Cristo no era conocido</li>
+    <li>Hechos 13-14: el primer viaje misionero de Pablo</li>
+    <li>Gálatas 1:15-16: llamado antes del nacimiento</li>
+  </ul>
+
+  <h3 class="dp-h3">Lo que el Apóstol entrega</h3>
+  <ul class="dp-list">
+    <li>Visión clara a largo plazo que moviliza personas</li>
+    <li>Estructuras que sostienen el crecimiento más allá de una sola generación</li>
+    <li>Fundamentos que permiten que otros ministerios florezcan</li>
+    <li>Valor para entrar en territorios desconocidos o difíciles</li>
+    <li>Capacidad de identificar y desarrollar otros líderes</li>
+  </ul>
+
+  <h3 class="dp-h3">Cuidados y tensiones</h3>
+  <ul class="dp-list">
+    <li><strong>Tendencia al control:</strong> Quien ve la visión con claridad puede tener dificultad para soltar el timón. Aprende que delegar no es perder: es multiplicar.</li>
+    <li><strong>Impaciencia con el proceso:</strong> El pionero quiere resultados rápidos. Pero los fundamentos llevan tiempo.</li>
+    <li><strong>Dificultad relacional:</strong> La orientación hacia la visión puede hacer que las personas se sientan como medios y no como fines.</li>
+    <li><strong>Aislamiento:</strong> El liderazgo apostólico puede ser solitario. Busca cobertura espiritual y compañeros que hablen verdad sobre ti.</li>
+  </ul>
+
+  <h3 class="dp-h3">Cómo crecer en tu llamado: estudio de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Hechos 13-14: observa cada decisión estratégica de Pablo.</li>
+    <li><strong>Semana 2:</strong> Efesios 2-4: el papel del apóstol en la edificación del Cuerpo.</li>
+    <li><strong>Semana 3:</strong> 1 Corintios 3:5-15: la diferencia entre plantar, regar y edificar.</li>
+    <li><strong>Semana 4:</strong> Nehemías 1-6: un modelo de apostolado en el Antiguo Testamento.</li>
+    <li><strong>Semana 5:</strong> Filipenses 4:10-13: el apostolado contento.</li>
+    <li><strong>Semana 6:</strong> Lee "The Permanent Revolution" de Alan Hirsch y Tim Catchim.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"Dios no te llamó solo a servir lo que ya existe. Te llamó a construir lo que todavía no existe. Ve con valor, con estructura, y con el corazón vuelto hacia las personas, no solo hacia la visión."</div>
+</div>`,
+
+B: `<div class="dp-profile">
+  <h2 class="dp-h2">Pastor: El Cuidador y Protector</h2>
+  <p class="dp-intro">Tienes un llamado pastoral. Dios ha puesto en ti una capacidad singular de cuidar a las personas con profundidad, paciencia y presencia. Pastorear no es un cargo: es una manera de amar. Y lo haces de forma natural, casi instintiva.</p>
+
+  <h3 class="dp-h3">Cómo se expresa este llamado</h3>
+  <p>Cuando entras en un ambiente, no solo ves rostros: percibes estados de alma. Notas quién está en silencio cuando debería estar hablando, quién sonríe pero tiene los ojos vacíos, quién llegó pero parece que está en otro lugar. Esta sensibilidad no es debilidad: es un don. Es el corazón pastoral en acción.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>En Juan 10:11, Jesús se describe como "el buen pastor" que "da su vida por las ovejas." En Ezequiel 34:4, Dios reprende duramente a los pastores que no cuidan el rebaño: "No fortalecisteis las débiles, ni curasteis a la enferma." El pastoreo saludable actúa en cuatro dimensiones: fortalecer, curar, restaurar y rescatar.</p>
+
+  <h4 class="dp-h4">Referencias clave</h4>
+  <ul class="dp-list">
+    <li>Juan 10:1-18: el buen pastor y las ovejas</li>
+    <li>Juan 21:15-17: el encargo de Pedro</li>
+    <li>1 Pedro 5:1-4: sed pastores del rebaño de Dios</li>
+    <li>Ezequiel 34:1-16: la responsabilidad del pastor</li>
+    <li>Lucas 15:3-7: la parábola de la oveja perdida</li>
+  </ul>
+
+  <h3 class="dp-h3">Lo que el Pastor entrega</h3>
+  <ul class="dp-list">
+    <li>Seguridad emocional y espiritual para quienes lo rodean</li>
+    <li>Acompañamiento consistente y fiel, especialmente en los momentos difíciles</li>
+    <li>Cultura de pertenencia y cuidado mutuo en la comunidad</li>
+    <li>Vínculos profundos que sostienen el crecimiento espiritual</li>
+    <li>Presencia que comunica: importas, eres visto, no estás solo</li>
+  </ul>
+
+  <h3 class="dp-h3">Cuidados y tensiones</h3>
+  <ul class="dp-list">
+    <li><strong>Agotamiento relacional:</strong> El pastor tiende a absorber el sufrimiento ajeno. Sin una vida de oración robusta y límites claros, el agotamiento es inevitable.</li>
+    <li><strong>Codependencia espiritual:</strong> El cuidado excesivo puede crear dependencia en lugar de madurez.</li>
+    <li><strong>Dificultad con la confrontación:</strong> El amor pastoral puede evitar la confrontación necesaria.</li>
+    <li><strong>Descuido del cuidado propio:</strong> Cuidas bien a los demás pero frecuentemente olvidas recibir cuidado tú mismo.</li>
+  </ul>
+
+  <h3 class="dp-h3">Cómo crecer en tu llamado: estudio de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Juan 10:1-18 y 21:15-17. Medita en el modelo de Jesús como pastor.</li>
+    <li><strong>Semana 2:</strong> Ezequiel 34. ¿Qué esperaba Dios de los pastores de Israel?</li>
+    <li><strong>Semana 3:</strong> 1 Pedro 5:1-11. Pastoreo como servicio, no como poder.</li>
+    <li><strong>Semana 4:</strong> Lucas 15. Las tres parábolas de la restauración.</li>
+    <li><strong>Semana 5:</strong> Estudia consejería bíblica pastoral. Lee "Caring for Souls" de Harold Senkbeil.</li>
+    <li><strong>Semana 6:</strong> Escribe un plan de acompañamiento para tres personas que Dios ha puesto en tu corazón.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"El mundo tiene muchos gestores y pocos pastores. Tu presencia en el sufrimiento ajeno no es debilidad: es la señal más clara de que el amor de Cristo habita en ti."</div>
+</div>`,
+
+C: `<div class="dp-profile">
+  <h2 class="dp-h2">Maestro: El Educador y Equipador</h2>
+  <p class="dp-intro">Tienes un llamado de enseñanza. Dios ha puesto en ti la capacidad de hacer la Palabra de Dios accesible, profunda y transformadora para otros. No se trata solo de saber mucho sobre la Biblia: es saber hacer que otros sepan, de una forma que la verdad entre por la mente, cambie el corazón y se manifieste en la vida.</p>
+
+  <h3 class="dp-h3">Cómo se expresa este llamado</h3>
+  <p>Probablemente te molesta cuando la Biblia se enseña de forma superficial o imprecisa. No por arrogancia, sino porque sientes el peso de la responsabilidad: la Palabra de Dios merece ser tratada con seriedad. Naturalmente quieres ir más profundo, preguntar "¿pero qué significa esto realmente?", y no te satisfacen las respuestas genéricas.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>Esdras 7:10 es quizás el versículo más preciso sobre el llamado del Maestro: "Esdras había preparado su corazón para estudiar la ley del Señor, ponerla en práctica y enseñar en Israel sus estatutos y decretos." Tres etapas inseparables: estudiar, practicar, enseñar. Pablo instruye a Timoteo en 2 Timoteo 2:2: "encomiéndalo a personas fieles que sean capaces de enseñar a otros."</p>
+
+  <h4 class="dp-h4">Referencias clave</h4>
+  <ul class="dp-list">
+    <li>Esdras 7:10: estudiar, practicar y enseñar</li>
+    <li>2 Timoteo 2:2: enseñar a hombres fieles que enseñen a otros</li>
+    <li>2 Timoteo 3:16-17: toda la Escritura es inspirada</li>
+    <li>Hechos 18:24-28: Apolos, poderoso en las Escrituras</li>
+    <li>Santiago 3:1: no seáis muchos maestros</li>
+  </ul>
+
+  <h3 class="dp-h3">Lo que el Maestro entrega</h3>
+  <ul class="dp-list">
+    <li>Claridad bíblica y teológica que fundamenta la fe de la comunidad</li>
+    <li>Herramientas de estudio que capacitan a otros para leer la Biblia por sí mismos</li>
+    <li>Corrección de errores doctrinales con gentileza y precisión</li>
+    <li>Discipulado profundo que forma carácter, no solo conocimiento</li>
+    <li>Materiales y recursos que multiplican la enseñanza</li>
+  </ul>
+
+  <h3 class="dp-h3">Cuidados y tensiones</h3>
+  <ul class="dp-list">
+    <li><strong>Orgullo intelectual:</strong> El conocimiento puede inflar si no se mantiene bajo la sombra de la cruz.</li>
+    <li><strong>Enseñanza sin práctica:</strong> El Maestro que enseña lo que no vive pierde la autoridad espiritual.</li>
+    <li><strong>Distancia relacional:</strong> La orientación hacia el contenido puede crear distancia de las personas.</li>
+    <li><strong>Perfeccionismo:</strong> La búsqueda de la precisión puede paralizar.</li>
+  </ul>
+
+  <h3 class="dp-h3">Cómo crecer en tu llamado: estudio de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Esdras 7:1-10 y Nehemías 8:1-12. El Maestro que estudia, vive y enseña.</li>
+    <li><strong>Semana 2:</strong> 2 Timoteo 2:1-15. El llamado a transmitir con fidelidad.</li>
+    <li><strong>Semana 3:</strong> Hechos 18:24-28. Apolos como modelo de humildad intelectual.</li>
+    <li><strong>Semana 4:</strong> Santiago 3:1-12. El peso de ser Maestro.</li>
+    <li><strong>Semana 5:</strong> Elige un libro de la Biblia y prepara una serie de cinco estudios.</li>
+    <li><strong>Semana 6:</strong> Lee "Knowing Scripture" de R.C. Sproul.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"No fuiste llamado solo a conocer la Verdad. Fuiste llamado a transmitirla de una manera que cambie vidas. Estudia con rigor, vive con integridad y enseña con amor."</div>
+</div>`,
+
+D: `<div class="dp-profile">
+  <h2 class="dp-h2">Evangelista: El Comunicador y Conector</h2>
+  <p class="dp-intro">Tienes un llamado evangelístico. Dios ha puesto en ti una capacidad singular de construir puentes entre las personas y el Evangelio de Jesucristo. No solo compartir información sobre Jesús: crear conexiones reales que llevan personas a la fe.</p>
+
+  <h3 class="dp-h3">Cómo se expresa este llamado</h3>
+  <p>Probablemente piensas en personas específicas que todavía no conocen a Cristo. No de forma abstracta, sino por nombre, por rostro, por historia. Tienes facilidad natural para conectar con personas de distintos orígenes. Puedes traducir el Evangelio a lenguajes que las personas de fuera pueden entender sin sentirse extrañas.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>En Romanos 10:14-15, Pablo hace una cadena de preguntas retóricas: "¿Cómo creerán en aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique?" El evangelista es el eslabón esencial en esta cadena. En Hechos 8:26-40, el Espíritu envió a Felipe al desierto para alcanzar a un solo hombre. La disposición del evangelista no es proporcional al tamaño de la audiencia: es proporcional a la convicción de que cada persona importa.</p>
+
+  <h4 class="dp-h4">Referencias clave</h4>
+  <ul class="dp-list">
+    <li>Hechos 8:26-40: Felipe y el eunuco etíope</li>
+    <li>Romanos 10:14-15: la cadena de la misión</li>
+    <li>2 Timoteo 4:5: haz el trabajo de evangelista</li>
+    <li>Juan 4:1-42: Jesús y la samaritana</li>
+    <li>1 Corintios 9:19-23: hacerse todo para todos</li>
+  </ul>
+
+  <h3 class="dp-h3">Lo que el Evangelista entrega</h3>
+  <ul class="dp-list">
+    <li>Puentes relacionales entre la Iglesia y quienes están fuera</li>
+    <li>Cultura de alcance dentro de la comunidad cristiana</li>
+    <li>Capacidad de hacer el Evangelio atractivo sin diluirlo</li>
+    <li>Movilización de otros creyentes para el evangelismo natural</li>
+    <li>Conexión entre visitantes y la vida comunitaria</li>
+  </ul>
+
+  <h3 class="dp-h3">Cuidados y tensiones</h3>
+  <ul class="dp-list">
+    <li><strong>Superficialidad relacional:</strong> El evangelista puede desarrollar muchos contactos sin relaciones profundas.</li>
+    <li><strong>Diluir el mensaje:</strong> La búsqueda de relevancia puede llevar a un Evangelio sin la cruz.</li>
+    <li><strong>Falta de discipulado:</strong> El evangelista tiende a plantar sin regar.</li>
+    <li><strong>Descuido de la comunidad interna:</strong> El enfoque en quién está fuera puede crear descuido de quién está dentro.</li>
+  </ul>
+
+  <h3 class="dp-h3">Cómo crecer en tu llamado: estudio de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> Hechos 8:1-40. Felipe: de la multitud al individuo.</li>
+    <li><strong>Semana 2:</strong> Juan 4:1-42. Jesús como modelo de evangelismo contextualizado.</li>
+    <li><strong>Semana 3:</strong> 1 Corintios 9:19-23. "Me he hecho todo a todos."</li>
+    <li><strong>Semana 4:</strong> Romanos 10:14-15. La urgencia de la misión.</li>
+    <li><strong>Semana 5:</strong> Escribe tu historia de fe en 2-3 minutos. Practica con alguien de confianza.</li>
+    <li><strong>Semana 6:</strong> Lee "Evangelism and the Sovereignty of God" de J.I. Packer.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"No necesitas tener todas las respuestas para ser un puente. Necesitas tener a Jesús y la disposición de encontrar a las personas donde están."</div>
+</div>`,
+
+E: `<div class="dp-profile">
+  <h2 class="dp-h2">Profeta: El Sensible e Inspirador</h2>
+  <p class="dp-intro">Tienes un llamado profético. Dios ha puesto en ti una sensibilidad espiritual agudizada para percibir lo que Él está diciendo a Su pueblo, identificar lo que está fuera del alineamiento con los propósitos de Dios, y traer dirección, exhortación y consolación con autoridad y compasión.</p>
+
+  <h3 class="dp-h3">Cómo se expresa este llamado</h3>
+  <p>Probablemente percibes cosas que otros no perciben. Entras en un ambiente y sientes antes de ver: algo está mal aquí, hay una tensión no resuelta, hay una apertura espiritual. Esta sensibilidad no es ansiedad: es un sentido espiritual entrenado por la intimidad con Dios.</p>
+
+  <h3 class="dp-h3">Fundamento bíblico</h3>
+  <p>En 1 Corintios 14:3, Pablo define el fruto de la profecía con precisión: "el que profetiza habla a los hombres: edificación, exhortación y consolación." En Amós 3:7: "no hace el Señor Dios nada sin que revele su secreto a sus siervos los profetas." Hay personas que Dios equipa con una capacidad peculiar de percibir lo que Él está haciendo antes de que otros lo reconozcan.</p>
+
+  <h4 class="dp-h4">Referencias clave</h4>
+  <ul class="dp-list">
+    <li>1 Corintios 14:3: edificación, exhortación y consolación</li>
+    <li>Amós 3:7: Dios revela sus secretos a los profetas</li>
+    <li>Lucas 2:36-38: Ana, la profetisa</li>
+    <li>Jeremías 1:4-10: el llamado profético antes del nacimiento</li>
+    <li>1 Reyes 18-19: Elías, la crisis y la restauración</li>
+  </ul>
+
+  <h3 class="dp-h3">Lo que el Profeta entrega</h3>
+  <ul class="dp-list">
+    <li>Discernimiento espiritual que protege a la comunidad de desvíos</li>
+    <li>Exhortación que convoca al pueblo de Dios de vuelta a su propósito</li>
+    <li>Consolación y esperanza en momentos de crisis colectiva</li>
+    <li>Intercesión profunda e informada por lo que Dios está haciendo</li>
+    <li>Liderazgo en momentos de búsqueda espiritual y oración corporativa</li>
+  </ul>
+
+  <h3 class="dp-h3">Cuidados y tensiones</h3>
+  <ul class="dp-list">
+    <li><strong>Aislamiento:</strong> El profeta tiende a sentirse incomprendido. Busca comunidad con otros líderes maduros.</li>
+    <li><strong>Juicio sin compasión:</strong> La sensibilidad para lo que está mal puede generar crítica constante sin el contrapeso del amor.</li>
+    <li><strong>No probar las percepciones:</strong> No todo lo que percibes viene del Espíritu Santo. 1 Juan 4:1 exhorta: "probad los espíritus."</li>
+    <li><strong>Orgullo espiritual:</strong> La percepción peculiar puede generar una sensación de superioridad espiritual.</li>
+  </ul>
+
+  <h3 class="dp-h3">Cómo crecer en tu llamado: estudio de 6 semanas</h3>
+  <ul class="dp-list">
+    <li><strong>Semana 1:</strong> 1 Corintios 14:1-5 y 29-33. Uso ordenado y edificante del llamado profético.</li>
+    <li><strong>Semana 2:</strong> Jeremías 1:4-19. El llamado antes del nacimiento y la resistencia inicial.</li>
+    <li><strong>Semana 3:</strong> 1 Reyes 18-19. La crisis del profeta frente a la oposición.</li>
+    <li><strong>Semana 4:</strong> Lucas 2:36-38. Ana como modelo de vida profética sostenida por oración y ayuno.</li>
+    <li><strong>Semana 5:</strong> Lee Isaías 1-6 meditando: ¿qué vio Dios en su pueblo y cómo lo comunicó?</li>
+    <li><strong>Semana 6:</strong> Lee "Los Profetas" de Abraham Joshua Heschel.</li>
+  </ul>
+
+  <div class="dp-final-phrase">"El profeta no fue llamado a ser popular. Fue llamado a ser fiel. Y la fidelidad al corazón de Dios siempre produce, a su tiempo, transformación real."</div>
+</div>`
+}
+};
+
+// pt-PT uses same as pt-BR
+DEEP_PROFILES['pt-PT'] = DEEP_PROFILES['pt-BR'];
 
 // ── STATE ──────────────────────────────────────────────────────────────
 
@@ -1124,9 +2883,9 @@ function renderQ() {
   const n     = currentQ + 1;
   const total = questions.length;
 
-  document.getElementById('q-num').textContent      = `Pergunta ${n}`;
+  document.getElementById('q-num').textContent      = (currentLang === 'pt-BR' || currentLang === 'pt-PT') ? `Pergunta ${n}` : (currentLang === 'en' ? `Question ${n}` : `Pregunta ${n}`);
   document.getElementById('q-text').textContent     = q.text;
-  document.getElementById('q-counter').textContent  = `Pergunta ${n} de ${total}`;
+  document.getElementById('q-counter').textContent  = (currentLang === 'pt-BR' || currentLang === 'pt-PT') ? `Pergunta ${n} de ${total}` : (currentLang === 'en' ? `Question ${n} of ${total}` : `Pregunta ${n} de ${total}`);
   document.getElementById('q-progress').style.width = `${(n / total) * 100}%`;
 
   const container = document.getElementById('q-options');
@@ -1144,7 +2903,7 @@ function renderQ() {
   const isLast  = currentQ === total - 1;
   document.getElementById('btn-prev').disabled    = isFirst;
   document.getElementById('btn-next').disabled    = answers[currentQ].length === 0;
-  document.getElementById('btn-next').textContent = isLast ? 'Ver resultado →' : 'Próxima →';
+  document.getElementById('btn-next').textContent = isLast ? t('qFinish') : t('qNext');
 }
 
 function selectOpt(key) {
@@ -1537,7 +3296,7 @@ function drawRadar(ctx, scores, cx, cy, radius, fontStack) {
     ctx.stroke();
   }
 
-  // Relative percentages — largest-remainder so they sum to exactly 100
+  // Relative percentages : largest-remainder so they sum to exactly 100
   const _tot = vals.reduce((s, v) => s + v, 0) || 1;
   const _fl  = vals.map(v => Math.floor(v / _tot * 100));
   let   _rem = 100 - _fl.reduce((a, b) => a + b, 0);
@@ -1595,6 +3354,22 @@ function preloadCardFonts() {
 
 // ── MINISTRY REPORT HTML ──────────────────────────────────────────────
 
+// Deep-profile CSS
+const DEEP_CSS = `
+.dp-profile{margin:0 0 32px}
+.dp-h2{font-size:22px;font-weight:700;color:#0E110D;margin:0 0 0;padding:18px 28px;background:#7A9E3F;border-radius:8px 8px 0 0;line-height:1.3}
+.dp-h3{font-size:14px;font-weight:700;color:#7A9E3F;text-transform:uppercase;letter-spacing:.08em;margin:24px 0 8px;padding-bottom:6px;border-bottom:1px solid #e0e0d8}
+.dp-h4{font-size:13px;font-weight:700;color:#2a3d15;margin:16px 0 6px}
+.dp-intro{font-size:14px;color:#1a1c18;line-height:1.8;margin:16px 0 12px}
+.dp-list{list-style:none;margin:8px 0 0;padding:0}
+.dp-list li{font-size:13px;color:#3a3b35;padding:6px 0 6px 18px;position:relative;border-bottom:1px solid #f0f0ea}
+.dp-list li:last-child{border-bottom:none}
+.dp-list li::before{content:".";position:absolute;left:0;color:#7A9E3F;font-weight:900;font-size:18px;line-height:1.2}
+.dp-final-phrase{background:#f2f8ec;border-radius:8px;padding:16px 20px;margin:24px 0 0;font-size:13px;color:#2a3d15;font-style:italic;border-left:3px solid #7A9E3F}
+.radar-img{display:block;max-width:360px;margin:20px auto}
+p{margin:0 0 10px}
+`;
+
 function generateMinistryReport() {
   if (!lastPriKey || !lastSecKey || !lastScores) return '';
   const pri    = ministries[lastPriKey];
@@ -1602,10 +3377,79 @@ function generateMinistryReport() {
   const scores = lastScores;
   const total  = Object.values(scores).reduce((s, v) => s + v, 0) || 1;
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const date   = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const lang   = currentLang || 'pt-BR';
+  const date   = new Date().toLocaleDateString(lang === 'en' ? 'en-US' : lang === 'es' ? 'es-ES' : 'pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  // Render radar to PNG for embedding
+  let radarDataUrl = '';
+  try {
+    const rc = document.createElement('canvas');
+    rc.width = 720; rc.height = 720;
+    const rctx = rc.getContext('2d');
+    rctx.fillStyle = '#ffffff';
+    rctx.fillRect(0, 0, 720, 720);
+    // draw radar on white background
+    const F2 = 'Inter, Arial, sans-serif';
+    // adapt colors for white bg
+    const oldGridColor = 'rgba(255,255,255,0.07)';
+    // draw simple radar manually
+    const vals2 = [scores.A, scores.E, scores.D, scores.B, scores.C];
+    const labels2 = lang === 'en'
+      ? ['Apostle','Prophet','Evangelist','Shepherd','Teacher']
+      : lang === 'es'
+      ? ['Apóstol','Profeta','Evangelista','Pastor','Maestro']
+      : ['Apóstolo','Profeta','Evangelista','Pastor','Mestre'];
+    const n2 = 5; const max2 = 18; const cx2 = 360; const cy2 = 360; const r2 = 240;
+    for (let lv = 1; lv <= 3; lv++) {
+      const lr = r2 * (lv/3);
+      rctx.beginPath();
+      for (let i = 0; i < n2; i++) {
+        const a = (Math.PI*2*i/n2) - Math.PI/2;
+        const px = cx2 + lr*Math.cos(a); const py = cy2 + lr*Math.sin(a);
+        i===0 ? rctx.moveTo(px,py) : rctx.lineTo(px,py);
+      }
+      rctx.closePath();
+      rctx.strokeStyle = 'rgba(0,0,0,0.1)'; rctx.lineWidth = 1; rctx.stroke();
+    }
+    for (let i=0;i<n2;i++){
+      const a=(Math.PI*2*i/n2)-Math.PI/2;
+      rctx.beginPath(); rctx.moveTo(cx2,cy2);
+      rctx.lineTo(cx2+r2*Math.cos(a), cy2+r2*Math.sin(a));
+      rctx.strokeStyle='rgba(0,0,0,0.1)'; rctx.lineWidth=1; rctx.stroke();
+    }
+    rctx.beginPath();
+    for (let i=0;i<n2;i++){
+      const a=(Math.PI*2*i/n2)-Math.PI/2;
+      const rv=r2*(vals2[i]/max2);
+      const px=cx2+rv*Math.cos(a); const py=cy2+rv*Math.sin(a);
+      i===0?rctx.moveTo(px,py):rctx.lineTo(px,py);
+    }
+    rctx.closePath();
+    rctx.fillStyle='rgba(122,158,63,0.2)'; rctx.fill();
+    rctx.strokeStyle='#7A9E3F'; rctx.lineWidth=2.5; rctx.stroke();
+    for (let i=0;i<n2;i++){
+      const a=(Math.PI*2*i/n2)-Math.PI/2;
+      const rv=r2*(vals2[i]/max2);
+      const px=cx2+rv*Math.cos(a); const py=cy2+rv*Math.sin(a);
+      rctx.beginPath(); rctx.arc(px,py,6,0,Math.PI*2);
+      rctx.fillStyle='#7A9E3F'; rctx.fill();
+      rctx.strokeStyle='#ffffff'; rctx.lineWidth=2; rctx.stroke();
+    }
+    rctx.textAlign='center';
+    for (let i=0;i<n2;i++){
+      const a=(Math.PI*2*i/n2)-Math.PI/2;
+      const labelR=r2+46;
+      const px=cx2+labelR*Math.cos(a); const py=cy2+labelR*Math.sin(a);
+      rctx.font=`600 22px ${F2}`; rctx.fillStyle='#555650';
+      rctx.fillText(labels2[i],px,py+6);
+      rctx.font=`700 18px ${F2}`; rctx.fillStyle='#7A9E3F';
+      rctx.fillText(`${vals2[i]}`,px,py+30);
+    }
+    radarDataUrl = rc.toDataURL('image/png');
+  } catch(e) { radarDataUrl = ''; }
 
   const distBars = sorted.map(([key, val]) => {
-    const m   = ministries[key];
+    const m = ministries[key];
     const pct = Math.round(val / total * 100);
     return `<div class="d-row">
       <div class="d-name">${m.name}</div>
@@ -1614,38 +3458,38 @@ function generateMinistryReport() {
     </div>`;
   }).join('');
 
-  const miniCard = (m, key, badge) => {
-    const pct   = Math.round(scores[key] / total * 100);
-    const refs  = m.bibleRefs.map(r => `<li>${r}</li>`).join('');
-    const chars = m.characteristics.map(c => `<li>${c}</li>`).join('');
-    const exs   = m.examples.map(e => `<li>${e}</li>`).join('');
-    const cls   = badge === 'Dominante' ? 'primary' : 'secondary';
-    return `<div class="m-card ${cls}">
-  <span class="m-badge">${badge}</span>
-  <h2>${m.name}</h2>
-  <p class="m-sub">${m.subtitle}</p>
-  <p class="m-pct">${scores[key]} resposta${scores[key] !== 1 ? 's' : ''} &middot; ${pct}% do total</p>
-  <blockquote>${m.verse}</blockquote>
-  <div class="s-label">Seu Chamado</div>
-  <p class="m-body">${m.main}</p>
-  <div class="s-label">Referência Bíblica &mdash; ${m.figure.name}</div>
-  <p class="m-fig">${m.figure.text}</p>
-  <div class="s-label">Versículos Relacionados</div>
-  <ul class="refs">${refs}</ul>
-  <div class="s-label">Características</div>
-  <ul>${chars}</ul>
-  <div class="s-label">Exemplos de Atuação</div>
-  <ul>${exs}</ul>
-  <div class="calling">${m.calling}</div>
+  const deepPri = (DEEP_PROFILES[lang] || DEEP_PROFILES['pt-BR'])[lastPriKey] || '';
+  const deepSec = (DEEP_PROFILES[lang] || DEEP_PROFILES['pt-BR'])[lastSecKey] || '';
+
+  const secLabel = lang === 'en' ? 'Secondary Ministry' : lang === 'es' ? 'Ministerio Secundario' : 'Ministério Secundário';
+  const secPctStr = `${scores[lastSecKey]} ${lang === 'en' ? 'answer' : lang === 'es' ? 'respuesta' : 'resposta'}${scores[lastSecKey] !== 1 ? 's' : ''} · ${Math.round(scores[lastSecKey]/total*100)}%`;
+  const disclText = lang === 'en'
+    ? '<strong>Note:</strong> This quiz is a Scripture-based self-knowledge tool. Results are not definitive and do not replace spiritual discernment, pastoral counseling, or confirmation from your leadership. Use this as a starting point for reflection, conversation, and prayer.'
+    : lang === 'es'
+    ? '<strong>Nota:</strong> Este cuestionario es una herramienta de autoconocimiento basada en las Escrituras. Los resultados no son definitivos y no reemplazan el discernimiento espiritual, la consejería pastoral ni la confirmación de tu liderazgo. Úsalo como punto de partida para la reflexión, la conversación y la oración.'
+    : '<strong>Lembrete:</strong> Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados não são definitivos e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança. Use este resultado como ponto de partida para reflexão, conversa e oração.';
+
+  const reportTitle = t('reportSubtitle');
+  const miniSecCard = `<div class="m-sec-card">
+  <div class="m-sec-top">
+    <div>
+      <div class="m-sec-lbl">${secLabel}</div>
+      <h3 class="m-sec-name">${sec.name}</h3>
+      <p class="m-sec-sub">${sec.subtitle}</p>
+      <p class="m-sec-pct">${secPctStr}</p>
+    </div>
+  </div>
+  <blockquote>${sec.verse}</blockquote>
+  <p class="m-body">${sec.main}</p>
+  <div class="calling">${sec.calling}</div>
 </div>`;
-  };
 
   return `<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="${lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${userName} &mdash; Meu Ministério &middot; CE.X</title>
+<title>${userName} · ${t('pageTitle')}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
@@ -1666,26 +3510,24 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f7f7f4;color:#1a1c18;l
 .d-wrap{flex:1;height:6px;background:#eeede6;border-radius:4px;overflow:hidden}
 .d-bar{height:100%;background:#7A9E3F;border-radius:4px}
 .d-val{font-size:12px;color:#8B8C82;width:72px;text-align:right;flex-shrink:0}
-.m-card{background:#fff;border-radius:12px;padding:40px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.m-card{background:#fff;border-radius:12px;overflow:hidden;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .m-card.primary{border-top:3px solid #7A9E3F}
-.m-card.secondary{border-top:3px solid #4F6B26}
-.m-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:#7A9E3F;padding:3px 10px;border-radius:4px;margin-bottom:12px}
-.m-card.secondary .m-badge{background:#4F6B26}
-h2{font-size:30px;font-weight:700;margin-bottom:4px}
-.m-sub{font-size:15px;color:#4F6B26;font-style:italic;margin-bottom:6px}
-.m-pct{font-size:12px;color:#8B8C82;margin-bottom:20px}
-blockquote{border-left:3px solid #7A9E3F;padding:10px 18px;background:#f4f4ef;border-radius:0 8px 8px 0;font-style:italic;font-size:14px;color:#3a3b35;margin-bottom:20px}
+.m-sec-card{background:#fff;border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.07);border-top:3px solid #4F6B26}
+.m-sec-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#4F6B26;margin-bottom:4px}
+.m-sec-name{font-size:22px;font-weight:700;margin-bottom:2px}
+.m-sec-sub{font-size:13px;color:#4F6B26;font-style:italic;margin-bottom:4px}
+.m-sec-pct{font-size:11px;color:#8B8C82;margin-bottom:16px}
+blockquote{border-left:3px solid #7A9E3F;padding:10px 18px;background:#f4f4ef;border-radius:0 8px 8px 0;font-style:italic;font-size:14px;color:#3a3b35;margin-bottom:16px}
 .s-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7A9E3F;margin:20px 0 8px}
-.m-body{font-size:14px;color:#3a3b35;line-height:1.8}
-.m-fig{font-size:13px;color:#555650;font-style:italic;line-height:1.8}
+.m-body{font-size:14px;color:#3a3b35;line-height:1.8;margin-bottom:12px}
+.calling{background:#f2f8ec;border-radius:8px;padding:16px 20px;font-size:13px;color:#2a3d15;font-style:italic;border-left:3px solid #7A9E3F}
 ul{list-style:none}
 ul li{font-size:13px;color:#3a3b35;padding:6px 0 6px 18px;position:relative;border-bottom:1px solid #f0f0ea}
 ul li:last-child{border-bottom:none}
-ul li::before{content:'—';position:absolute;left:0;color:#7A9E3F}
-ul.refs li{font-size:12px;color:#555650}
-.calling{background:#f2f8ec;border-radius:8px;padding:18px 22px;margin-top:20px;font-size:13px;color:#2a3d15;font-style:italic;border-left:3px solid #7A9E3F}
+ul li::before{content:"·";position:absolute;left:0;color:#7A9E3F;font-weight:900}
 .disc{font-size:12px;color:#8B8C82;line-height:1.8}
 .footer{text-align:center;padding:32px 0 0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#aaa}
+${DEEP_CSS}
 </style>
 </head>
 <body>
@@ -1693,26 +3535,32 @@ ul.refs li{font-size:12px;color:#555650}
   <div class="c-logo">CE<em>.X</em></div>
   <p class="c-eyebrow">Campus Expansão</p>
   <p class="c-name">${userName}</p>
-  <p class="c-sub">Resultado do Questionário dos Cinco Ministérios</p>
-  <p class="c-date">Gerado em ${date}</p>
+  <p class="c-sub">${reportTitle}</p>
+  <p class="c-date">${date}</p>
 </div>
 <div class="wrap">
   <div class="box">
-    <div class="box-title">Distribuição dos Ministérios</div>
+    <div class="box-title">${lang === 'en' ? 'Ministry Distribution' : lang === 'es' ? 'Distribución de Ministerios' : 'Distribuição dos Ministérios'}</div>
     ${distBars}
+    ${radarDataUrl ? `<img class="radar-img" src="${radarDataUrl}" alt="Radar">` : ''}
   </div>
-  ${miniCard(pri, lastPriKey, 'Dominante')}
-  ${miniCard(sec, lastSecKey, 'Secundário')}
+  <div class="m-card primary">
+    ${deepPri}
+  </div>
+  ${miniSecCard}
   <div class="box disc">
-    <strong>Lembrete:</strong> Este questionário é uma ferramenta de autoconhecimento baseada nas Escrituras. Os resultados não são definitivos e não substituem o discernimento espiritual, o aconselhamento pastoral ou a confirmação da sua liderança. Use este resultado como ponto de partida para reflexão, conversa e oração.
+    ${disclText}
   </div>
-  <p class="footer">CE.X &middot; Campus Expansão</p>
+  <p class="footer">CE.X · Campus Expansão</p>
 </div>
 </body>
 </html>`;
 }
 
-// ── KEYBOARD ──────────────────────────────────────────────────────────
+// Apply detected language on load
+setLanguage(currentLang);
+
+// ── KEYBOARD ──────────────────────────────────────────────────────────────
 
 document.getElementById('user-name').addEventListener('keydown', e => {
   if (e.key === 'Enter') startQuiz();
